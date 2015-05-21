@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://dereksakamoto.com/github-workflow -->
+<html class=" js no-touch localstorage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Github Workflow - Derek Sakamoto
+</title>
+
+<script type="text/javascript" async="" src="./Github Workflow_files/ga.js"></script><script id="facebook-jssdk" src="./Github Workflow_files/all.js"></script><script src="./Github Workflow_files/modernizr.custom-1c2b9226ae724b41504ca414e3a385d5.js" type="text/javascript"></script>
+<meta content="authenticity_token" name="csrf-param">
+<meta content="WMeNufDpMCF6dDFFe/8FRVbkmcIurxb8j1VFsjOT7/s=" name="csrf-token">
+<meta content="width=device-width,initial-scale=1" name="viewport">
+<meta content="Github Workflow" property="og:title">
+<meta content="article" property="og:type">
+<meta content="http://dereksakamoto.com/github-workflow" property="og:url">
+<meta content="Derek Sakamoto" property="og:site_name">
+<meta content="Throughout our first group projects, it&#39;s apparent that Github workflow is crucially important. So here is the clearest picture I can conjure to explain how it is done (made using Sketch and..." property="og:description">
+<meta content="https://phaven-prod.s3.amazonaws.com/files/image_part/asset/1432475/tsBDN_1-YBI_lEu5Mje0Bnl1LDc/large_github_workflow_sketch.png" property="og:image">
+<meta content="1200" property="og:image:width">
+<meta content="1015" property="og:image:height">
+<meta content="summary_large_image" property="twitter:card">
+<meta content="https://phaven-prod.s3.amazonaws.com/files/image_part/asset/1432475/tsBDN_1-YBI_lEu5Mje0Bnl1LDc/large_github_workflow_sketch.png" property="twitter:img:src">
+
+<link href="http://dereksakamoto.com/posts.atom" rel="alternate" title="ATOM" type="application/atom+xml">
+<link href="http://dereksakamoto.com/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="./Github Workflow_files/css" media="screen" rel="stylesheet" type="text/css">
+<link href="./Github Workflow_files/blog-216cd592f9aba3e6ae098e40e5c2a6b5.css" media="screen" rel="stylesheet" type="text/css">
+<style>
+  
+</style>
+
+<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body id="site_9900" data-twttr-rendered="true">
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="f1d767a904" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" src="./Github Workflow_files/ping.html" style="display: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Github Workflow_files/NM7BtzAR8RM.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Github Workflow_files/NM7BtzAR8RM(1).html" style="border: none;"></iframe></div></div></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=488600357843531";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="posthaven-widget posthaven-widget-post-control" data-url="https://posthaven.com/widget/post_render/control/852520?widget_token=eNcFJzobAGgYrmuZlH0cCMZkW2yBRe8FAcH0BPPU7Z0%3D"><iframe name="easyXDM_default9696_provider" id="easyXDM_default9696_provider" src="./Github Workflow_files/852520.html" frameborder="0" style="height: 26px;" allowtransparency="true" scrolling="no" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+<div id="container">
+<header id="topbar">
+<a href="https://posthaven.com/"><div class="posthaven-tab"></div>
+</a></header>
+<div id="flash">
+</div>
+<header id="header">
+<h1>
+<a href="http://dereksakamoto.com/">Derek Sakamoto
+</a></h1>
+<h2>
+A personal organization and understanding of my own thoughts
+</h2>
+<div id="back_to_blog">
+<a href="http://dereksakamoto.com/">«&nbsp;Back to blog
+</a></div>
+
+
+</header>
+<div id="main_container">
+<div id="main">
+<article class="post" data-post-id="852520">
+<header>
+<div class="post-title">
+<h2>
+<a href="./Github Workflow_files/Github Workflow.html">Github Workflow</a>
+</h2>
+</div>
+</header>
+<div class="post-body" id="post_body_852520">
+<p>Throughout our first group projects, it's apparent that Github workflow is crucially important. So here is the clearest picture I can conjure to explain how it is done (made using Sketch and Skitch).</p><p>        </p><div class="posthaven-gallery" id="posthaven_gallery[869285]">
+          <div class="posthaven-gallery-car">
+                    <p class="posthaven-file posthaven-file-image posthaven-file-state-processed">
+          <img class="posthaven-gallery-image" src="./Github Workflow_files/medium_github_workflow_sketch.png" data-posthaven-state="processed" data-medium-src="https://phaven-prod.s3.amazonaws.com/files/image_part/asset/1432475/tsBDN_1-YBI_lEu5Mje0Bnl1LDc/medium_github_workflow_sketch.png" data-medium-width="800" data-medium-height="677" data-large-src="https://phaven-prod.s3.amazonaws.com/files/image_part/asset/1432475/tsBDN_1-YBI_lEu5Mje0Bnl1LDc/large_github_workflow_sketch.png" data-large-width="1200" data-large-height="1015" data-thumb-src="https://phaven-prod.s3.amazonaws.com/files/image_part/asset/1432475/tsBDN_1-YBI_lEu5Mje0Bnl1LDc/thumb_github_workflow_sketch.png" data-thumb-width="200" data-thumb-height="200" data-xlarge-src="https://phaven-prod.s3.amazonaws.com/files/image_part/asset/1432475/tsBDN_1-YBI_lEu5Mje0Bnl1LDc/xlarge_github_workflow_sketch.png" data-xlarge-width="1508" data-xlarge-height="1276" data-orig-src="https://phaven-prod.s3.amazonaws.com/files/image_part/asset/1432475/tsBDN_1-YBI_lEu5Mje0Bnl1LDc/github_workflow_sketch.png" data-orig-width="1508" data-orig-height="1276" data-posthaven-id="1432475">
+        </p>
+
+          </div>
+          
+        </div>
+<p></p><p>In addition, hear are some important tips of things to avoid because they will lead to pain:</p><ul>
+<li>Multiple team members working in the same file</li>
+<li>A team member not rebasing and going through the rebase process and creating a pull request</li>
+<ul>
+<li>Code reviewers should catch this, it's part of the job of code review</li>
+<li>Code review cannot happen if a team member (or, potentially, their pair) merges their own pull request</li>
+</ul>
+<li>Team members do more than the scope of their feature in their feature's branch</li>
+<li>When you change branches or rebase, close your text editor. Sometimes editors will try to save changes that you do not intend to save</li>
+</ul><p>Working in groups, may seem slow at first, but very few big projects were done by a single contributor.</p>
+</div>
+
+<footer class="post-responses" id="post_responses">
+<div class="posthaven-widget posthaven-widget-post-responses" data-url="https://posthaven.com/widget/post_render/responses/852520?widget_token=eNcFJzobAGgYrmuZlH0cCMZkW2yBRe8FAcH0BPPU7Z0%3D"><iframe name="easyXDM_default9697_provider" id="easyXDM_default9697_provider" src="./Github Workflow_files/852520(1).html" frameborder="0" style="height: 349px; width: 100%; overflow: hidden;" allowtransparency="true" scrolling="no" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+</footer>
+</article>
+
+</div>
+<aside id="sidebar">
+<section>
+<nav class="menu" id="menu_navigation">
+<ul>
+<li class="menu-item" id="menu_item_36759">
+<a href="http://dereksakamoto.com/about-me">About Me</a>
+</li>
+<li class="menu-item" id="menu_item_36765">
+<a href="https://instagram.com/dmsakamoto/">Instagram</a>
+</li>
+<li class="menu-item" id="menu_item_36755">
+<a href="https://twitter.com/Derek_Sakamoto">Twitter</a>
+</li>
+<li class="menu-item" id="menu_item_36760">
+<a href="https://www.linkedin.com/in/dmsakamoto">LinkedIn</a>
+</li>
+<li class="menu-item" id="menu_item_36756">
+<a href="https://github.com/dmsakamoto">GitHub</a>
+</li>
+</ul>
+</nav>
+
+</section>
+
+<section id="bio">
+<h3>
+Derek Sakamoto
+</h3>
+
+
+</section>
+
+<section class="post-date">
+<div class="display-date">
+Posted
+<a href="./Github Workflow_files/Github Workflow.html">14 days
+ago
+</a><div class="actual-date posthaven-timezone-string" data-posthaven-date-format="MMMM D, YYYY \a\t h:mm A" data-posthaven-date-utc-iso8601="2015-05-06T23:46:24Z">May 6, 2015 at 4:46 PM</div>
+</div>
+</section>
+<section class="stats">
+<span class="stat">
+<script src="./Github Workflow_files/count.js" type="text/javascript"></script>85
+</span>
+<span class="measure">
+views
+</span>
+</section>
+
+</aside>
+</div>
+</div>
+<script>
+  var POSTHAVEN_SCRIBD_PUB_ID = 'pub-93932668657726994124';
+</script>
+<script src="./Github Workflow_files/scribd_api.js" type="text/javascript"></script>
+<script src="./Github Workflow_files/swfobject.js" type="text/javascript"></script>
+<script async="async" src="./Github Workflow_files/widgets.js" type="text/javascript"></script>
+<script src="./Github Workflow_files/blog-2391b340d54868efa00f918f8019859e.js" type="text/javascript"></script>
+<script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38525690-2']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+</script>
+<script>
+  var _gaq = _gaq || [];
+  _gaq.push(['b._setAccount', 'UA-60893204-1']);
+  _gaq.push(['b._trackPageview']);
+</script>
+<script>
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
+             '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+<div style="height: 0px;" id="posthaven_spacer_0"></div><div id="posthaven_view_modal_1" class="posthaven-gallery-modal" style="display: none;"></div><div id="glass_posthaven_view_modal_1" class="posthaven-gallery-modal-glasspane" style="display: none;"></div></body></html>
