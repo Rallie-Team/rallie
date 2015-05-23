@@ -30,7 +30,7 @@
     "flux": "2.0.3",
     "fluxxor": "1.5.4",
     "react": "0.13.3",
-    "sequelize": "^3.0.0"
+    "sequelize": "3.1.0"
   },
   "devDependencies": {
     "mocha": "2.2.4",
