@@ -1,0 +1,22 @@
+{
+  "name": "Joseki",
+  "version": "0.0.0",
+  "homepage": "https://github.com/VacantAardvark/joseki",
+  "author": [
+    "Derek Sakomoto",
+    "Eddie Kong",
+    "Kevin Huang",
+    "Steven Shyun"
+  ],
+  "main": "client/public/index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
