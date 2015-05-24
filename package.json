@@ -29,6 +29,8 @@
     "express": "4.12.3",
     "flux": "2.0.3",
     "fluxxor": "1.5.4",
+    "keymirror": "0.1.1",
+    "object-assign": "2.0.0",
     "react": "0.13.3",
     "react-router": "0.13.3",
     "sequelize": "3.1.0"
