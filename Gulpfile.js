@@ -4,6 +4,10 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var gutil = require('gulp-util');
+var livereload = require('gulp-livereload');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
+
 
 var b = watchify(browserify({
   cache: {},
