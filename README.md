@@ -17,8 +17,17 @@
 ## Development ##
 
 ### Installing dependencies ###
+Run `npm install` from the project's root directory.
+
+If you want to build React files from the command line, you will need to install watchify globally 
+by running `npm install -g watchify`.
+
+If you want to use Gulp to watch and build the React files, run `gulp react` from the project root directory.
 
 ### Tasks ###
+To build and automatically rebuild the React files on any updates, run the following command from the project's root directory:
+
+`watchify -v -t reactify client/public/js/app.js -o client/public/js/bundle.js`
 
 ## Team ##
 
