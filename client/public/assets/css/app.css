@@ -1,0 +1,18 @@
+* {
+  font-family: Helvetica, Arial, sans-serif;
+}
+body {
+  font-size: 18px;
+  line-height: 1.6;
+}
+.event-list-item {
+  border: 1px solid #C0C0C0;
+  border-radius: 10px;
+  padding: 10px;
+}
+.event-list-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.event-list-item-location {
+  font-style: italic;
+}
