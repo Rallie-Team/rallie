@@ -1,4 +1,5 @@
 var React = require('react'),
+    Navigation = require('react-router').Navigation,
     RouteHandler = require('react-router').RouteHandler,
     EventStore = require('../stores/EventStore');
 
@@ -9,16 +10,18 @@ var getEventState = function() {
 };
 
 var App = React.createClass({
+  mixins: [Navigation],
+
   getInitialState: function() {
     return getEventState();
   },
 
   componentDidMount: function() {
-    EventStore.addChangeListener(this._onChange);
+    EventStore.addEventListener('change', this._onChange);
   },
 
   componentWillUnmount: function() {
-    EventStore.removeChangeListener(this._onChange);
+    EventStore.removeEventListener('change', this._onChange);
   },
 
   render: function() {
@@ -28,8 +31,8 @@ var App = React.createClass({
           <h1>Joseki</h1>
           <nav>
             <ul>
-              <li><a href="/#/">Home</a></li>
-              <li><a href="/#/events">Events</a></li>
+              <li><a href={this.makeHref('home')}>Home</a></li>
+              <li><a href={this.makeHref('events')}>Events</a></li>
             </ul>
           </nav>
         </header>
