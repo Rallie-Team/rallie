@@ -7,20 +7,33 @@ var _events = [{name: 'Riot at Hack Reactor', location: 'Hack Reactor HQ'}, {nam
 
 var EventStore = assign({}, EventEmitter.prototype, {
   getAll: function() {
-    console.log('sending events', _events);
     return _events;
   },
 
-  emitChange: function() {
-    this.emit('change');
+  /**
+   * Trigger an event
+   * @param {string} eventName The name of the event
+   */
+  emitEvent: function(eventName) {
+    this.emit(eventName);
   },
 
-  addChangeListener: function(callback) {
-    this.on('change', callback);
+  /**
+   * Register a callback to invoke when an event is triggered
+   * @param {string} eventName The name of the event
+   * @param {function} callback The callback function to invoke when the event is triggered
+   */
+  addListener: function(eventName, callback) {
+    this.on(eventName, callback);
   },
 
-  removeChangeListener: function(callback) {
-    this.removeListener('change', callback);
+  /**
+   * Prevent a callback from being invoked when an event is triggered
+   * @param {string} eventName The name of the event
+   * @param {function} callback Stops the callback function from being invoked when the event is triggered
+   */
+  removeListener: function(eventName, callback) {
+    this.removeListener(eventName, callback);
   }
 });
 
@@ -29,12 +42,17 @@ AppDispatcher.register(function(payload) {
   switch(payload.action) {
     // TODO: NEED TO IMPLEMENT HANDLER FOR CREATING EVENTS
     case AppConstants.EVENT_CREATE:
-      EventStore.emitChange();
+      // Optimistically add new event to the collection of events before POSTing to the server
+      _events.push({name: payload.name, location: payload.location});
+
+      // TODO: CALL SERVER TO CREATE NEW EVENT IN DB AND THEN INVOKE EventStore.emitEvent('create') ON SUCCESS
+      EventStore.emitEvent('create');
+      // TODO: DO SOMETHING ELSE IF THERE WAS AN ERROR DURING EVENT CREATION
       break;
 
     // TODO: NEED TO IMPLEMENT HANDLER FOR DELETING EVENTS
     case AppConstants.EVENT_DELETE:
-      EventStore.emitChange();
+      EventStore.emitEvent('delete');
       break;
 
     // TODO: IMPLEMENT OTHER HANDLERS FOR EVENTS

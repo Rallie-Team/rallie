@@ -8,17 +8,18 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
 
 var EventActions = {
   // Creates an event
-  create: function(name) {
+  create: function(event) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.EVENT_CREATE,
-      name: name
+      action: AppConstants.EVENT_CREATE,
+      name: event.name,
+      location: event.location
     });
   },
 
   // Deletes an event
   destroy: function(id) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.EVENT_DELETE,
+      action: AppConstants.EVENT_DELETE,
       id: id
     });
   }
