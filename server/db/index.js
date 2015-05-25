@@ -38,6 +38,15 @@ var Observation = orm.define('Observation', {
 // table relations
 // TODO: build out table relations
 
+Shepherd.hasMany(User);
+Shepherd.hasMany(Event);
+User.hasMany(Observation);
+User.hasOne(Shepherd);
+Event.hasMany(Observation);
+Event.hasMany(Shepherd);
+Observation.hasOne(Event);
+Observation.belongsTo(User);
+
 // sync all tables
 User.sync();
 Shepherd.sync();
