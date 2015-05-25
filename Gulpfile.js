@@ -16,7 +16,8 @@ var b = watchify(browserify({
 var bundle = function() {
   return b.bundle()
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('client/public/js'));
+    .pipe(gulp.dest('client/public/js'))
+    .pipe(livereload());
 };
 
 var paths = {
