@@ -17,7 +17,14 @@ var paths = {
   server: 'server/**/*.js'
 };
 
-
+gulp.task('reactScripts', function() {
+  return gulp.src([
+    paths.reactScripts
+  ])
+  .pipe(jshint())
+  .pipe(jshint.reporter(stylish))
+  .pipe(livereload());
+});
 
 gulp.task('styles', function() {
   return gulp.src([
@@ -54,7 +61,7 @@ gulp.task('watch', function () {
   gulp.watch(paths.html,['html']);
   gulp.watch(paths.images,['images']);
   gulp.watch(paths.styles,['styles']);
-  gulp.watch(paths.reactScripts,['reactScripts']);
+  gulp.watch(paths.reactScripts,['react']);
   gulp.watch(paths.server,['server']);
 });
 
