@@ -1,5 +1,5 @@
 # Joseki #
-> Find, engage, and run local events in your community with ease.
+Find, engage, and run local events in your community with ease.
 
 ## Table of Contents ##
   1. [Usage](#usage)
@@ -19,15 +19,12 @@
 ### Installing dependencies ###
 Run `npm install` from the project's root directory.
 
-If you want to build React files from the command line, you will need to install watchify globally 
-by running `npm install -g watchify`.
+### Tasks ###
+If you want to build React files from the command line, you will first need to install watchify globally 
+by running `npm install -g watchify`. Afterwards, run `watchify -v -t reactify client/public/js/app.js -o client/public/js/bundle.js` 
+to automatically compile the React files whenever they are modified.
 
 If you want to use Gulp to watch and build the React files, run `gulp react` from the project root directory.
-
-### Tasks ###
-To build and automatically rebuild the React files on any updates, run the following command from the project's root directory:
-
-`watchify -v -t reactify client/public/js/app.js -o client/public/js/bundle.js`
 
 ## Team ##
 
