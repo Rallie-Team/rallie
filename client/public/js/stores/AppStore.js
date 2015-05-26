@@ -1,15 +1,10 @@
 var EventEmitter = require('events').EventEmitter,
     assign = require('object-assign'),
     AppDispatcher = require('../dispatcher/AppDispatcher'),
-    AppConstants = require('../constants/AppConstants');
+    AppConstants = require('../constants/AppConstants'),
+    AppActions = require('../actions/AppActions');
 
-var _events = [{name: 'Riot at Hack Reactor', location: 'Hack Reactor HQ'}, {name: 'Flash Mob Dance Party', location: 'City Hall'}];
-
-var EventStore = assign({}, EventEmitter.prototype, {
-  getAll: function() {
-    return _events;
-  },
-
+var AppStore = assign({}, EventEmitter.prototype, {
   /**
    * Trigger an event
    * @param {string} eventName The name of the event
@@ -40,26 +35,16 @@ var EventStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(payload) {
   switch(payload.action) {
-    // TODO: NEED TO IMPLEMENT HANDLER FOR CREATING EVENTS
-    case AppConstants.EVENT_CREATE:
-      // Optimistically add new event to the collection of events before POSTing to the server
-      _events.push({name: payload.name, location: payload.location});
+    case AppConstants.TOGGLE_MODE:
+      // CALL AppActionCreators to talk to API
 
-      // TODO: CALL SERVER TO CREATE NEW EVENT IN DB AND THEN INVOKE EventStore.emitEvent('create') ON SUCCESS
-      EventStore.emitEvent('create');
+      AppStore.emitEvent('toggleMode');
       // TODO: DO SOMETHING ELSE IF THERE WAS AN ERROR DURING EVENT CREATION
       break;
-
-    // TODO: NEED TO IMPLEMENT HANDLER FOR DELETING EVENTS
-    case AppConstants.EVENT_DELETE:
-      EventStore.emitEvent('delete');
-      break;
-
-    // TODO: IMPLEMENT OTHER HANDLERS FOR EVENTS
 
     default:
       // no op
   }
 });
 
-module.exports = EventStore;
+module.exports = AppStore;
