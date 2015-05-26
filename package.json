@@ -1,18 +1,18 @@
 {
-  "name": "Joseki",
+  "name": "joseki",
   "version": "1.0.0",
-  "description": "Easy way to organize events",
+  "description": "Social engagement solution that spontaneously builds, organizes, and drives events for organizers and participants",
   "main": "server/server.js",
   "scripts": {
-    "test": "mocha test/server.spec.js",
-    "start": "gulp watch & nodemon server/server.js",
+    "test": "mocha --reporter spec server/test && mocha --reporter spec client/test",
+    "start": "gulp watch & node server/server.js",
     "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/VacantAardvark/joseki"
   },
-  "author": [
+  "contributors": [
     "Derek Sakomoto",
     "Eddie Kong",
     "Kevin Huang",
