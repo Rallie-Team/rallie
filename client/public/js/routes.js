@@ -1,14 +1,15 @@
 var React = require('react'),
     Router = require('react-router'),
     Route = Router.Route,
-    DefaultRoute = Router.DefaultRoute;
-
-var App = require('./components/App'),
-    EventList = require('./components/EventList');
+    DefaultRoute = Router.DefaultRoute,
+    App = require('./components/App'),
+    EventList = require('./components/EventList'),
+    EventCreate = require('./components/EventCreate');
 
 var routes = (
-  <Route handler={App}>
-    <Route name="events" handler={EventList}/>
+  <Route name="home" handler={App} path="/">
+    <Route name="events" handler={EventList} path="events"/>
+    <Route name="event-create" handler={EventCreate} path="events/create"/>
   </Route>
 );
 
