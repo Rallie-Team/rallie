@@ -6,7 +6,6 @@ var app = express();
 
 app.set('port', process.env.PORT || 3000);
 
-// app.use(parser.urlencoded({extend: true}));
 require('./config/middleware.js')(app, express, passport);
 
 // start server

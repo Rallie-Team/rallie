@@ -1,3 +1,6 @@
+//this is the file that we will use when we upload the project
+//to heroku
+
 var ip  = process.env.IP || 'http://localhost';
 var port = process.env.PORT || 8080;
 module.exports= {
