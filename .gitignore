@@ -31,8 +31,5 @@ client/public/lib
 client/bower_components
 dist
 
-# local configuration file
-server/config/environment/thirdPartyServices.js
-
 # Build files
 client/public/js/bundle.js
