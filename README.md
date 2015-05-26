@@ -1,4 +1,4 @@
-# Joseki #
+# Joseki ![Travis CI build status](https://travis-ci.org/VacantAardvark/joseki.svg?branch=master)
 Find, engage, and run local events in your community with ease.
 
 ## Table of Contents ##
