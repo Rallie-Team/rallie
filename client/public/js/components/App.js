@@ -1,27 +1,27 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
     RouteHandler = require('react-router').RouteHandler,
-    EventStore = require('../stores/EventStore');
-
-var getEventState = function() {
-  return {
-    events: EventStore.getAll()
-  };
-};
+    EventStore = require('../stores/EventStore'),
+    AppActions = require('../actions/AppActions'),
+    AppStore = require('../stores/AppStore');
 
 var App = React.createClass({
   mixins: [Navigation],
 
   getInitialState: function() {
-    return getEventState();
+    return {
+      mode: 'sheep'
+    };
   },
 
   componentDidMount: function() {
     EventStore.addEventListener('change', this._onChange);
+    AppStore.addEventListener('toggleMode', this._changeStateMode);
   },
 
   componentWillUnmount: function() {
     EventStore.removeEventListener('change', this._onChange);
+    AppStore.removeEventListener('toggleMode', this._changeStateMode);
   },
 
   render: function() {
@@ -33,12 +33,14 @@ var App = React.createClass({
             <ul>
               <li><a href={this.makeHref('home')}>Home</a></li>
               <li><a href={this.makeHref('events')}>Events</a></li>
+              {/* This is the toggler for shepherd/sheep */}
+              <li><a href={this.makeHref('toggle')} onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</a></li>
             </ul>
           </nav>
         </header>
         <div>
           {/* The RouteHandler component renders the active child route's handler */}
-          <RouteHandler events={this.state.events}/>
+          <RouteHandler/>
         </div>
       </div>
     );
@@ -47,6 +49,16 @@ var App = React.createClass({
   // Event handler for 'change' events coming from the EventStore
   _onChange: function() {
     this.setState(getEventState());
+  },
+
+  _changeMode: function() {
+    AppActions.toggleMode(this.state.mode === 'shepherd' ? 'sheep' : 'shepherd', this.state.userId);
+  },
+
+  _changeStateMode: function() {
+    this.setState({
+      mode: this.state.mode === 'shepherd' ? 'sheep' : 'shepherd'
+    });
   }
 });
 

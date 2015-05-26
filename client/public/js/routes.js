@@ -10,6 +10,7 @@ var routes = (
   <Route name="home" handler={App} path="/">
     <Route name="events" handler={EventList} path="events"/>
     <Route name="event-create" handler={EventCreate} path="events/create"/>
+    <Route name="toggle" handler={EventCreate}/>
   </Route>
 );
 
