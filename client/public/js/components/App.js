@@ -34,13 +34,13 @@ var App = React.createClass({
               <li><a href={this.makeHref('home')}>Home</a></li>
               <li><a href={this.makeHref('events')}>Events</a></li>
               {/* This is the toggler for shepherd/sheep */}
-              <li><a href={this.makeHref('toggle')} onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</a></li>
+              <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
             </ul>
           </nav>
         </header>
         <div>
           {/* The RouteHandler component renders the active child route's handler */}
-          <RouteHandler/>
+          <RouteHandler mode={this.state.mode}/>
         </div>
       </div>
     );
