@@ -1,6 +1,7 @@
 var React = require('react'),
     Router = require('react-router'),
     Route = Router.Route,
+
     DefaultRoute = Router.DefaultRoute,
     App = require('./components/App'),
     EventList = require('./components/EventList'),
