@@ -17,7 +17,7 @@ var App = React.createClass({
   //users are able to change to shepherd
   getInitialState: function() {
     return {
-      mode: ''
+      mode: 'sheep'
     };
   },
 
