@@ -2,7 +2,7 @@ var EventEmitter = require('events').EventEmitter,
     assign = require('object-assign'),
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     passport = require('passport-facebook'),
-    AppConstants = require('../constants/AppConstants'),
+    AppConstants = require('../constants/AppConstants');
 
 var _events = [{name: 'Riot at Hack Reactor', location: 'Hack Reactor HQ'}, {name: 'Flash Mob Dance Party', location: 'City Hall'}];
 

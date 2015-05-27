@@ -26,6 +26,13 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 client/public/lib
+.tmp
+.idea
+client/bower_components
+dist
+
+# local configuration file
+server/config/environment/thirdPartyAuth.js
 
 # Build files
 client/public/js/bundle.js

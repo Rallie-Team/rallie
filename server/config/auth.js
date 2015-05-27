@@ -26,7 +26,7 @@ module.exports = function (app, express, passport) {
   app.use(passport.session());
 
   // Serve the client files
-  app.use('/', express.static('../client/public'));
+  // app.use('/', express.static('../client/public'));
 
   //handles the login request from the home page
   app.use('/Server/auth/', authRouter);
@@ -34,8 +34,8 @@ module.exports = function (app, express, passport) {
   //injects passport into the authController
   //which enables for facebook auth
   require('../auth/authController.js')(passport);
+  
   //injects authRouter into the authRoutes which will
   //be able to handle the routes
   require('../auth/authRoutes.js')(authRouter);
-
 };
