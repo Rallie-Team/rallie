@@ -8,6 +8,9 @@ var React = require('react'),
 var App = React.createClass({
   //mixins allows users to reuse code from different parts of
   //the app even when their use cases are very different
+  //Navigation allows us to dynamically create hrefs in the render
+  //section.  Inside of mixen, we allow the entire react component
+  //to reference the functionalities using "this"
   mixins: [Navigation],
 
   //the default mode for a new user is a sheep
