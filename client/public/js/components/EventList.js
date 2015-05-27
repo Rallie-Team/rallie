@@ -31,7 +31,9 @@ var EventList = React.createClass({
       return <EventListItem key={i} event={event}/>
     });
 
-    //this.props.mode references the mode set in App.js
+    //this.props.mode references the mode set in App.js which is made
+    //possible because Event List is a child Route of App.js
+    //Please reference routes.js
     //this checks to see if the user is a shepherd and only allows
     //the create button to appear is that is true
     return (
