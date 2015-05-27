@@ -1,5 +1,4 @@
 var React = require('react'),
-    EventDetailActions = require('../actions/EventDetailActions'),
     EventStore = require('../stores/EventStore'),
     EventDetailActions = require('../actions/EventDetailActions');
 
