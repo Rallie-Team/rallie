@@ -9,7 +9,7 @@ var favicon = require('serve-favicon');
 var morgan = require('morgan');
 var compression = require('compression');
 var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var methodOverride = require('method-override'); // Adds PUT and DELETE HTTP requests
 var cookieParser = require('cookie-parser');
 var errorHandler = require('errorhandler');
 var path = require('path');
@@ -19,11 +19,9 @@ var passport = require('passport');
 module.exports = function(app) {
   var env = app.get('env');
 
-  app.set('views', config.root + '/server/views');
+  app.set('views', config.root + 'server/views');
   app.set('view engine', 'html');
   app.use(compression());
-  // TODO: Look to see if {extended: true} from React tutorial matters
-  // currently bodyParser.urlencoded({ extended: true }) is commented out
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(methodOverride());
@@ -31,8 +29,8 @@ module.exports = function(app) {
   app.use(passport.initialize());
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
-    app.use(express.static(path.join(config.root, 'public')));
-    app.set('appPath', config.root + '/public');
+    app.use(express.static(path.join(config.root, 'client/public')));
+    app.set('appPath', config.root + 'client/public');
     app.use(morgan('dev'));
   }
 

@@ -24,9 +24,7 @@ var server = require('http').createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
 
-// process.env.NODE_ENV above sets the envirment
-// app.set('port', process.env.PORT || 3000);
-
+// TODO: Uncomment to get authentication to work
 // require('./config/auth.js')(app, express, passport);
 
 // Start server
