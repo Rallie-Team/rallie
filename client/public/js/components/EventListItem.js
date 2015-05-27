@@ -1,5 +1,8 @@
 var React = require('react');
 
+//EventList item is referenced in EventList.js
+//This will render all of the events in the event List
+//this.props references the event that is passed in
 var EventListItem = React.createClass({
   render: function() {
     return (
