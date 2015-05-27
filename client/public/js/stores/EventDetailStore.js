@@ -3,10 +3,10 @@ var EventEmitter = require('events').EventEmitter,
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants');
 
-var _observations = [{name: 'Riot at Hack Reactor', location: 'Hack Reactor HQ'}, {name: 'Flash Mob Dance Party', location: 'City Hall'}];
+var _observations = [{name: 'Steven', text: 'I am happy'}, {name: 'Kevin', text: 'hi'}];
 
 var EventDetailStore = assign({}, EventEmitter.prototype, {
-  getAll: function() {
+  getAllObservations: function() {
     return _observations;
   },
 

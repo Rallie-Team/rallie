@@ -1,6 +1,7 @@
 var React = require('react'),
     EventStore = require('../stores/EventStore'),
-    EventDetailActions = require('../actions/EventDetailActions');
+    EventDetailActions = require('../actions/EventDetailActions'),
+    ObservationList = require('./ObservationList');
 
 var EventDetail = React.createClass({
   getInitialState: function() {
@@ -23,6 +24,7 @@ var EventDetail = React.createClass({
       <button onClick={this._editEvent}>Edit Event</button>
       {this.state.location}
       <button onClick={this._editAction}>Edit Action</button>
+      <ObservationList/>
       </div>
     );
   },
