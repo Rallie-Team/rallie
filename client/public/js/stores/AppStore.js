@@ -4,6 +4,8 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants'),
     AppActions = require('../actions/AppActions');
 
+//TODO: define the events array inside the appstore
+// var _events = [];
 var AppStore = assign({}, EventEmitter.prototype, {
   /**
    * Trigger an event
@@ -36,8 +38,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   switch(payload.action) {
     case AppConstants.TOGGLE_MODE:
-      // CALL AppActionCreators to talk to API
-
+      //TODO: with data from payload.events, populate appstore's array of events 
       AppStore.emitEvent('toggleMode');
       // TODO: DO SOMETHING ELSE IF THERE WAS AN ERROR DURING EVENT CREATION
       break;

@@ -1,8 +1,10 @@
 var React = require('react'),
+    Navigation = require('react-router').Navigation,
     EventStore = require('../stores/EventStore'),
     EventActions = require('../actions/EventActions');
 
 var EventCreate = React.createClass({
+  mixins: [Navigation],
 
   //initially sets the inputs of the Event to blank
   //will be filed in the form
@@ -67,6 +69,7 @@ var EventCreate = React.createClass({
       location: '',
       result: 'Event created!'
     });
+    this.transitionTo('events');
   }
 });
 

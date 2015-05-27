@@ -22,6 +22,13 @@ var EventActions = {
       action: AppConstants.EVENT_DELETE,
       id: id
     });
+  },
+
+  prepareForSegue: function(state){
+    AppDispatcher.dispatch({
+      action: AppConstants.UPDATE_STATE,
+      state: state
+    });
   }
 };
 

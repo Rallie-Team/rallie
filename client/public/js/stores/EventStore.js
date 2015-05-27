@@ -5,10 +5,15 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants');
 
 var _events = [{name: 'Riot at Hack Reactor', location: 'Hack Reactor HQ'}, {name: 'Flash Mob Dance Party', location: 'City Hall'}];
+var _currentEvent = {name: '', location: ''};
 
 var EventStore = assign({}, EventEmitter.prototype, {
   getAll: function() {
     return _events;
+  },
+
+  getCurrentEvent: function() {
+    return _currentEvent;
   },
 
   /**
@@ -55,7 +60,12 @@ AppDispatcher.register(function(payload) {
     // TODO: NEED TO IMPLEMENT HANDLER FOR DELETING EVENTS
     case AppConstants.EVENT_DELETE:
       EventStore.emitEvent('delete');
-     break;
+      break;
+
+    case AppConstants.UPDATE_STATE:
+      _currentEvent = payload.state;
+      EventStore.emitEvent('update');
+      break;
 
     default:
       // no op
