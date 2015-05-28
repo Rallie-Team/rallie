@@ -12,14 +12,11 @@ var EventDetail = React.createClass({
 
   componentDidMount: function() {
     EventDetailStore.addEventListener('create', this._onCreate);
-  },
-
-  componentWillUnmount: function() {
-    EventDetailStore.removeEventListener('create', this._onCreate);
     EventStore.addEventListener('edit', this._onEdit);
   },
 
   componentWillUnmount: function() {
+    EventDetailStore.removeEventListener('create', this._onCreate);
     EventStore.removeEventListener('edit', this._onEdit);
   },
 
@@ -44,7 +41,7 @@ var EventDetail = React.createClass({
   },
 
   _editEvent: function(){
-    this.state.name = prompt('What should the Event be called?')
+    this.state.name = prompt('What should the Event be called?');
     EventDetailActions.edit(this.state);
   },
 
@@ -53,15 +50,13 @@ var EventDetail = React.createClass({
   },
 
   _editLocation: function(){
-    this.state.location = prompt('What should the location be?')
-    console.log(this.state);
+    this.state.location = prompt('What should the location be?');
     EventDetailActions.edit(this.state);
 
   },
 
   _onEdit: function(){
-    this.setState(this.getInitialState());
->>>>>>> Implemented editing event names and location
+    this.setState(this.getInitialState);
   }
 
 });
