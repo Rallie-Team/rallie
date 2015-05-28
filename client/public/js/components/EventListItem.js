@@ -21,7 +21,8 @@ var EventListItem = React.createClass({
   prepareForDetailedView: function() {
   	var updatedState = {
       name: this.props.event.name,
-      location: this.props.event.location
+      location: this.props.event.location,
+      mode: this.props.mode
     };
     EventActions.prepareForSegue(updatedState);
   }

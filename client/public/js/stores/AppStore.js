@@ -6,7 +6,14 @@ var EventEmitter = require('events').EventEmitter,
 
 //TODO: define the events array inside the appstore
 // var _events = [];
+var _currentUser = {id: '123', name: 'Eddie'};
+
 var AppStore = assign({}, EventEmitter.prototype, {
+
+  getCurrentUser: function() {
+    return _currentUser.name;
+  },
+  
   /**
    * Trigger an event
    * @param {string} eventName The name of the event

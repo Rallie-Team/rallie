@@ -4,7 +4,6 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants');
 
 var _observations = [{name: 'Steven', text: 'I am happy'}, {name: 'Kevin', text: 'hi'}];
-
 var EventDetailStore = assign({}, EventEmitter.prototype, {
   getAllObservations: function() {
     return _observations;
@@ -47,6 +46,10 @@ AppDispatcher.register(function(payload) {
       break;
 
     // TODO: IMPLEMENT OTHER HANDLERS FOR EVENTS
+    case AppConstants.OBSERVATION_CREATE:
+      _observations.push(payload.observation);
+      EventDetailStore.emitEvent('create');
+      break;
 
     default:
       // no op

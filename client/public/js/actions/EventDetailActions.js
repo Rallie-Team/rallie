@@ -13,6 +13,13 @@ var EventDetailActions = {
       name: event.name,
       location: event.location
     });
+  },
+
+  createNewObservation: function(newObservation){
+  	AppDispatcher.dispatch({
+      action: AppConstants.OBSERVATION_CREATE,
+      observation: newObservation
+    });
   }
 };
 
