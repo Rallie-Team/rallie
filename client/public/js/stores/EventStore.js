@@ -81,7 +81,7 @@ AppDispatcher.register(function(payload) {
       // EventStore.emitEvent('edit');
       // break;
 
-    case AppConstants.EDIT:
+    case AppConstants.EVENT_EDIT:
       _currentEvent.location = payload.location;
       _currentEvent.name = payload.name;
       console.log(_currentEvent);

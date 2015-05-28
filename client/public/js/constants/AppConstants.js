@@ -12,5 +12,5 @@ module.exports = keyMirror({
   TOGGLE_MODE: null,
   UPDATE_STATE: null,
   OBSERVATION_CREATE: null,
-  EDIT: null
+  EVENT_EDIT: null
 });
