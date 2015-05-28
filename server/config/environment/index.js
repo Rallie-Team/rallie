@@ -34,12 +34,8 @@ var all = {
   userRoles: ['guest', 'user', 'admin'],
 
   // TODO: Database connection options
-  database: {
-    options: {
-      db: {
-        safe: true
-      }
-    }
+  postgres: {
+    options: {}
   },
 
   facebook: {
