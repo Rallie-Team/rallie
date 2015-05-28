@@ -68,15 +68,25 @@ AppDispatcher.register(function(payload) {
       EventStore.emitEvent('update');
       break;
 
+    // case AppConstants.LOCATION_EDIT:
+    //   _currentEvent.location = payload.location
+      // for(var i = 0; i < _events.length; i ++){
+      //   console.log(_events[i].name, 'sdfdsfsadfdsad');
+      //   console.log(payload);
+      //   if(_events[i].name === payload.name){
+      //     _events[i].location = payload.location;
+      //     console.log(_events);
+      //   }
+      // }
+      // EventStore.emitEvent('edit');
+      // break;
+
     case AppConstants.EDIT:
-      for(var i = 0; i < _events.length; i ++){
-        if(_events[i][name] === payload.name){
-          _events[i][location] = payload.location;
-        }
-      }
+      console.log('in AppConstants.edits');
+      _currentEvent.location = payload.location;
+      _currentEvent.name = payload.name;
       EventStore.emitEvent('edit');
       break;
-
 
     default:
       // no op

@@ -10,7 +10,7 @@ var EventDetailActions = {
   edit: function(event){
     console.log("event", event);
     AppDispatcher.dispatch({
-      action: AppConstants.LOCATION_EDIT,
+      action: AppConstants.EDIT,
       name: event.name,
       location: event.location
     });

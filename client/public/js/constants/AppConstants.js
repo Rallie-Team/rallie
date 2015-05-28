@@ -10,8 +10,7 @@ module.exports = keyMirror({
   EVENT_CREATE: null,
   EVENT_DELETE: null,
   TOGGLE_MODE: null,
-  LOCATION_EDIT: null,
-  EVENT_EDIT: null,
   UPDATE_STATE: null,
-  OBSERVATION_CREATE: null
+  OBSERVATION_CREATE: null,
+  EDIT: null
 });
