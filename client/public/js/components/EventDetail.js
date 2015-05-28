@@ -1,7 +1,9 @@
 var React = require('react'),
     EventStore = require('../stores/EventStore'),
+    EventDetailStore = require('../stores/EventDetailStore'),
     EventDetailActions = require('../actions/EventDetailActions'),
-    ObservationList = require('./ObservationList');
+    ObservationList = require('./ObservationList'),
+    ObservationCreate = require('./ObservationCreate');
 
 var EventDetail = React.createClass({
   getInitialState: function() {
@@ -9,22 +11,29 @@ var EventDetail = React.createClass({
   },
 
   componentDidMount: function() {
-    // EventDetailStore.addEventListener('create', this._onCreate);
+    EventDetailStore.addEventListener('create', this._onCreate);
   },
 
   componentWillUnmount: function() {
-    // EventDetailStore.removeEventListener('create', this._onCreate);
+    EventDetailStore.removeEventListener('create', this._onCreate);
   },
 
   render: function() {
     return (
       <div>
-      <p>{this.state.name}</p>
-      {this.state.name}
-      <button onClick={this._editEvent}>Edit Event</button>
-      {this.state.location}
-      <button onClick={this._editAction}>Edit Action</button>
+
+      <p>Event: {this.state.name}
+      {this.state.mode === 'shepherd' ? <button onClick={this._editEvent}>Edit Event</button> : null}
+      </p>
+
+      <p>Location: {this.state.location}
+      {this.state.mode === 'shepherd' ? <button onClick={this._editAction}>Edit Action</button> : null}
+      </p>
+
+      {this.state.mode === 'sheep' ? <ObservationCreate/> : null}
+
       <ObservationList/>
+
       </div>
     );
   },
@@ -35,6 +44,10 @@ var EventDetail = React.createClass({
 
   _editAction: function(){
     EventDetailActions.edit();
+  },
+
+  _onCreate: function(){
+    this.setState(this.getInitialState);
   }
 
 });
