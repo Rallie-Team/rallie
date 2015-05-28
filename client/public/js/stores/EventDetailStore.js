@@ -4,14 +4,9 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants');
 
 var _observations = [{name: 'Steven', text: 'I am happy'}, {name: 'Kevin', text: 'hi'}];
-var _currentUser = {id: '123', name: 'Eddie'};
 var EventDetailStore = assign({}, EventEmitter.prototype, {
   getAllObservations: function() {
     return _observations;
-  },
-
-  getCurrentUser: function() {
-    return _currentUser.name;
   },
 
   /**
@@ -54,6 +49,8 @@ AppDispatcher.register(function(payload) {
     case AppConstants.OBSERVATION_CREATE:
       _observations.push(payload.observation);
       EventDetailStore.emitEvent('create');
+      break;
+
     default:
       // no op
   }

@@ -15,7 +15,7 @@ var EventDetailActions = {
     });
   },
 
-  create: function(newObservation){
+  createNewObservation: function(newObservation){
   	AppDispatcher.dispatch({
       action: AppConstants.OBSERVATION_CREATE,
       observation: newObservation

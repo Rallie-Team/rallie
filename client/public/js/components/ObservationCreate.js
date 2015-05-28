@@ -1,5 +1,6 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
+    AppStore = require('../stores/AppStore'),
     EventDetailStore = require('../stores/EventDetailStore'),
     EventDetailActions = require('../actions/EventDetailActions');
 
@@ -10,12 +11,12 @@ var ObservationCreate = React.createClass({
   //will be filed in the form
   getInitialState: function() {
     return {
-      name: EventDetailStore.getCurrentUser(),
+      name: AppStore.getCurrentUser(),
       text: ''
     };
   },
 
-  //Clears default values after event is created
+  //Clears default values after observation is created
   componentDidMount: function() {
     EventDetailStore.addEventListener('create', this._onCreate);
   },
@@ -38,7 +39,7 @@ var ObservationCreate = React.createClass({
   },
 
   // Add new observation to the state and database
-  // .target redferences the dom node of e
+  // .target references the dom node of e
   _save: function(e) {
     e.preventDefault();
     console.log(this.state.name);
@@ -46,11 +47,11 @@ var ObservationCreate = React.createClass({
       name: this.state.name,
       text: e.target.text.value.trim()
     };
-    EventDetailActions.create(newObservation);
+    EventDetailActions.createNewObservation(newObservation);
   },
 
   // Update the current state with the new values in the input fields
-  // every time the user tpes a letter
+  // every time the user types a letter
   // this updates the state values that were defined in getInitialState
   _onChange: function(e) {
     var obj = {};
@@ -60,10 +61,10 @@ var ObservationCreate = React.createClass({
   },
 
   // Event handler for 'create' observations coming from the EventDetailStore
-  // clears default calues of name and location
+  // clears default values of name and location
   _onCreate: function() {
     this.setState({
-      name: EventDetailStore.getCurrentUser(),
+      name: AppStore.getCurrentUser(),
       text: ''
     });
   }
