@@ -1,4 +1,3 @@
-
 var gulp = require('gulp');
 var browserify = require('browserify');
 var watchify = require('watchify');
@@ -8,8 +7,7 @@ var livereload = require('gulp-livereload');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 
-
-var b = watchify(browserify({
+var watchReact = watchify(browserify({
   cache: {},
   packageCache: {},
   entries: ['client/public/js/app.js'],
@@ -17,11 +15,23 @@ var b = watchify(browserify({
   transform: ['reactify']
 }));
 
-var bundle = function() {
-  return b.bundle()
+var bundleDev = function() {
+  return watchReact.bundle()
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('client/public/js'))
     .pipe(livereload());
+};
+
+var bundle = function() {
+  browserify({
+    cache: {},
+    packageCache: {},
+    entries: ['client/public/js/app.js'],
+    debug: false,
+    transform: ['reactify']
+  }).bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('client/public/js'));
 };
 
 var paths = {
@@ -60,8 +70,9 @@ gulp.task('server', function() {
   .pipe(jshint.reporter(stylish));
 });
 
+gulp.task('react', bundleDev);
+gulp.task('build', bundle);
 
-gulp.task('react', bundle);
 gulp.task('watch', function () {
   livereload.listen();
 
@@ -71,9 +82,7 @@ gulp.task('watch', function () {
   gulp.watch(paths.server,['server']);
 });
 
-
 // Runs watchify again on any changes
-b.on('update', bundle);
-b.on('log', gutil.log);
+watchReact.on('update', bundleDev);
+watchReact.on('log', gutil.log);
 gulp.task('default', ['watch', 'react']);
-

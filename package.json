@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "Social engagement solution that spontaneously builds, organizes, and drives events for organizers and participants",
   "main": "server/server.js",
+  "engines": {
+    "node": "0.10.36"
+  },
   "scripts": {
     "test": "mocha --reporter spec server/test && mocha --reporter spec client/test",
-    "start": "gulp watch & node server/server.js",
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "start": "node server/server.js",
+    "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/.bin/gulp build"
   },
   "repository": {
     "type": "git",
