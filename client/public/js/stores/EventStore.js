@@ -41,6 +41,7 @@ var EventStore = assign({}, EventEmitter.prototype, {
   removeEventListener: function(eventName, callback) {
     this.removeListener(eventName, callback);
   }
+
 });
 
 
@@ -65,6 +66,29 @@ AppDispatcher.register(function(payload) {
     case AppConstants.UPDATE_STATE:
       _currentEvent = payload.state;
       EventStore.emitEvent('update');
+      break;
+
+    // case AppConstants.LOCATION_EDIT:
+    //   _currentEvent.location = payload.location
+      // for(var i = 0; i < _events.length; i ++){
+      //   console.log(_events[i].name, 'sdfdsfsadfdsad');
+      //   console.log(payload);
+      //   if(_events[i].name === payload.name){
+      //     _events[i].location = payload.location;
+      //     console.log(_events);
+      //   }
+      // }
+      // EventStore.emitEvent('edit');
+      // break;
+
+    //Sets location and name property to currentEvent
+    //which is then emits an edit event to Event Store which
+    //will update the view.
+    case AppConstants.EVENT_EDIT:
+      _currentEvent.location = payload.location;
+      _currentEvent.name = payload.name;
+      // console.log(_currentEvent);
+      EventStore.emitEvent('edit');
       break;
 
     default:
