@@ -11,6 +11,7 @@ var express = require('express');
 var parser = require('body-parser');
 var config = require('./config/environment');
 var passport = require('passport');
+var db = require('./db');
 
 // TODO: Connect to database
 
@@ -31,6 +32,9 @@ require('./routes')(app);
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
+
+// Init database
+db.init();
 
 // Expose app
 exports = module.exports = app;
