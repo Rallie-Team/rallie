@@ -41,6 +41,7 @@ var EventStore = assign({}, EventEmitter.prototype, {
   removeEventListener: function(eventName, callback) {
     this.removeListener(eventName, callback);
   }
+
 });
 
 
@@ -66,6 +67,16 @@ AppDispatcher.register(function(payload) {
       _currentEvent = payload.state;
       EventStore.emitEvent('update');
       break;
+
+    case AppConstants.EDIT:
+      for(var i = 0; i < _events.length; i ++){
+        if(_events[i][name] === payload.name){
+          _events[i][location] = payload.location;
+        }
+      }
+      EventStore.emitEvent('edit');
+      break;
+
 
     default:
       // no op

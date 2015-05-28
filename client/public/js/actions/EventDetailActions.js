@@ -7,9 +7,10 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants');
 
 var EventDetailActions = {
-  edit: function(){
+  edit: function(event){
+    console.log("event", event);
     AppDispatcher.dispatch({
-      action: AppConstants.EVENT_EDIT,
+      action: AppConstants.LOCATION_EDIT,
       name: event.name,
       location: event.location
     });

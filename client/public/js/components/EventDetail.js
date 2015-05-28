@@ -27,7 +27,7 @@ var EventDetail = React.createClass({
       </p>
 
       <p>Location: {this.state.location}
-      {this.state.mode === 'shepherd' ? <button onClick={this._editAction}>Edit Action</button> : null}
+      {this.state.mode === 'shepherd' ? <button onClick={this._editLocation}>Edit Location</button> : null}
       </p>
 
       {this.state.mode === 'sheep' ? <ObservationCreate/> : null}
@@ -39,17 +39,22 @@ var EventDetail = React.createClass({
   },
 
   _editEvent: function(){
-    EventDetailActions.edit();
-  },
-
-  _editAction: function(){
+    this.state.location = prompt('What should the Event be called?')
     EventDetailActions.edit();
   },
 
   _onCreate: function(){
     this.setState(this.getInitialState);
+  },
+
+  _editLocation: function(){
+    this.state.location = prompt('What should the location be?')
+    console.log(this.state);
+    EventDetailActions.edit(this.state);
   }
 
 });
+
+_onChange:
 
 module.exports = EventDetail;
