@@ -81,10 +81,13 @@ AppDispatcher.register(function(payload) {
       // EventStore.emitEvent('edit');
       // break;
 
+    //Sets location and name property to currentEvent
+    //which is then emits an edit event to Event Store which
+    //will update the view.
     case AppConstants.EVENT_EDIT:
       _currentEvent.location = payload.location;
       _currentEvent.name = payload.name;
-      console.log(_currentEvent);
+      // console.log(_currentEvent);
       EventStore.emitEvent('edit');
       break;
 

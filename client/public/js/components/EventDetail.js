@@ -61,6 +61,7 @@ var EventDetail = React.createClass({
 
   },
 
+  //updates the current event properties on the page
   _onEdit: function(){
     this.setState(this.getInitialState);
   }

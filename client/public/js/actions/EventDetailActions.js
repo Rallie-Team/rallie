@@ -7,8 +7,10 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants');
 
 var EventDetailActions = {
+  //uses same edit event detail for both location and name
+  //changes.  This will just update both properties.
   edit: function(event){
-    console.log("event", event);
+    // console.log("event", event);
     AppDispatcher.dispatch({
       action: AppConstants.EVENT_EDIT,
       name: event.name,
