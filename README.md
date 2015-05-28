@@ -19,6 +19,18 @@ Find, engage, and run local events in your community with ease.
 ### Installing dependencies ###
 Run `npm install` from the project's root directory.
 
+Install a local PostgresSQL database:
+
+```
+brew update
+brew doctor
+brew install postgresql
+initdb /usr/local/var/postgres -E utf8
+mkdir -p ~/Library/LaunchAgents
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+createdb joseki
+```
+
 ### Tasks ###
 If you want to build React files from the command line, you will first need to install watchify globally 
 by running `npm install -g watchify`. Afterwards, run `watchify -v -t reactify client/public/js/app.js -o client/public/js/bundle.js` 

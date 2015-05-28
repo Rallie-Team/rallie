@@ -1,21 +1,19 @@
 var Sequelize = require('sequelize');
-var orm = new Sequelize('joseki', 'VacantAardvark', 'onedirtyride');
 
-// TODO: Does sequelize add createdAt and updatedAt?
+var orm;
+if (process.env.DATABASE_URL) {
+  // The DATABASE_URL variable should already include the username, password, host, port, and database name
+  orm = new Sequelize(process.env.DATABASE_URL);
+} else {
+  orm = new Sequelize('joseki', {
+    host: 'localhost',
+    dialect: 'postgres'
+  });
+}
 
 var User = orm.define('User', {
   username: Sequelize.STRING,
   facebook_id: Sequelize.STRING
-});
-
-var Shepherd = orm.define('Shepherd', {
-  user_id: Sequelize.INTEGER,
-  event_id: Sequelize.INTEGER
-});
-
-var Sheep = orm.define('Sheep', {
-  user_id: Sequelize.INTEGER,
-  event_id: Sequelize.INTEGER
 });
 
 var Event = orm.define('Event', {
@@ -29,29 +27,65 @@ var Event = orm.define('Event', {
 });
 
 var Observation = orm.define('Observation', {
-  user_id: Sequelize.INTEGER,
-  event_id: Sequelize.INTEGER,
   content: Sequelize.STRING,
   completed: Sequelize.BOOLEAN
 });
 
-// table relations
-// TODO: build out table relations
+/**
+ * MODEL RELATIONS
+ * belongsToMany connects a source with multiple targets, and the targets can connect to multiple sources
+ * Using a `through` option will create a new model with foreign keys for the source and target
+ *
+ * Example:
+ * User.belongsToMany(Event, {as: 'ShepherdEvents', through: 'ShepherdEvent'});
+ * Event.belongsToMany(User, {as: 'Shepherds', through: 'ShepherdEvent'});
+ *
+ * We create a many-to-many relationship between users and events, and the join table is called ShepherdEvent.
+ * The ShepherdEvent table will have a foreign key for EventId and UserId.
+ * The User and Event models will have get, set, and add methods. For example, user.getShepherdEvents() 
+ * will return all instances of a ShepherdEvent belonging to that user, and each instance would reference the 
+ * Event the user is a shepherd for.
+ * 
+ * See http://sequelize.readthedocs.org/en/latest/docs/associations/#belongs-to-many-associations
+ *
+ * hasMany connects a source with multiple targets, but the targets can only connect to one source
+ *
+ * See http://sequelize.readthedocs.org/en/latest/docs/associations/#one-to-many-associations
+ */
 
-Shepherd.hasMany(Event);
-User.hasMany(Observation);
-Event.hasMany(Observation);
+User.belongsToMany(Event, {as: 'ShepherdEvents', through: 'ShepherdEvent'});
+Event.belongsToMany(User, {as: 'Shepherds', through: 'ShepherdEvent'});
+User.belongsToMany(Event, {as: 'SheepEvents', through: 'SheepEvent'});
+Event.belongsToMany(User, {as: 'Sheep', through: 'SheepEvent'});
+User.hasMany(Observation); // UserId on Observation
+Event.hasMany(Observation); // EventId on Observation
 
-// sync all tables
-User.sync();
-Shepherd.sync();
-Sheep.sync();
-Event.sync();
-Observation.sync();
+/* EXAMPLE OF HOW TO CREATE A USER, THEN AN EVENT, AND FINALLY AN OBSERVATION TIED TO THE USER AND EVENT:
+User.create({
+  username: 'Kev'
+}).then(function(user) {
+  Event.create({
+    eventName: 'Dance party',
+    location: 'San Francisco'
+  }).then(function(event) {
+    Observation.create({
+      content: 'It is poppin in herrr',
+      completed: false
+    }).then(function(observation) {
+      // Associate the observation to the event
+      return event.addObservation(observation);
+    }).then(function(observation) {
+      // Associate the observation to the user
+      user.addObservation(observation);
+    });
+  });
+});
+*/
 
-// export all tables
+// sync all models
+orm.sync();
+
+// export all models
 exports.User = User;
-exports.Shepherd = Shepherd;
-exports.Sheep = Sheep;
 exports.Event = Event;
 exports.Observation = Observation;
