@@ -84,10 +84,11 @@ var init = function() {
 
   // sync all models
   orm.sync();
+  
+  // export all models
+  exports.User = User;
+  exports.Event = Event;
+  exports.Observation = Observation;
 };
+  exports.init = init;
 
-// export all models
-exports.User = User;
-exports.Event = Event;
-exports.Observation = Observation;
-exports.init = init;

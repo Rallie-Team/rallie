@@ -13,14 +13,14 @@ var config = require('./config/environment');
 var passport = require('passport');
 var db = require('./db');
 
-// TODO: Connect to database
-
-
 // TODO: Eddie - Populate DB with sample data
 // TODO: Eddie - Enter seed data line here
 
 var app = express();
 var server = require('http').createServer(app);
+
+// Init database
+db.init();
 
 require('./config/express')(app);
 require('./routes')(app);
@@ -32,9 +32,6 @@ require('./routes')(app);
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
-
-// Init database
-db.init();
 
 // Expose app
 exports = module.exports = app;
