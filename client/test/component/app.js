@@ -3,7 +3,6 @@ var expect = require('chai').expect;
 var App = require('../../public/js/components/app');
 var TestUtils = React.addons.TestUtils;
 
-// TODO: Refactor out to component folder
 describe('App Component', function () {
   var appComponent;
 
@@ -30,11 +29,5 @@ describe('App Component', function () {
   it('should have a h1 tag with "Joseki"', function () {
     expect(appComponent.props.children).to.contain(<h1>Joseki</h1>);
   });
-});
 
-// Original tests
-describe('Client Tests', function() {
-  it('should pass', function() {
-    expect(true).to.be.true;
-  });
 });
