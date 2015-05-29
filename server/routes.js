@@ -13,7 +13,7 @@ module.exports = function(app) {
   // Delete this route for things
   // app.use('/api/things', require('./api/thing'));
   // app.use('/api/action', require('./api/action'));
-  // app.use('/api/event', require('./api/event'));
+  app.use('/api/event', require('./api/event'));
   // app.use('/api/observation', require('./api/observation'));
   // app.use('/api/user', require('./api/user')); 
 
