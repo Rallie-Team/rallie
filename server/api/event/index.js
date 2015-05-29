@@ -53,7 +53,7 @@ router.post('/create', function(req, res) {
     if (user) {
       // User exists, continue to create event
       db.Event.create({
-        eventName: req.body.eventName || '',
+        name: req.body.name || '',
         // If no start time specified, default to now
         start: req.body.start || currentDate,
         // If no end time specified, default to 24 hours from now
@@ -83,7 +83,7 @@ router.put('/:eventId', function(req, res) {
     if (event) {
       // Found event in db, continue to update
       event.updateAttributes({
-        eventName: req.body.eventName,
+        name: req.body.name,
         location: req.body.location
       }).then(function() {
         res.sendStatus(200);

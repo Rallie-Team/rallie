@@ -12,7 +12,7 @@ var EventListItem = React.createClass({
     return (
       <div className="event-list-item">
         <a href={this.makeHref('event-detail')} onClick={this.prepareForDetailedView}>
-        <div className="event-list-item-name">{this.props.event.eventName}</div></a>
+        <div className="event-list-item-name">{this.props.event.name}</div></a>
         <div className="event-list-item-location">{this.props.event.location}</div>
       </div>
     );

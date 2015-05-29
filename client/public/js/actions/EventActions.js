@@ -25,7 +25,7 @@ var EventActions = {
     EventAPI.addEvent(data).then(function(event) {
       AppDispatcher.dispatch({
         action: AppConstants.EVENT_CREATE,
-        name: event.eventName,
+        name: event.name,
         location: event.location
       });
     });
