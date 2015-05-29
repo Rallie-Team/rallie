@@ -50,8 +50,8 @@ var EventList = React.createClass({
     //sends each event to EventListItem so that it will be properly
     //displayed
     var mode = this.props.mode;
-    var events = this.state.events.map(function(event, i) {
-      return <EventListItem key={i} event={event} mode={mode}/>
+    var events = this.state.events.map(function(event) {
+      return <EventListItem key={event.id} event={event} mode={mode}/>
     });
 
     //this.props.mode references the mode set in App.js which is made

@@ -38,7 +38,7 @@ var EventDetailStore = assign({}, EventEmitter.prototype, {
 
 // Register callback to handle all updates
 AppDispatcher.register(function(payload) {
-  switch(payload.action) {
+  switch(payload.actionType) {
 
     // TODO: NEED TO IMPLEMENT HANDLER FOR DELETING EVENTS
     case AppConstants.EVENT_EDIT:

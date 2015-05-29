@@ -5,43 +5,55 @@
 
 var AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants'),
-    EventAPI = require('../utils/EventAPI');
+    EventAPI = require('../utils/EventAPI'),
+    assign = require('object-assign');
 
 var EventActions = {
-  // Get all events
+  /**
+   * Get all events
+   */
   getAll: function() {
     EventAPI.getAllEvents().then(function(events) {
       AppDispatcher.dispatch({
-        action: AppConstants.EVENT_GET,
+        actionType: AppConstants.EVENT_GET,
         events: events
       });
     });
   },
 
-  // Get all events for a specific shepherd
+  /**
+   * Get all events for a specific shepherd
+   * @param {number} shepherdId The primary key of the user in the database
+   */
+  getAllByShepherd: function(shepherdId) {
+    // TODO
+  },
 
-  // Creates an event
+  /**
+   * Create an event
+   * @param {object} data An object containing the attributes of the event
+   */
   create: function(data) {
     EventAPI.addEvent(data).then(function(event) {
-      AppDispatcher.dispatch({
-        action: AppConstants.EVENT_CREATE,
-        name: event.name,
-        location: event.location
-      });
+      AppDispatcher.dispatch(
+        // Use object-assign to combine event properties with the action property
+        // and dispatch the collective properties as one object
+        assign({actionType: AppConstants.EVENT_CREATE}, event)
+      );
     });
   },
 
   // Deletes an event
   destroy: function(id) {
     AppDispatcher.dispatch({
-      action: AppConstants.EVENT_DELETE,
+      actionType: AppConstants.EVENT_DELETE,
       id: id
     });
   },
 
   prepareForSegue: function(state){
     AppDispatcher.dispatch({
-      action: AppConstants.UPDATE_STATE,
+      actionType: AppConstants.UPDATE_STATE,
       state: state
     });
   }

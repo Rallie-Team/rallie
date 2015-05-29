@@ -1,6 +1,7 @@
 var React = require('react'),
-	Navigation = require('react-router').Navigation,
-	EventActions = require('../actions/EventActions');
+	  Navigation = require('react-router').Navigation,
+	  EventActions = require('../actions/EventActions'),
+    assign = require('object-assign');
 
 //EventList item is referenced in EventList.js
 //This will render all of the events in the event List
@@ -19,11 +20,8 @@ var EventListItem = React.createClass({
   },
 
   prepareForDetailedView: function() {
-  	var updatedState = {
-      name: this.props.event.name,
-      location: this.props.event.location,
-      mode: this.props.mode
-    };
+    // Merge all keys in this.props.event and this.props.mode into one object
+    var updatedState = assign(this.props.event, {mode: this.props.mode});
     EventActions.prepareForSegue(updatedState);
   }
 });
