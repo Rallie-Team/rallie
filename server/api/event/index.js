@@ -64,8 +64,9 @@ router.post('/create', function(req, res) {
       }).then(function(event) {
         // After creating the event, associate the event with the user as a shepherd
         user.addShepherdEvent(event).then(function(shepherdEvent) {
-          event.addShepherd(user);
-          res.json(event);
+          event.addShepherd(user).then(function(){
+            res.json(event);
+          });
         });
       });
     }
@@ -85,8 +86,8 @@ router.put('/:eventId', function(req, res) {
       event.updateAttributes({
         name: req.body.name,
         location: req.body.location
-      }).then(function() {
-        res.sendStatus(200);
+      }).then(function(event) {
+        res.json(event);
       });
     } else {
       // Event not found
