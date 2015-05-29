@@ -4,9 +4,22 @@
  */
 
 var AppDispatcher = require('../dispatcher/AppDispatcher'),
-    AppConstants = require('../constants/AppConstants');
+    AppConstants = require('../constants/AppConstants'),
+    EventAPI = require('../utils/EventAPI');
 
 var EventActions = {
+  // Get all events
+  getAll: function() {
+    EventAPI.getAllEvents().then(function(events) {
+      AppDispatcher.dispatch({
+        action: AppConstants.EVENT_GET,
+        events: events
+      });
+    });
+  },
+
+  // Get all events for a specific shepherd
+
   // Creates an event
   create: function(event) {
     AppDispatcher.dispatch({

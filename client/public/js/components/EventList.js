@@ -1,14 +1,11 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
     EventListItem = require('./EventListItem'),
-    EventStore = require('../stores/EventStore');
+    EventStore = require('../stores/EventStore'),
+    EventActions = require('../actions/EventActions');
 
-//Gets all of the events presently stored and sets it to
-//state.events
-var getEventState = function() {
-  return {
-    events: EventStore.getAll()
-  };
+var getEvents = function() {
+  return EventStore.getAll();
 };
 
 var EventList = React.createClass({
@@ -20,7 +17,32 @@ var EventList = React.createClass({
   mixins: [Navigation],
 
   getInitialState: function() {
-    return getEventState();
+    // Set initial state to the initial set of events defined in EventStore
+    return {
+      events: getEvents()
+    };
+  },
+
+  // Fetch all events after component is mounted
+  // Fetching via AJAX needs to happen after mounting due to async
+  componentDidMount: function() {
+    // Add event listener for getting events from the server when the component is mounted
+    EventStore.addEventListener('get', this._onGet);
+
+    if (this.isMounted()) {
+      // TODO: REFACTOR TO GET ALL EVENTS BY USERID FOR A SHEPHERD
+      // WE NEED TO PASS THE USER MODE DOWN TO THIS REACT COMPONENT
+      // SO THAT WE CAN DISTINGUISH WHETHER TO GET ALL EVENTS (FOR SHEEP)
+      // OR GET ALL EVENTS BY USERID (FOR A SHEPHERD)
+
+      // Get all events (for sheep)
+      EventActions.getAll();
+    }
+  },
+
+  componentWillUnmount: function() {
+    // Remove event listener when the DOM element is removed
+    EventStore.removeEventListener('get', this._onGet);
   },
 
   render: function() {
@@ -48,6 +70,12 @@ var EventList = React.createClass({
         {events}
       </div>
     );
+  },
+
+  _onGet: function() {
+    this.setState({
+      events: getEvents()
+    });
   }
 });
 

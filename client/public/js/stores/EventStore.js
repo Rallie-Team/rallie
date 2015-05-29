@@ -4,7 +4,8 @@ var EventEmitter = require('events').EventEmitter,
     passport = require('passport-facebook'),
     AppConstants = require('../constants/AppConstants');
 
-var _events = [{name: 'Riot at Hack Reactor', location: 'Hack Reactor HQ'}, {name: 'Flash Mob Dance Party', location: 'City Hall'}];
+// var _events = [{name: 'Riot at Hack Reactor', location: 'Hack Reactor HQ'}, {name: 'Flash Mob Dance Party', location: 'City Hall'}];
+var _events = [];
 var _currentEvent = {name: '', location: ''};
 
 var EventStore = assign({}, EventEmitter.prototype, {
@@ -48,6 +49,13 @@ var EventStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(payload) {
   switch(payload.action) {
+    // When events are fetched
+    case AppConstants.EVENT_GET:
+      // Set current events collection to the fetched results
+      _events = payload.events;
+      EventStore.emitEvent('get');
+      break;
+
     // TODO: NEED TO IMPLEMENT HANDLER FOR CREATING EVENTS
     case AppConstants.EVENT_CREATE:
       // Optimistically add new event to the collection of events before POSTing to the server
