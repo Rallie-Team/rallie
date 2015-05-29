@@ -60,15 +60,15 @@ var EventAPI = {
 
   /**
    * Create a new event
-   * @param {object} event An object containing all the event attributes
+   * @param {object} data An object containing the shepherd ID and all the event attributes
    */
-  addEvent: function(event) {
+  addEvent: function(data) {
     // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/create',
       method: 'POST',
       dataType: 'json',
-      data: event
+      data: data
     }).then(function(data) {
       // Return event on success
       return data;

@@ -44,11 +44,12 @@ var EventCreate = React.createClass({
   // .target redferences the dom node of e
   _save: function(e) {
     e.preventDefault();
-    var newEvent = {
-      name: e.target.name.value.trim(),
+    var data = {
+      userId: 2, // TODO: NEED TO DYNAMICALLY RETRIEVE USERID OF SHEPHERD
+      eventName: e.target.name.value.trim(),
       location: e.target.location.value.trim()
     };
-    EventActions.create(newEvent);
+    EventActions.create(data);
   },
 
   // Update the current state with the new values in the input fields

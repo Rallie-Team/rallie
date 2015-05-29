@@ -21,11 +21,13 @@ var EventActions = {
   // Get all events for a specific shepherd
 
   // Creates an event
-  create: function(event) {
-    AppDispatcher.dispatch({
-      action: AppConstants.EVENT_CREATE,
-      name: event.name,
-      location: event.location
+  create: function(data) {
+    EventAPI.addEvent(data).then(function(event) {
+      AppDispatcher.dispatch({
+        action: AppConstants.EVENT_CREATE,
+        name: event.eventName,
+        location: event.location
+      });
     });
   },
 
