@@ -5,9 +5,15 @@ var User, Event, Observation;
 
 var init = function() {
   var orm;
+
+  // Use different parameters for initializing the Sequelize instance depending on environment
   if (config.postgres.uri) {
+    // The production environment should have a DATABASE_URL environment variable, which includes a URL
+    // with username, password, host, port, and database. The URL will be set in config/environment/production.js.
     orm = new Sequelize(config.postgres.uri, config.postgres.options);
   } else {
+    // The development environment will not use a URL, and each config parameter
+    // will be set in config/environment/development.js
     orm = new Sequelize(config.postgres.database, config.postgres.user, config.postgres.password, config.postgres.options);
   }
 
@@ -90,5 +96,5 @@ var init = function() {
   exports.Event = Event;
   exports.Observation = Observation;
 };
-  exports.init = init;
 
+exports.init = init;
