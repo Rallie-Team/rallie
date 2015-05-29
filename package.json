@@ -64,12 +64,16 @@
     "jshint-stylish": "1.0.2",
     "mocha": "2.2.4",
     "reactify": "1.1.1",
+    "sinon": "1.14.1",
+    "supertest": "1.0.1",
     "vinyl-source-stream": "1.1.0",
     "watchify": "3.2.1"
   },
   "jest": {
     "scriptPreprocessor": "./client/test/preprocessor.js",
-    "testPathDirs": ["./client/test"],
+    "testPathDirs": [
+      "./client/test"
+    ],
     "unmockedModulePathPatterns": [
       "./node_modules/react"
     ]
