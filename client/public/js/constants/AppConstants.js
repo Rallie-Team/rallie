@@ -13,5 +13,6 @@ module.exports = keyMirror({
   EVENT_DELETE: null,
   TOGGLE_MODE: null,
   UPDATE_STATE: null,
-  OBSERVATION_CREATE: null
+  OBSERVATION_CREATE: null,
+  SET_CURRENT_USER: null
 });

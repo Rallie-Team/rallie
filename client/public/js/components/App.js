@@ -13,12 +13,24 @@ var App = React.createClass({
   //to reference the functionalities using "this"
   mixins: [Navigation],
 
+  getParameterByName: function(name){
+  var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+  return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+  },
+
   //the default mode for a new user is a sheep
   //users are able to change to shepherd
   getInitialState: function() {
     return {
+      currentUser: undefined,
       mode: 'sheep'
     };
+  },
+
+  _loggedIn: function(){
+      this.setState({
+        currentUser: AppStore.getCurrentUser(),
+    });
   },
 
   //setup event listeners
@@ -27,16 +39,34 @@ var App = React.createClass({
   componentDidMount: function() {
     // EventStore.addEventListener('change', this._onChange);
     AppStore.addEventListener('toggleMode', this._changeStateMode);
+    AppStore.addEventListener('loggedIn', this._loggedIn);
+
+    if(this.getParameterByName("user")){
+      console.log('///////////////////////////////');
+      var username = this.getParameterByName("user");
+      var id = this.getParameterByName('id');
+      var token = this.getParameterByName("token");
+
+      var data = {
+        username: username,
+        id: id,
+        token: token
+      };
+    AppActions.setCurrentUser(data);
+    }
   },
 
   //removes both event listeners when the dom element is removed
   componentWillUnmount: function() {
     // EventStore.removeEventListener('change', this._onChange);
     AppStore.removeEventListener('toggleMode', this._changeStateMode);
+    AppStore.removeEventListener('loggedIn', this._loggedIn);
+
   },
 
   //this.makeHref('home') can be replaced with #/home
   render: function() {
+
     return (
       <div>
         <header>
@@ -45,16 +75,17 @@ var App = React.createClass({
             <ul>
               <li><a href={this.makeHref('home')}>Home</a></li>
               <li><a href={this.makeHref('events')}>Events</a></li>
+              <li><a href='/Server/auth/facebook'>Login</a></li>
               {/* This is the toggler for shepherd/sheep */}
               <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
+              <li>{this.state.currentUser}</li>
             </ul>
           </nav>
         </header>
-        <div>
+
           {/* The RouteHandler component renders the active child route's handler */}
           <RouteHandler mode={this.state.mode}/>
         </div>
-      </div>
     );
   },
 

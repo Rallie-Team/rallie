@@ -36,6 +36,13 @@ var AppActions = {
       actionType: AppConstants.TOGGLE_MODE,
       events: [{name: 'Event 1', location: 'SF'}, {name: 'Event 2', location: 'LA'}]
     });
+  },
+
+  setCurrentUser: function(user){
+    AppDispatcher.dispatch({
+      action: AppConstants.SET_CURRENT_USER,
+      user: user
+    });
   }
 };
 
