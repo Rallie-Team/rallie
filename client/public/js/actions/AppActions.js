@@ -43,6 +43,13 @@ var AppActions = {
       action: AppConstants.SET_CURRENT_USER,
       user: user
     });
+  },
+
+  removeCurrentUser: function(){
+    console.log('inside of removeCurrentUser');
+    AppDispatcher.dispatch({
+      action: AppConstants.REMOVE_CURRENT_USER
+    });
   }
 };
 

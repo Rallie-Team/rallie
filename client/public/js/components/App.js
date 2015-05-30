@@ -33,10 +33,16 @@ var App = React.createClass({
     });
   },
 
-  _logout: function(){
+  _loggedOut: function(){
+    console.log(AppStore.getCurrentUser(), "inside of loggedout");
     this.setState({
-      currentUser: getCurrentUser()
+      currentUser: AppStore.getCurrentUser()
     });
+  },
+
+  removeCurrentUser: function(){
+    console.log('inside of components/app');
+    AppActions.removeCurrentUser();
   },
 
   //setup event listeners
@@ -46,6 +52,7 @@ var App = React.createClass({
     // EventStore.addEventListener('change', this._onChange);
     AppStore.addEventListener('toggleMode', this._changeStateMode);
     AppStore.addEventListener('loggedIn', this._loggedIn);
+    AppStore.addEventListener('loggedOut', this._loggedOut);
 
     if(this.getParameterByName("user")){
       var username = this.getParameterByName("user");
@@ -66,12 +73,13 @@ var App = React.createClass({
     // EventStore.removeEventListener('change', this._onChange);
     AppStore.removeEventListener('toggleMode', this._changeStateMode);
     AppStore.removeEventListener('loggedIn', this._loggedIn);
+    AppStore.removeEventListener('loggedOut', this._loggedOut);
 
   },
 
   //this.makeHref('home') can be replaced with #/home
   render: function() {
-    if(AppStore.getCurrentUser() !== undefined){
+    if(this.getParameterByName("user")){
       return (
         <div>
           <header>
@@ -83,6 +91,7 @@ var App = React.createClass({
                 {/* This is the toggler for shepherd/sheep */}
                 <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
                 <li>{this.state.currentUser}</li>
+                <li><a onClick={this.removeCurrentUser} href={this.makeHref('home')}>Logout</a></li>
               </ul>
             </nav>
           </header>
@@ -90,7 +99,7 @@ var App = React.createClass({
             {/* The RouteHandler component renders the active child route's handler */}
             <RouteHandler mode={this.state.mode}/>
         </div>
-    );
+      );
 
     } else {
 
