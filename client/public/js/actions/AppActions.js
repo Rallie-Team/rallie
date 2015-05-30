@@ -36,6 +36,26 @@ var AppActions = {
       actionType: AppConstants.TOGGLE_MODE,
       events: [{name: 'Event 1', location: 'SF'}, {name: 'Event 2', location: 'LA'}]
     });
+
+  },
+
+  //relays information to App Store to add the information
+  //of the current user
+  setCurrentUser: function(user){
+    AppDispatcher.dispatch({
+      actionType: AppConstants.SET_CURRENT_USER,
+      user: user
+    });
+  },
+
+  //relays information to App Store to remove the information
+  //of the current user
+  removeCurrentUser: function(){
+    console.log('inside of appactions removeCurrentUser');
+    AppDispatcher.dispatch({
+      actionType: AppConstants.REMOVE_CURRENT_USER
+    });
+
   }
 };
 
