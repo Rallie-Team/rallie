@@ -11,12 +11,18 @@ module.exports = function(app, express, passport) {
   console.log(app.get('appPath'));
   // console.log(app);
   // console.log(express);
+  //
+  //
+
 
    var authRouter = express.Router();
   // Insert routes below
   // Delete this route for things
   // app.use('/api/things', require('./api/thing'));
   // app.use('/api/action', require('./api/action'));
+
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   app.use('/api/event', require('./api/event'));
   app.use('/api/observation', require('./api/observation'));

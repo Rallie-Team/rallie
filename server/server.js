@@ -17,9 +17,6 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport');
 
 
-db.init();
-// TODO: Connect to database
-
 // TODO: Eddie - Populate DB with sample data
 // TODO: Eddie - Enter seed data line here
 
@@ -46,10 +43,6 @@ server.listen(config.port, config.ip, function () {
 
 
 // Init database
-
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 // Expose app
