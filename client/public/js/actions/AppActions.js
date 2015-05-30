@@ -38,6 +38,8 @@ var AppActions = {
     });
   },
 
+  //relays information to App Store to add the information
+  //of the current user
   setCurrentUser: function(user){
     AppDispatcher.dispatch({
       action: AppConstants.SET_CURRENT_USER,
@@ -45,8 +47,9 @@ var AppActions = {
     });
   },
 
+  //relays information to App Store to remove the information
+  //of the current user
   removeCurrentUser: function(){
-    console.log('inside of removeCurrentUser');
     AppDispatcher.dispatch({
       action: AppConstants.REMOVE_CURRENT_USER
     });

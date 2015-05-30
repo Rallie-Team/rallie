@@ -27,21 +27,25 @@ var App = React.createClass({
     };
   },
 
+  //sets current user as logged in after they successfully log into facebook
   _loggedIn: function(){
       this.setState({
         currentUser: AppStore.getCurrentUser()
     });
   },
 
+  // sets state of current user to undefined after they click the logout
+  // button
   _loggedOut: function(){
-    console.log(AppStore.getCurrentUser(), "inside of loggedout");
     this.setState({
       currentUser: AppStore.getCurrentUser()
     });
   },
 
+  //Relays information to Event Store so that current user information can
+  //be set to be undefined
+
   removeCurrentUser: function(){
-    console.log('inside of components/app');
     AppActions.removeCurrentUser();
   },
 
@@ -78,6 +82,9 @@ var App = React.createClass({
   },
 
   //this.makeHref('home') can be replaced with #/home
+  //Depending on if the user is logged in (based off the url)
+  //the application will determine which parts of the render function
+  //to be displayed
   render: function() {
     if(this.getParameterByName("user")){
       return (
