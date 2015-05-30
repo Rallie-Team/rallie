@@ -17,6 +17,7 @@ var routes = (
     <Route name="events" handler={EventList} path="events"/>
     <Route name="event-create" handler={EventCreate} path="events/create"/>
     <Route name="event-detail" handler={EventDetail} path="events/detail"/>
+    <Route name="facebook-route" handler={EventDetail} path="/_=_"/>
   </Route>
 );
 

@@ -16,33 +16,29 @@ module.exports = function(passport){
   clientSecret: localServices.facebook.secret,
   callbackURL: client.facebookAuth.callbackURL
 
-  }, function(token, refreshToken, profile, done){
-    console.log('im in authController');
+   }, function(token, refreshToken, profile, done){
+    console.log(profile.id);
 
-    //function looks to see if the user id is in the system
-    User.findOne({'facebook.id' : profile.id}, function (err, user){
-      if(err){
-        console.error (err);
-        return done (err);
-      } else if (user) {
-        //if it is in the system, we return the user information
-        return done(null, user);
-      } else {
-        //if it is not in the system, we create user information
-        //in the system
-        db.User.create({
-          username: profile.id,
-          facebook_id: profile.name.givenName
-        })
-        //return user information when done
-        .then(function(results){
-          return done(null, results)
-        //return error if user is not found
-        .catch(function (error){
-          next(new Error("couldn't add in user", error));
-        });
+    db.User.find({where: {'facebook_id' : profile.id}})
+      .then(function(user){
+        if(!user){
+          console.log('creating new user');
+          db.User.create({
+            username: profile.name.givenName,
+            facebook_id: profile.id
+          })
+          .then(function(newUser){
+            console.log(newUser, '----------------------');
+            return done(null, newUser);
+          });
+        } else {
+          var currentUser = {
+            username: user.username,
+            table_id: user.id
+          };
+          return done(null, currentUser);
+        }
       });
-      }
-   });
-  }));
+    }
+  ));
 };
