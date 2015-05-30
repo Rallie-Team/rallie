@@ -57,7 +57,6 @@ var EventCreate = React.createClass({
   // this updates the state values that were defined in getInitialState
   _onChange: function(e) {
     var obj = {};
-    console.log(e.target, "targeted node");
     obj[e.target.name] = e.target.value;
     this.setState(obj);
   },

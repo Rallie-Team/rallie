@@ -20,13 +20,6 @@ var EventDetailActions = {
       var data = assign({actionType: AppConstants.EVENT_EDIT}, event);
       AppDispatcher.dispatch(data);
     });
-  },
-
-  createNewObservation: function(newObservation){
-  	AppDispatcher.dispatch({
-      actionType: AppConstants.OBSERVATION_CREATE,
-      observation: newObservation
-    });
   }
 };
 

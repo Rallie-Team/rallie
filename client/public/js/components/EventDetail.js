@@ -10,7 +10,6 @@ var EventDetail = React.createClass({
     return EventStore.getCurrentEvent();
   },
 
-
   componentDidMount: function() {
     //adds an event listener for when events are created
     EventDetailStore.addEventListener('create', this._onCreate);
@@ -37,9 +36,9 @@ var EventDetail = React.createClass({
       {this.state.mode === 'shepherd' ? <button onClick={this._editLocation}>Edit Location</button> : null}
       </p>
 
-      {this.state.mode === 'sheep' ? <ObservationCreate/> : null}
+      {this.state.mode === 'sheep' ? <ObservationCreate eventId={this.state.id}/> : null}
 
-      <ObservationList/>
+      <ObservationList eventId={this.state.id}/>
 
       </div>
     );

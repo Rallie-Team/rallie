@@ -1,17 +1,13 @@
 var EventEmitter = require('events').EventEmitter,
     assign = require('object-assign'),
     AppDispatcher = require('../dispatcher/AppDispatcher'),
-    AppConstants = require('../constants/AppConstants'),
-    AppActions = require('../actions/AppActions');
+    AppConstants = require('../constants/AppConstants');
 
-//TODO: define the events array inside the appstore
-// var _events = [];
-var _currentUser = {id: 1, username: 'Eddie'};
+var _observations = [];
 
-var AppStore = assign({}, EventEmitter.prototype, {
-
-  getCurrentUser: function() {
-    return _currentUser;
+var ObservationStore = assign({}, EventEmitter.prototype, {
+  getAll: function() {
+    return _observations;
   },
 
   /**
@@ -44,27 +40,18 @@ var AppStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(payload) {
   switch(payload.actionType) {
-    case AppConstants.TOGGLE_MODE:
-      //TODO: with data from payload.events, populate appstore's array of events
-      AppStore.emitEvent('toggleMode');
-      // TODO: DO SOMETHING ELSE IF THERE WAS AN ERROR DURING EVENT CREATION
+    // When observations are fetched
+    case AppConstants.OBSERVATION_GET:
+      // Set current observations collection to the fetched results
+      _observations = payload.observations;
+      ObservationStore.emitEvent('get');
       break;
 
-
-    case AppConstants.SET_CURRENT_USER:
-      _currentUser.id = payload.user.id;
-      _currentUser.name = payload.user.username;
-      console.log(payload, 'payloaddd');
-      AppStore.emitEvent('loggedIn');
-      break;
-
-    case AppConstants.REMOVE_CURRENT_USER:
-      console.log('removing user inside of appstore.js');
-      _currentUser.id = undefined;
-      _currentUser.name = undefined;
-      window.localStorage.removeItem('joseki');
-      window.location = '/';
-      AppStore.emitEvent('loggedOut');
+    // When an observation is created
+    case AppConstants.OBSERVATION_CREATE:
+      // Add the new observation to the current collection of observations
+      _observations.unshift(payload.observations[0]);
+      ObservationStore.emitEvent('create');
       break;
 
     default:
@@ -72,4 +59,4 @@ AppDispatcher.register(function(payload) {
   }
 });
 
-module.exports = AppStore;
+module.exports = ObservationStore;

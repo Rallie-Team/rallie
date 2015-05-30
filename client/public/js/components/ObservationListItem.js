@@ -8,8 +8,9 @@ var ObservationListItem = React.createClass({
   render: function() {
     return (
       <div className="event-list-item">
-        <div className="event-list-item-name">{this.props.observation.name}</div>
-        <div className="event-list-item-location">{this.props.observation.text}</div>
+        <div className="event-list-item-name">{this.props.observation.User.username}</div>
+        <div className="list-item-datetime">{this.props.observation.createdAt}</div>
+        <div className="event-list-item-location">{this.props.observation.content}</div>
       </div>
     );
   }
