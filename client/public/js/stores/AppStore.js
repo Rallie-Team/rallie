@@ -22,6 +22,11 @@ var AppStore = assign({}, EventEmitter.prototype, {
     this.emit(eventName);
   },
 
+  removeCurrentUser: function() {
+    window.localStorage.removeItem('joseki');
+    window.location = '/';
+  },
+
   /**
    * Register a callback to invoke when an event is triggered
    * @param {string} eventName The name of the event
@@ -53,9 +58,15 @@ AppDispatcher.register(function(payload) {
     case AppConstants.SET_CURRENT_USER:
       _currentUser.id = payload.user.id;
       _currentUser.name = payload.user.username;
-      console.log(_currentUser, '-----------------------');
       AppStore.emitEvent('loggedIn');
       break;
+
+    // case AppConstants.REMOVE_CURRENT_USER:
+    //     _currentUser.id = undefined;
+    //     _currentUser.name = undefined
+    //     this.removeCurrentUser();
+    //     AppStore.emitEvent('loggedOut');
+    //   break;
 
     default:
       // no op
@@ -63,3 +74,4 @@ AppDispatcher.register(function(payload) {
 });
 
 module.exports = AppStore;
+

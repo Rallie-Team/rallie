@@ -14,5 +14,6 @@ module.exports = keyMirror({
   TOGGLE_MODE: null,
   UPDATE_STATE: null,
   OBSERVATION_CREATE: null,
-  SET_CURRENT_USER: null
+  SET_CURRENT_USER: null,
+  REMOVE_CURRENT_USER: null
 });

@@ -29,7 +29,13 @@ var App = React.createClass({
 
   _loggedIn: function(){
       this.setState({
-        currentUser: AppStore.getCurrentUser(),
+        currentUser: AppStore.getCurrentUser()
+    });
+  },
+
+  _logout: function(){
+    this.setState({
+      currentUser: getCurrentUser()
     });
   },
 
@@ -42,7 +48,6 @@ var App = React.createClass({
     AppStore.addEventListener('loggedIn', this._loggedIn);
 
     if(this.getParameterByName("user")){
-      console.log('///////////////////////////////');
       var username = this.getParameterByName("user");
       var id = this.getParameterByName('id');
       var token = this.getParameterByName("token");
@@ -66,27 +71,51 @@ var App = React.createClass({
 
   //this.makeHref('home') can be replaced with #/home
   render: function() {
+    if(AppStore.getCurrentUser() !== undefined){
+      return (
+        <div>
+          <header>
+            <h1>Joseki</h1>
+            <nav>
+              <ul>
+                <li><a href={this.makeHref('home')}>Home</a></li>
+                <li><a href={this.makeHref('events')}>Events</a></li>
+                {/* This is the toggler for shepherd/sheep */}
+                <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
+                <li>{this.state.currentUser}</li>
+              </ul>
+            </nav>
+          </header>
 
-    return (
-      <div>
-        <header>
-          <h1>Joseki</h1>
-          <nav>
-            <ul>
-              <li><a href={this.makeHref('home')}>Home</a></li>
-              <li><a href={this.makeHref('events')}>Events</a></li>
-              <li><a href='/Server/auth/facebook'>Login</a></li>
-              {/* This is the toggler for shepherd/sheep */}
-              <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
-              <li>{this.state.currentUser}</li>
-            </ul>
-          </nav>
-        </header>
-
-          {/* The RouteHandler component renders the active child route's handler */}
-          <RouteHandler mode={this.state.mode}/>
+            {/* The RouteHandler component renders the active child route's handler */}
+            <RouteHandler mode={this.state.mode}/>
         </div>
     );
+
+    } else {
+
+      return (
+        <div>
+          <header>
+            <h1>Joseki</h1>
+            <nav>
+              <ul>
+                <li><a href={this.makeHref('home')}>Home</a></li>
+                <li><a href={this.makeHref('events')}>Events</a></li>
+                <li><a href='/Server/auth/facebook'>Login</a></li>
+                {/* This is the toggler for shepherd/sheep */}
+                <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
+              </ul>
+            </nav>
+          </header>
+
+            {/* The RouteHandler component renders the active child route's handler */}
+            <RouteHandler mode={this.state.mode}/>
+          </div>
+      );
+
+    }
+
   },
 
   // Event handler for 'change' events coming from the EventStore

@@ -38,7 +38,6 @@ module.exports = function(app, express, passport) {
   // Already tried using "app.disable('etag')"
   //
   app.get('/_=_', function(req, res){
-    console.log('HEY STEVEN');
     res.redirect('/');
   });
 
