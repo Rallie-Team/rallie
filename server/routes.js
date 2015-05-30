@@ -1,8 +1,6 @@
 /**
  * Main application routes
  */
-var express = require('express');
-
 // 'use strict';
 
 var errors = require('./components/errors');
