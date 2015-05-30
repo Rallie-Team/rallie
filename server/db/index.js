@@ -23,7 +23,7 @@ var init = function() {
   });
 
   Event = orm.define('Event', {
-    eventName: Sequelize.STRING,
+    name: Sequelize.STRING,
     start: Sequelize.DATE,
     end: Sequelize.DATE,
     location: Sequelize.STRING,
@@ -71,7 +71,7 @@ var init = function() {
     username: 'Kev'
   }).then(function(user) {
     Event.create({
-      eventName: 'Dance party',
+      name: 'Dance party',
       location: 'San Francisco'
     }).then(function(event) {
       Observation.create({

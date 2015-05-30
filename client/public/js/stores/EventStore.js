@@ -4,7 +4,6 @@ var EventEmitter = require('events').EventEmitter,
     passport = require('passport-facebook'),
     AppConstants = require('../constants/AppConstants');
 
-// var _events = [{name: 'Riot at Hack Reactor', location: 'Hack Reactor HQ'}, {name: 'Flash Mob Dance Party', location: 'City Hall'}];
 var _events = [];
 var _currentEvent = {name: '', location: ''};
 
@@ -48,7 +47,7 @@ var EventStore = assign({}, EventEmitter.prototype, {
 
 // Register callback to handle all updates
 AppDispatcher.register(function(payload) {
-  switch(payload.action) {
+  switch(payload.actionType) {
     // When events are fetched
     case AppConstants.EVENT_GET:
       // Set current events collection to the fetched results
@@ -95,7 +94,6 @@ AppDispatcher.register(function(payload) {
     case AppConstants.EVENT_EDIT:
       _currentEvent.location = payload.location;
       _currentEvent.name = payload.name;
-      // console.log(_currentEvent);
       EventStore.emitEvent('edit');
       break;
 

@@ -43,7 +43,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 // Register callback to handle all updates
 AppDispatcher.register(function(payload) {
-  switch(payload.action) {
+  switch(payload.actionType) {
     case AppConstants.TOGGLE_MODE:
       //TODO: with data from payload.events, populate appstore's array of events 
       AppStore.emitEvent('toggleMode');

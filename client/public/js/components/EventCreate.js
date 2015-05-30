@@ -46,7 +46,7 @@ var EventCreate = React.createClass({
     e.preventDefault();
     var data = {
       userId: 2, // TODO: NEED TO DYNAMICALLY RETRIEVE USERID OF SHEPHERD
-      eventName: e.target.name.value.trim(),
+      name: e.target.name.value.trim(),
       location: e.target.location.value.trim()
     };
     EventActions.create(data);

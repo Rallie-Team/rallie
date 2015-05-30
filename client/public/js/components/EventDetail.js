@@ -46,9 +46,8 @@ var EventDetail = React.createClass({
   },
   //created a prompt asking for waht the user wants to change the event to
   _editEvent: function(){
-    var obj = {};
+    var obj = this.state;
     obj.name = prompt('What should the Event be called?');
-    obj.location = this.state.location;
     EventDetailActions.edit(obj);
   },
 
@@ -58,16 +57,15 @@ var EventDetail = React.createClass({
 
   //created a prompt asking for waht the user wants to change the event to
   _editLocation: function(){
-    var obj = {};
+    var obj = this.state;
     obj.location = prompt('Where is the location?');
-    obj.name = this.state.name;
     EventDetailActions.edit(obj);
 
   },
 
   //updates the current event properties on the page
   _onEdit: function(){
-    this.setState(this.getInitialState);
+    this.setState(EventStore.getCurrentEvent());
   }
 
 });

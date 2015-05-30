@@ -4,23 +4,27 @@
  */
 
 var AppDispatcher = require('../dispatcher/AppDispatcher'),
-    AppConstants = require('../constants/AppConstants');
+    AppConstants = require('../constants/AppConstants'),
+    EventAPI = require('../utils/EventAPI'),
+    assign = require('object-assign');
 
 var EventDetailActions = {
-  //uses same edit event detail for both location and name
-  //changes.  This will just update both properties.
-  edit: function(event){
-    // console.log("event", event);
-    AppDispatcher.dispatch({
-      action: AppConstants.EVENT_EDIT,
-      name: event.name,
-      location: event.location
+  /**
+   * Update event details
+   * @param {object} event An updated representation of the event attributes
+   */
+  edit: function(event) {
+    EventAPI.editEvent(event).then(function(event) {
+      // Use object-assign to combine event properties with the action property
+      // and dispatch the collective properties as one object
+      var data = assign({actionType: AppConstants.EVENT_EDIT}, event);
+      AppDispatcher.dispatch(data);
     });
   },
 
   createNewObservation: function(newObservation){
   	AppDispatcher.dispatch({
-      action: AppConstants.OBSERVATION_CREATE,
+      actionType: AppConstants.OBSERVATION_CREATE,
       observation: newObservation
     });
   }
