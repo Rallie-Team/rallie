@@ -1,7 +1,7 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var db = require('../db');
 var localServices = require('../config/environment/thirdPartyServices');
-// var client = require('./facebookAuthInfo.js');
+var client = require('./facebookAuthInfo.js');
 
 
 module.exports = function(passport){
@@ -15,6 +15,7 @@ module.exports = function(passport){
   clientID: localServices.facebook.id,
   clientSecret: localServices.facebook.secret,
   callbackURL: client.facebookAuth.callbackURL
+
 
   }, function(token, refreshToken, profile, done){
     console.log('im in authController');
@@ -44,7 +45,6 @@ module.exports = function(passport){
           return done(null, currentUser);
         }
       });
-      }
-   });
-  }));
+    }
+   ));
 };

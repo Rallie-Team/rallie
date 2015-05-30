@@ -1,5 +1,6 @@
 var passport = require('passport');
 var jwt = require('jwt-simple');
+var querystring = require('querystring');
 
 module.exports = function(app){
 
@@ -9,16 +10,14 @@ module.exports = function(app){
   //able to handle the callback from facebook which will
   //give us the user information
   app.get('/facebook/callback', function(req, res, next){
-    passport.authenticate('facebook', function(err, user, info){
+    passport.authenticate('facebook', function(err, user){
       if(err){
         return next(err);
       } else {
         var token = jwt.encode(user, 'secret');
-        res.json({token:token, user:user});
-        res.redirect('/#');
+        res.redirect('/?' + querystring.stringify({user: user.username}) + '&' + querystring.stringify({id: user.table_id})+ '&' + querystring.stringify({token: token}));
       }
     })(req,res,next);
-
   });
 
 };
