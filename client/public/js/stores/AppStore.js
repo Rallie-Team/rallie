@@ -6,7 +6,7 @@ var EventEmitter = require('events').EventEmitter,
 
 //TODO: define the events array inside the appstore
 // var _events = [];
-var _currentUser = {id: 1, username: 'Eddie'};
+var _currentUser = {id: undefined, username: undefined};
 
 var AppStore = assign({}, EventEmitter.prototype, {
 
@@ -53,7 +53,7 @@ AppDispatcher.register(function(payload) {
 
     case AppConstants.SET_CURRENT_USER:
       _currentUser.id = payload.user.id;
-      _currentUser.name = payload.user.username;
+      _currentUser.username = payload.user.username;
       console.log(payload, 'payloaddd');
       AppStore.emitEvent('loggedIn');
       break;

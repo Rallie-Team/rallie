@@ -84,6 +84,10 @@ var App = React.createClass({
   //to be displayed
   render: function() {
     if(this.getParameterByName("user")){
+      var currentUserLi;
+      if (this.state.currentUser && this.state.currentUser.username) {
+        currentUserLi = <li>{this.state.currentUser.username}</li>
+      }
       return (
         <div>
           <header>
@@ -94,7 +98,7 @@ var App = React.createClass({
                 <li><a href={this.makeHref('events')}>Events</a></li>
                 {/* This is the toggler for shepherd/sheep */}
                 <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
-                <li>{this.state.currentUser}</li>
+                {currentUserLi}
                 <li><a onClick={this.removeCurrentUser} href={this.makeHref('home')}>Logout</a></li>
               </ul>
             </nav>
