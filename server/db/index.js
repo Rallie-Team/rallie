@@ -63,8 +63,10 @@ var init = function() {
   Event.belongsToMany(User, {as: 'Shepherds', through: 'ShepherdEvent'});
   User.belongsToMany(Event, {as: 'SheepEvents', through: 'SheepEvent'});
   Event.belongsToMany(User, {as: 'Sheep', through: 'SheepEvent'});
-  User.hasMany(Observation); // UserId on Observation
-  Event.hasMany(Observation); // EventId on Observation
+  User.hasMany(Observation);
+  Observation.belongsTo(User);
+  Event.hasMany(Observation);
+  Observation.belongsTo(Event);
 
   /* EXAMPLE OF HOW TO CREATE A USER, THEN AN EVENT, AND FINALLY AN OBSERVATION TIED TO THE USER AND EVENT:
   User.create({
