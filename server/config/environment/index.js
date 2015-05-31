@@ -2,7 +2,7 @@
 
 var path = require('path');
 var _ = require('lodash');
-var localServices = require('./thirdPartyServices.js')
+var localServices = require('./thirdPartyServices.js');
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -39,9 +39,6 @@ var all = {
   },
 
   facebook: {
-    clientID:     localServices.facebook.id,
-    clientSecret: localServices.facebook.secret,
-    callbackURL:  localServices.facebook.callback
   },
 
 };

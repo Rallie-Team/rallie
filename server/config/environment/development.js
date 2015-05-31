@@ -1,4 +1,6 @@
-// TODO: Create development environment database connection
+// local development configuration file
+var localServices = require('./thirdPartyServices.js');
+
 module.exports = {
   postgres: {
     database: 'joseki',
@@ -8,5 +10,10 @@ module.exports = {
       host: 'localhost',
       dialect: 'postgres'
     }
-  }
+  },
+  facebook: {
+   id: localServices.facebook.id,
+   secret: localServices.facebook.secret,
+   callback: 'http://localhost:3000/auth/facebook/callback'
+ }
 };
