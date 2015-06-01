@@ -28,7 +28,7 @@ var App = React.createClass({
 
   //sets current user as logged in after they successfully log into facebook
   _loggedIn: function(){
-    console.log('inside of app.js loggedIn')
+    // console.log('inside of app.js loggedIn')
       this.setState({
         currentUser: AppStore.getCurrentUser()
     });
