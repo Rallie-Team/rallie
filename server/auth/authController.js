@@ -17,18 +17,18 @@ module.exports = function(passport){
   callbackURL: localServices.facebook.callback
 
    }, function(token, refreshToken, profile, done){
-    console.log(profile.id);
+    // console.log(profile.id);
 
     db.User.find({where: {'facebook_id' : profile.id}})
       .then(function(user){
         if(!user){
-          console.log('creating new user');
+          // console.log('creating new user');
           db.User.create({
             username: profile.name.givenName,
             facebook_id: profile.id
           })
           .then(function(newUser){
-            console.log(newUser, '----------------------');
+            // console.log(newUser, '----------------------');
             return done(null, newUser);
           });
         } else {
