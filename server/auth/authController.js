@@ -1,8 +1,6 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var db = require('../db');
-var localServices = require('../config/environment/thirdPartyServices');
 var config = require('../config/environment');
-// var client = require('./facebookAuthInfo.js');
 
 
 module.exports = function(passport){
