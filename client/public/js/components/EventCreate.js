@@ -1,7 +1,8 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
     EventStore = require('../stores/EventStore'),
-    EventActions = require('../actions/EventActions');
+    EventActions = require('../actions/EventActions'),
+    AppStore = require('../stores/AppStore');
 
 var EventCreate = React.createClass({
   mixins: [Navigation],
@@ -45,7 +46,7 @@ var EventCreate = React.createClass({
   _save: function(e) {
     e.preventDefault();
     var data = {
-      userId: 2, // TODO: NEED TO DYNAMICALLY RETRIEVE USERID OF SHEPHERD
+      userId: AppStore.getCurrentUser().id,
       name: e.target.name.value.trim(),
       location: e.target.location.value.trim()
     };
