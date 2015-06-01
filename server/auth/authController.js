@@ -1,6 +1,7 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var db = require('../db');
 var localServices = require('../config/environment/thirdPartyServices');
+var config = require('../config/environment');
 // var client = require('./facebookAuthInfo.js');
 
 
@@ -12,9 +13,9 @@ module.exports = function(passport){
 
   //clientID and clientSecret need to remain private
   //we need to add this information to heroku
-  clientID: localServices.facebook.id,
-  clientSecret: localServices.facebook.secret,
-  callbackURL: localServices.facebook.callback
+  clientID: config.facebook.id,
+  clientSecret: config.facebook.secret,
+  callbackURL: config.facebook.callback
 
    }, function(token, refreshToken, profile, done){
     // console.log(profile.id);
