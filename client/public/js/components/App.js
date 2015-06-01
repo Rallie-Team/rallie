@@ -117,11 +117,7 @@ var App = React.createClass({
             <h1>Joseki</h1>
             <nav>
               <ul>
-                <li><a href={this.makeHref('home')}>Home</a></li>
-                <li><a href={this.makeHref('events')}>Events</a></li>
                 <li><a href='/Server/auth/facebook'>Login</a></li>
-                {/* This is the toggler for shepherd/sheep */}
-                <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
               </ul>
             </nav>
           </header>
