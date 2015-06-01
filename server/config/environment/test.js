@@ -1,19 +1,18 @@
 // local test configuration file
-var localServices = require('./thirdPartyServices.js');
 
 module.exports = {
   postgres: {
     database: 'joseki',
-    user: null,
-    password: null,
+    user: process.env.DATABASE_USER || null,
+    password: process.env.DATABASE_PASSWORD || null,
     options: {
       host: 'localhost',
       dialect: 'postgres'
     }
   },
   facebook: {
-   id: localServices.facebook.id,
-   secret: localServices.facebook.secret,
-   callback: 'http://localhost:3000/auth/facebook/callback'
+   id: process.env.FACEBOOK_ID,
+   secret: process.env.FACEBOOK_SECRET,
+   callback: process.env.FACEBOOK_CALLBACK
  }
 };
