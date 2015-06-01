@@ -28,7 +28,7 @@ var App = React.createClass({
 
   //sets current user as logged in after they successfully log into facebook
   _loggedIn: function(){
-    console.log('inside of app.js loggedIn')
+    // console.log('inside of app.js loggedIn')
       this.setState({
         currentUser: AppStore.getCurrentUser()
     });
@@ -117,11 +117,7 @@ var App = React.createClass({
             <h1>Joseki</h1>
             <nav>
               <ul>
-                <li><a href={this.makeHref('home')}>Home</a></li>
-                <li><a href={this.makeHref('events')}>Events</a></li>
                 <li><a href='/Server/auth/facebook'>Login</a></li>
-                {/* This is the toggler for shepherd/sheep */}
-                <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
               </ul>
             </nav>
           </header>
