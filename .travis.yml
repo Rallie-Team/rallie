@@ -1,6 +1,9 @@
 language: node_js
 node_js:
   - "0.10.36"
+addons:
+  - "9.4"
 before_script:
   - npm install -g bower
   - bower install
+  - psql -c 'create database joseki;' -U postgres
