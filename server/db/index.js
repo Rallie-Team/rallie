@@ -90,13 +90,13 @@ var init = function() {
   });
   */
 
-  // sync all models
-  orm.sync();
-  
   // export all models
   exports.User = User;
   exports.Event = Event;
   exports.Observation = Observation;
+  
+  // sync all models
+  return orm.sync();
 };
 
 exports.init = init;
