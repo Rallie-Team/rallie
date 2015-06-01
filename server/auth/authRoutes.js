@@ -13,8 +13,8 @@ module.exports = function(app){
       } else {
         var token = jwt.encode(user, 'secret');
         res.redirect(
-          '/?' + querystring.stringify({user: user.username}) + 
-          '&' + querystring.stringify({id: user.table_id})+ 
+          '/?' + querystring.stringify({user: user.username}) +
+          '&' + querystring.stringify({id: user.table_id})+
           '&' + querystring.stringify({token: token})
         );
       }
