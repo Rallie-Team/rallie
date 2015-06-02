@@ -94,9 +94,11 @@ router.put('/:eventId', function(req, res) {
   }).then(function(event) {
     if (event) {
       // Found event in db, continue to update
+      // Selectively choose which columns to update
       event.updateAttributes({
         name: req.body.name,
-        location: req.body.location
+        location: req.body.location,
+        end: req.body.end
       }).then(function(event) {
         res.json(event);
       });

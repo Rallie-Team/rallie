@@ -75,25 +75,11 @@ AppDispatcher.register(function(payload) {
       EventStore.emitEvent('update');
       break;
 
-    // case AppConstants.LOCATION_EDIT:
-    //   _currentEvent.location = payload.location
-      // for(var i = 0; i < _events.length; i ++){
-      //   console.log(_events[i].name, 'sdfdsfsadfdsad');
-      //   console.log(payload);
-      //   if(_events[i].name === payload.name){
-      //     _events[i].location = payload.location;
-      //     console.log(_events);
-      //   }
-      // }
-      // EventStore.emitEvent('edit');
-      // break;
-
-    //Sets location and name property to currentEvent
-    //which is then emits an edit event to Event Store which
-    //will update the view.
+    // Sets the current event with data coming from the payload
+    // then emits an edit event from EventStore which will update 
+    // any components listening to it
     case AppConstants.EVENT_EDIT:
-      _currentEvent.location = payload.location;
-      _currentEvent.name = payload.name;
+      _currentEvent = payload;
       EventStore.emitEvent('edit');
       break;
 
