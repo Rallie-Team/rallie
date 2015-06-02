@@ -11,7 +11,7 @@ var AttendeesAPI = {
     // console.log(eventId, 'inside of getAllAttendeesByEvent');
     // Return a promise so the requester can chain the response
     return $.ajax({
-      url: '/api/attendees/shepherd/' + eventId,
+      url: '/api/attendee/shepherd/' + eventId,
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
@@ -28,7 +28,7 @@ var AttendeesAPI = {
     // console.log(eventId, 'inside of getAllAttendeesByEvent');
     // Return a promise so the requester can chain the response
     return $.ajax({
-      url: '/api/attendees/sheep/' + eventId,
+      url: '/api/attendee/sheep/' + eventId,
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
