@@ -16,5 +16,6 @@ module.exports = keyMirror({
   OBSERVATION_CREATE: null,
   SET_CURRENT_USER: null,
   REMOVE_CURRENT_USER: null,
-  ATTENDEES_GET: null
+  SHEEP_GET: null,
+  SHEPHERD_GET: null
 });

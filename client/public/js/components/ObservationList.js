@@ -22,12 +22,14 @@ var ObservationList = React.createClass({
     return {
       // Initialize empty set of observations on initial render
       observations: [],
-      attendees: []
+      sheeps: [],
+      shepherds: []
     };
   },
 
   componentDidMount: function() {
-    AttendeeStore.addEventListener('aquiredShepherds', this._aquiredShepherds);
+    AttendeeStore.addEventListener('aquiredShepherds', this._acquiredShepherds);
+    AttendeeStore.addEventListener('acquiredSheep', this._acquiredSheep);
     // Add event listener for getting observations from the server when the component is mounted
     ObservationStore.addEventListener('get', this._onGet);
     // Add event listener on observation creation
@@ -37,13 +39,16 @@ var ObservationList = React.createClass({
     // Fetching via AJAX needs to happen after mounting due to async
     if (this.isMounted()) {
       ObservationActions.getAllByEvent(this.props.eventId);
-      AttendeeActions.getAllByEvent(this.props.eventId);
+      AttendeeActions.getAllSheepsByEvent(this.props.eventId);
+      AttendeeActions.getAllShepherdsByEvent(this.props.eventId);
     }
   },
 
   componentWillUnmount: function() {
     // Remove event listeners when the DOM element is removed
-    AttendeeStore.removeEventListener('aquiredShepherds', this._aquiredShepherds);
+    AttendeeStore.removeEventListener('aquiredShepherds', this._acquiredShepherds);
+    AttendeeStore.removeEventListener('acquiredSheep', this._acquiredSheep);
+
     ObservationStore.removeEventListener('get', this._onGet);
     ObservationStore.removeEventListener('create', this._onCreate);
   },
@@ -56,10 +61,14 @@ var ObservationList = React.createClass({
       return <ObservationListItem key={observation.id} observation={observation}/>
     })
 
-    var attendees = this.state.attendees.map(function(attendee, i) {
-      return <AttendeesListItem key={attendee.id} attendee={attendee}/>
+    var shepherd = this.state.shepherds.map(function(shepherd, i) {
+      return <ShepherdListItem key={shepherd.id} shepherd={shepherd}/>
     });
 
+
+    var sheep = this.state.sheeps.map(function(sheep, i) {
+      return <SheepListItem key={sheep.id} sheep={sheep}/>
+    });
     //this.props.mode references the mode set in App.js which is made
     //possible because Event List is a child Route of App.js
     //Please reference routes.js
@@ -69,10 +78,11 @@ var ObservationList = React.createClass({
       <div className="event-list">
         <h2>Observations</h2>
         {observations}
-      </div>,
-      <div className="attendees-list">
         <h2>Attendees</h2>
-        {attendees}
+        <h1>Shepherd</h1>
+        {shepherd}
+        <h1>Sheep</h1>
+        {sheep}
       </div>
     );
   },
@@ -81,12 +91,17 @@ var ObservationList = React.createClass({
     this.setState({
       observations: ObservationStore.getAll()
     });
-    console.log(observations, '==============================observations')
   },
 
-  _aquiredShepherds: function(){
+  _acquiredShepherds: function(){
     this.setState({
-      attendees: AttendeeStore.getAll()
+      shepherd: AttendeeStore.getAllShepherd()
+    })
+  },
+
+  _acquiredSheep: function(){
+    this.setState({
+      Sheep: AttendeeStore.getAllSheep()
     })
   },
 

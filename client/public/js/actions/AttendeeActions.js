@@ -13,12 +13,24 @@ var AttendeeActions = {
    * Get all observations for an event
    * @param {number} eventId The primary key of the event in the database
    */
-  getAllByEvent: function(eventId) {
+  getAllSheepsByEvent: function(eventId) {
     console.log(eventId, 'inside of AttendeeActions');
-    AttendeeAPI.getAllAttendeesByEvent(eventId).then(function(attendees) {
+    AttendeeAPI.getAllSheepsByEvent(eventId).then(function(sheeps) {
+      console.log(sheeps, 'sheeps insode of AttendeeActions');
       AppDispatcher.dispatch({
-        actionType: AppConstants.ATTENDEES_GET,
-        attendees: attendees
+        actionType: AppConstants.SHEEPS_GET,
+        sheeps: sheeps
+      });
+    });
+  },
+
+  getAllShepherdsByEvent: function(eventId) {
+    console.log(eventId, 'inside of AttendeeActions');
+    AttendeeAPI.getAllShepherdsByEvent(eventId).then(function(shepherds) {
+      console.log(shepherds, 'shepherds insode of AttendeeActions');
+      AppDispatcher.dispatch({
+        actionType: AppConstants.SHEPHERDS_GET,
+        shepherds: shepherds
       });
     });
   }

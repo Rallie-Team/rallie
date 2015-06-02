@@ -3,15 +3,20 @@ var EventEmitter = require('events').EventEmitter,
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants');
 
-var _attendees = [];
+var _sheeps = [];
+var _shepherds = [];
 
 var AttendeeStore = assign({}, EventEmitter.prototype, {
-  getAll: function() {
-    return _attendees;
+  getAllSheep: function() {
+    return _sheeps;
+  },
+
+  getAllShepherd: function() {
+    return _shepherds;
   },
 
   /**
-   * Trigger an attendees
+   * Trigger an sheep
    * @param {string} attendeeName The name of the attendee
    */
   emitEvent: function(attendeeName) {
@@ -19,18 +24,18 @@ var AttendeeStore = assign({}, EventEmitter.prototype, {
   },
 
   /**
-   * Register a callback to invoke when an attendees is triggered
-   * @param {string} attendeeName The name of the attendees
-   * @param {function} callback The callback function to invoke when the attendees is triggered
+   * Register a callback to invoke when an sheep is triggered
+   * @param {string} attendeeName The name of the sheep
+   * @param {function} callback The callback function to invoke when the sheep is triggered
    */
   addEventListener: function(attendeeName, callback) {
     this.on(attendeeName, callback);
   },
 
   /**
-   * Prattendees a callback from being invoked when an attendees is triggered
-   * @param {string} attendeeName The name of the attendees
-   * @param {function} callback Stops the callback function from being invoked when the attendees is triggered
+   * Prsheep a callback from being invoked when an sheep is triggered
+   * @param {string} attendeeName The name of the sheep
+   * @param {function} callback Stops the callback function from being invoked when the sheep is triggered
    */
   removeEventListener: function(attendeeName, callback) {
     this.removeListener(attendeeName, callback);
@@ -40,15 +45,17 @@ var AttendeeStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(payload) {
   switch(payload.actionType) {
-    // When attendees are fetched
-    case AppConstants.ATTENDEES_GET:
-      // Set current attendees collection to the fetched results
-      _attendees = [];
-      for(var i = 0; i < payload.attendees.length; i ++){
-        _attendees.push(payload.attendees[i].username);
-      }
-      console.log(_attendees, '--------------------------');
+    // When sheep are fetched
+    case AppConstants.SHEPHERD_GET:
+      // Set current sheep collection to the fetched results
+      _shepherd = payload.shepherds;
       AttendeeStore.emitEvent('aquiredShepherds');
+      break;
+
+    case AppConstants.SHEEP_GET:
+      // Set current sheep collection to the fetched results
+      _sheep = payload.sheeps;
+      AttendeeStore.emitEvent('aquiredSheep');
       break;
 
     default:
