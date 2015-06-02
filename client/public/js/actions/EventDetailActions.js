@@ -10,7 +10,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
 
 var EventDetailActions = {
   /**
-   * Update event details
+   * Edit and update event details
    * @param {object} event An updated representation of the event attributes
    */
   edit: function(event) {
@@ -20,6 +20,17 @@ var EventDetailActions = {
       var data = assign({actionType: AppConstants.EVENT_EDIT}, event);
       AppDispatcher.dispatch(data);
     });
+  },
+
+  /**
+   * Join the event as a sheep
+   */
+  join: function (event) {
+    console.log('Hit join in EventDetailActions');
+    // EventAPI.joinEvent(event).then(function(event) {
+    //   // var data = assign 
+    //   // AppDispatcher.dispatch(data);
+    // })
   }
 };
 
