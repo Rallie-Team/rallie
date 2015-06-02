@@ -1,21 +1,15 @@
 var router = require('express').Router();
 var db = require('../../db');
 
-// Return a list of all active events
-router.get('/', function(req, res) {
- db.Event.findAll({
-  where: {
-    end: {
-      $gt: new Date() // Filters events where end date is greater than the current timestamp
-    }
-  }
- }).then(function(results) {
-   res.json(results);
- });
+// Return a list of all events
+router.get('/', function (req, res) {
+  db.Event.findAll().then(function(results){
+     res.json(results);
+  });
 });
 
 // Return one specific event by eventId
-router.get('/:eventId', function(req, res) {
+router.get('/:eventId', function (req, res) {
   db.Event.findOne({
     where: {
       id: req.params.eventId
@@ -32,16 +26,10 @@ router.get('/user/:userId', function(req, res) {
     where: {
       id: req.params.userId
     }
-  }).then(function(user) {
+  }).then(function (user) {
     if (user) {
       // For the user, find all events where the user is a shepherd
-      user.getShepherdEvents({
-        where: {
-          end: {
-            $gt: new Date() // Filters events where end date is greater than the current timestamp
-          }
-        }
-      }).then(function(results) {
+      user.getShepherdEvents().then(function(results) {
         res.json(results);
       });
     } else {
@@ -60,7 +48,7 @@ router.post('/create', function(req, res) {
     where: {
       id: req.body.userId
     }
-  }).then(function(user) {
+  }).then(function (user) {
     if (user) {
       // User exists, continue to create event
       db.Event.create({
@@ -85,7 +73,7 @@ router.post('/create', function(req, res) {
 });
 
 // Edit details for an event
-router.put('/:eventId', function(req, res) {
+router.put('/:eventId', function (req, res) {
   // Find the event by ID
   db.Event.findOne({
     where: {
@@ -105,6 +93,39 @@ router.put('/:eventId', function(req, res) {
     } else {
       // Event not found
       res.sendStatus(400);
+    }
+  });
+});
+
+// Adds a sheep and event to the Sheep Event table
+router.post('/add-participant/:eventId', function (req, res) {
+  var sheep = req.body.user;
+  db.Event.findOne({
+    where: {
+      id: req.params.eventId
+    }
+  }).then(function (event) {
+    if (event) {
+      event.addSheep(sheep).then(function () {
+        res.json(event);
+      });
+    }
+  });
+});
+
+
+// Removes a sheep and event from the Sheep Event table
+router.delete('/remove-participant/:eventId', function (req, res) {
+  var sheep = req.body.user;
+  db.Event.findOne({
+    where: {
+      id: req.params.eventId
+    }
+  }).then(function (event) {
+    if (event) {
+      event.removeSheep(sheep).then(function () {
+        res.json(event);
+      });
     }
   });
 });
