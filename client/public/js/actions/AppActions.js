@@ -10,33 +10,12 @@ var AppActions = {
   /**
    * Toggle the user mode
    * @param {string} targetMode The target mode to toggle to
-   * @param {string} id The unique ID for the user
    */
-
-      // $.ajax({
-    //   url: url,
-    //   success: function(data) {
-    //     AppDispatcher.dispatch({
-    //       action: AppConstants.TOGGLE_MODE,
-    //       events: data.events
-    //     });
-    //   },
-    //   error: function(data) {
-    //     console.error('Toggle failed', data);
-    //   }
-    // });
-
-  toggleMode: function(targetMode, id) {
-    var url = ''; // TODO: Set default URL to be sheep
-    if (targetMode === 'shepherd') {
-      url = '/api/'; // TODO: Fill in shepherd URL
-    }
-
+  toggleMode: function(targetMode) {
     AppDispatcher.dispatch({
       actionType: AppConstants.TOGGLE_MODE,
-      events: [{name: 'Event 1', location: 'SF'}, {name: 'Event 2', location: 'LA'}]
+      mode: targetMode
     });
-
   },
 
   //relays information to App Store to add the information

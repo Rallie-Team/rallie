@@ -4,14 +4,17 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants'),
     AppActions = require('../actions/AppActions');
 
-//TODO: define the events array inside the appstore
-// var _events = [];
 var _currentUser = {id: undefined, username: undefined};
+var _currentMode = 'sheep'; // the default mode is sheep
 
 var AppStore = assign({}, EventEmitter.prototype, {
 
   getCurrentUser: function() {
     return _currentUser;
+  },
+
+  getCurrentMode: function() {
+    return _currentMode;
   },
 
   /**
@@ -45,11 +48,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   switch(payload.actionType) {
     case AppConstants.TOGGLE_MODE:
-      //TODO: with data from payload.events, populate appstore's array of events
+      _currentMode = payload.mode;
       AppStore.emitEvent('toggleMode');
-      // TODO: DO SOMETHING ELSE IF THERE WAS AN ERROR DURING EVENT CREATION
       break;
-
 
     case AppConstants.SET_CURRENT_USER:
       _currentUser.id = payload.user.id;

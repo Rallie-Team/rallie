@@ -1,10 +1,8 @@
 var React = require('react');
-//Attendee item is referenced in ObservationList.js
-//This will render all of the users at an the event
-//this.props references the event that is passed in
 
 var SheepListItem = React.createClass({
-
+  // Render each sheep at an event
+  // this.props.sheep references the sheep
   render: function(){
     return (
       <div className="sheep-list-item">
