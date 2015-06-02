@@ -25,7 +25,7 @@ var AttendeesList = React.createClass({
   },
 
   componentDidMount: function() {
-    AttendeeStore.addEventListener('aquiredShepherds', this._acquiredShepherds);
+    AttendeeStore.addEventListener('acquiredShepherds', this._acquiredShepherds);
     AttendeeStore.addEventListener('acquiredSheep', this._acquiredSheeps);
     // Add event listener for getting observations from the server when the component is mounted
 
@@ -39,7 +39,7 @@ var AttendeesList = React.createClass({
 
   componentWillUnmount: function() {
     // Remove event listeners when the DOM element is removed
-    AttendeeStore.removeEventListener('aquiredShepherds', this._acquiredShepherds);
+    AttendeeStore.removeEventListener('acquiredShepherds', this._acquiredShepherds);
     AttendeeStore.removeEventListener('acquiredSheep', this._acquiredSheeps);
 
   },
