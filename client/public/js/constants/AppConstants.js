@@ -11,11 +11,12 @@ module.exports = keyMirror({
   EVENT_CREATE: null,
   EVENT_EDIT: null,
   EVENT_DELETE: null,
-  TOGGLE_MODE: null,
-  UPDATE_STATE: null,
   OBSERVATION_CREATE: null,
-  SET_CURRENT_USER: null,
+  OBSERVATION_GET: null,
   REMOVE_CURRENT_USER: null,
-  SHEEP_GET: null,
-  SHEPHERD_GET: null
+  SET_CURRENT_USER: null,
+  SHEEPS_GET: null,
+  SHEPHERDS_GET: null,
+  TOGGLE_MODE: null,
+  UPDATE_STATE: null
 });

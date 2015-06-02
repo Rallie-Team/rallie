@@ -16,7 +16,7 @@ var AttendeeActions = {
   getAllSheepsByEvent: function(eventId) {
     console.log(eventId, 'inside of AttendeeActions');
     AttendeeAPI.getAllSheepsByEvent(eventId).then(function(sheeps) {
-      console.log(sheeps, 'sheeps insode of AttendeeActions');
+      // console.log(sheeps, 'sheeps insode of AttendeeActions');
       AppDispatcher.dispatch({
         actionType: AppConstants.SHEEPS_GET,
         sheeps: sheeps
@@ -27,7 +27,7 @@ var AttendeeActions = {
   getAllShepherdsByEvent: function(eventId) {
     console.log(eventId, 'inside of AttendeeActions');
     AttendeeAPI.getAllShepherdsByEvent(eventId).then(function(shepherds) {
-      console.log(shepherds, 'shepherds insode of AttendeeActions');
+      // console.log(shepherds, 'shepherds insode of AttendeeActions');
       AppDispatcher.dispatch({
         actionType: AppConstants.SHEPHERDS_GET,
         shepherds: shepherds

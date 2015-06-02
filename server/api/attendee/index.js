@@ -15,7 +15,7 @@ router.get('/shepherd/:eventId', function(req, res) {
 router.get('/sheep/:eventId', function(req, res) {
   db.Event.findOne({where: {id: req.params.eventId}})
   .then(function(event){
-    return event.getSheeps();
+    return event.getSheep();
   })
   .then(function(sheeps){
     res.json(sheeps);

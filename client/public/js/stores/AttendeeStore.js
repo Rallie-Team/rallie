@@ -46,15 +46,17 @@ var AttendeeStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   switch(payload.actionType) {
     // When sheep are fetched
-    case AppConstants.SHEPHERD_GET:
+    case AppConstants.SHEPHERDS_GET:
       // Set current sheep collection to the fetched results
-      _shepherd = payload.shepherds;
+      _shepherds = payload.shepherds;
+      console.log(_shepherds, 'inside of attendee store!!')
       AttendeeStore.emitEvent('aquiredShepherds');
       break;
 
-    case AppConstants.SHEEP_GET:
+    case AppConstants.SHEEPS_GET:
       // Set current sheep collection to the fetched results
-      _sheep = payload.sheeps;
+      _sheeps = payload.sheeps;
+      console.log(_sheeps, 'inside of attendee store!!')
       AttendeeStore.emitEvent('aquiredSheep');
       break;
 

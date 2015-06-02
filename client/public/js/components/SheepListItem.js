@@ -3,7 +3,7 @@ var React = require('react');
 //This will render all of the users at an the event
 //this.props references the event that is passed in
 
-var SheepeListItem = React.createClass({
+var SheepListItem = React.createClass({
 
   render: function(){
     return (

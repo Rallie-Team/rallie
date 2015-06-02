@@ -6,8 +6,9 @@ var React = require('react'),
     ObservationStore = require('../stores/ObservationStore'),
     ObservationActions = require('../actions/ObservationActions'),
     AttendeeStore = require('../stores/AttendeeStore'),
-    AttendeeActions = require('../actions/AttendeeActions');
-    AttendeesListItem = require('./AttendeesListItem')
+    AttendeeActions = require('../actions/AttendeeActions'),
+    SheepListItem = require('./SheepListItem'),
+    ShepherdListItem = require('./ShepherdListItem');
 
 
 var ObservationList = React.createClass({
@@ -29,7 +30,7 @@ var ObservationList = React.createClass({
 
   componentDidMount: function() {
     AttendeeStore.addEventListener('aquiredShepherds', this._acquiredShepherds);
-    AttendeeStore.addEventListener('acquiredSheep', this._acquiredSheep);
+    AttendeeStore.addEventListener('acquiredSheep', this._acquiredSheeps);
     // Add event listener for getting observations from the server when the component is mounted
     ObservationStore.addEventListener('get', this._onGet);
     // Add event listener on observation creation
@@ -47,7 +48,7 @@ var ObservationList = React.createClass({
   componentWillUnmount: function() {
     // Remove event listeners when the DOM element is removed
     AttendeeStore.removeEventListener('aquiredShepherds', this._acquiredShepherds);
-    AttendeeStore.removeEventListener('acquiredSheep', this._acquiredSheep);
+    AttendeeStore.removeEventListener('acquiredSheep', this._acquiredSheeps);
 
     ObservationStore.removeEventListener('get', this._onGet);
     ObservationStore.removeEventListener('create', this._onCreate);
@@ -57,18 +58,19 @@ var ObservationList = React.createClass({
     //referenced the observations retrieved from EventDetailStore using getAllObservations()
     //sends each observation to ObservationListItem so that it will be properly
     //displayed
+      console.log(this.state.observations, '--------------------');
     var observations = this.state.observations.map(function(observation, i) {
       return <ObservationListItem key={observation.id} observation={observation}/>
     })
 
-    var shepherd = this.state.shepherds.map(function(shepherd, i) {
+    var shepherds = this.state.shepherds.map(function(shepherd, i) {
+      console.log(shepherd, 'inside of render ObservationList')
       return <ShepherdListItem key={shepherd.id} shepherd={shepherd}/>
     });
 
-
-    var sheep = this.state.sheeps.map(function(sheep, i) {
-      return <SheepListItem key={sheep.id} sheep={sheep}/>
-    });
+      var sheeps = this.state.sheeps.map(function(sheep, i) {
+        return <SheepListItem key={sheep.id} sheep={sheep}/>
+    }
     //this.props.mode references the mode set in App.js which is made
     //possible because Event List is a child Route of App.js
     //Please reference routes.js
@@ -79,10 +81,10 @@ var ObservationList = React.createClass({
         <h2>Observations</h2>
         {observations}
         <h2>Attendees</h2>
-        <h1>Shepherd</h1>
-        {shepherd}
-        <h1>Sheep</h1>
-        {sheep}
+        <h3>Shepherds</h3>
+        {shepherds}
+        <h3>Sheeps</h3>
+        {sheeps}
       </div>
     );
   },
@@ -95,13 +97,14 @@ var ObservationList = React.createClass({
 
   _acquiredShepherds: function(){
     this.setState({
-      shepherd: AttendeeStore.getAllShepherd()
+      shepherds: AttendeeStore.getAllShepherd()
     })
+    console.log(this.state.shepherds, "_acquiredShepherds")
   },
 
-  _acquiredSheep: function(){
+  _acquiredSheeps: function(){
     this.setState({
-      Sheep: AttendeeStore.getAllSheep()
+      sheeps: AttendeeStore.getAllSheep()
     })
   },
 
