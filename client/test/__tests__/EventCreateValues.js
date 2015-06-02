@@ -1,10 +1,5 @@
-var componentPath = '../../public/js/components/'
+var componentPath = '../../public/js/components/';
 jest.dontMock(componentPath + 'EventCreate.js');
-
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
-
-var EventCreate = require('../../public/js/components/EventCreate.js');
 
 describe('Successfully update values on Form', function() {
   it('Should update value', function() {
