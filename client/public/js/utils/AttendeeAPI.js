@@ -15,7 +15,7 @@ var AttendeesAPI = {
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      console.log('ShepherdAPI', data);
+      // console.log('ShepherdAPI', data);
       // Return attendees on success
       return data;
     }, function() {
@@ -32,7 +32,7 @@ var AttendeesAPI = {
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      console.log('SheepAPI', data);
+      // console.log('SheepAPI', data);
       // Return attendees on success
       return data;
     }, function() {

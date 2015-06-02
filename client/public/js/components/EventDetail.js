@@ -4,7 +4,8 @@ var React = require('react'),
     EventDetailStore = require('../stores/EventDetailStore'),
     EventDetailActions = require('../actions/EventDetailActions'),
     ObservationList = require('./ObservationList'),
-    ObservationCreate = require('./ObservationCreate');
+    ObservationCreate = require('./ObservationCreate'),
+    AttendeesList = require('./AttendeesList');
 
 var EventDetail = React.createClass({
   mixins: [Navigation],
@@ -44,6 +45,7 @@ var EventDetail = React.createClass({
         { /* Display Join or Leave event based on whether the sheep is currently in the event */ }
         { (this.state.mode === 'sheep' && true) ? <button onClick={this._toggleJoin}>Leave Event</button> : null }
         { (this.state.mode === 'sheep' && false) ? <button onClick={this._toggleJoin}>Join Event</button> : null }
+        <AttendeesList eventId={this.state.id}/>
 
         { /* Add the observation create if and only if sheep is attending event */ }
         { (this.state.mode === 'sheep' && true) ? <ObservationCreate eventId={this.state.id}/> : null }
