@@ -57,7 +57,7 @@ AppDispatcher.register(function(payload) {
     // Set the current event
     case AppConstants.UPDATE_CURRENT_EVENT:
       _currentEvent = payload.event;
-      EventDetailStore.emitEvent('update-current-event');
+      EventDetailStore.emitEvent('updateCurrentEvent');
       break;
 
     default:
