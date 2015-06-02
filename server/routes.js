@@ -24,6 +24,7 @@ module.exports = function(app, express, passport) {
 
   app.use('/api/event', require('./api/event'));
   app.use('/api/observation', require('./api/observation'));
+  app.use('/api/attendees', require('./api/attendee'));
   // app.use('/api/user', require('./api/user'));
   app.use('/Server/auth', authRouter);
   app.use('/auth', authRouter);
