@@ -1,8 +1,6 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var db = require('../db');
-var localServices = require('../config/environment/thirdPartyServices');
-// var client = require('./facebookAuthInfo.js');
-
+var config = require('../config/environment');
 
 
 module.exports = function(passport){
@@ -21,16 +19,15 @@ module.exports = function(passport){
     db.User.find({where: {'facebook_id' : profile.id}})
       .then(function(user){
         if(!user){
-
           // Creates a new user which extracts the Facbook ID and username
           // Facebook ID is referenced so that users are not able to sign up for more than one account
           // console.log('creating new user');
+
           db.User.create({
             username: profile.name.givenName,
             facebook_id: profile.id
           })
           .then(function(newUser){
-
             // console.log(newUser, '----------------------');
             // null value represents that there were no errors
             return done(null, newUser);
@@ -38,11 +35,11 @@ module.exports = function(passport){
         } else {
 
           // Current user exists and create currentUser object
+
           var currentUser = {
             username: user.username,
             table_id: user.id
           };
-
            // null value represents that there were no errors
           return done(null, currentUser);
         }
