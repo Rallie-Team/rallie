@@ -3,8 +3,14 @@ var EventEmitter = require('events').EventEmitter,
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants');
 
-var _observations = [{name: 'Steven', text: 'I am happy'}, {name: 'Kevin', text: 'hi'}];
+var _currentEvent = {name: '', location: ''};
+var _observations = [];
+
 var EventDetailStore = assign({}, EventEmitter.prototype, {
+  getCurrentEvent: function() {
+    return _currentEvent;
+  },
+
   getAllObservations: function() {
     return _observations;
   },
@@ -40,15 +46,18 @@ var EventDetailStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   switch(payload.actionType) {
 
-    // TODO: NEED TO IMPLEMENT HANDLER FOR DELETING EVENTS
+    // Set the current event from data coming from the payload
+    // then emit an edit event from EventDetailStore which will update
+    // any components listening to it
     case AppConstants.EVENT_EDIT:
+      _currentEvent = payload.event;
       EventDetailStore.emitEvent('edit');
       break;
 
-    // TODO: IMPLEMENT OTHER HANDLERS FOR EVENTS
-    case AppConstants.OBSERVATION_CREATE:
-      _observations.push(payload.observation);
-      EventDetailStore.emitEvent('create');
+    // Set the current event
+    case AppConstants.UPDATE_CURRENT_EVENT:
+      _currentEvent = payload.event;
+      EventDetailStore.emitEvent('updateCurrentEvent');
       break;
 
     default:

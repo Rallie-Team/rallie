@@ -5,8 +5,7 @@
 
 var AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants'),
-    EventAPI = require('../utils/EventAPI'),
-    assign = require('object-assign');
+    EventAPI = require('../utils/EventAPI');
 
 var EventDetailActions = {
   /**
@@ -15,10 +14,10 @@ var EventDetailActions = {
    */
   edit: function(event) {
     EventAPI.editEvent(event).then(function(event) {
-      // Use object-assign to combine event properties with the action property
-      // and dispatch the collective properties as one object
-      var data = assign({actionType: AppConstants.EVENT_EDIT}, event);
-      AppDispatcher.dispatch(data);
+      AppDispatcher.dispatch({
+        actionType: AppConstants.EVENT_EDIT,
+        event: event
+      });
     });
   },
 

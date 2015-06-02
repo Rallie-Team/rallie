@@ -1,7 +1,6 @@
 var EventEmitter = require('events').EventEmitter,
     assign = require('object-assign'),
     AppDispatcher = require('../dispatcher/AppDispatcher'),
-    passport = require('passport-facebook'),
     AppConstants = require('../constants/AppConstants');
 
 var _events = [];
@@ -68,19 +67,6 @@ AppDispatcher.register(function(payload) {
     // TODO: NEED TO IMPLEMENT HANDLER FOR DELETING EVENTS
     case AppConstants.EVENT_DELETE:
       EventStore.emitEvent('delete');
-      break;
-
-    case AppConstants.UPDATE_STATE:
-      _currentEvent = payload.state;
-      EventStore.emitEvent('update');
-      break;
-
-    // Sets the current event with data coming from the payload
-    // then emits an edit event from EventStore which will update 
-    // any components listening to it
-    case AppConstants.EVENT_EDIT:
-      _currentEvent = payload;
-      EventStore.emitEvent('edit');
       break;
 
     default:
