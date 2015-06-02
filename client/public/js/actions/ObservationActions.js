@@ -14,7 +14,9 @@ var ObservationActions = {
    * @param {number} eventId The primary key of the event in the database
    */
   getAllByEvent: function(eventId) {
+    // console.log(eventId, 'eventID inside of observationActions');
     ObservationAPI.getAllObservationsByEvent(eventId).then(function(observations) {
+      // console.log(observations, "observations inside of observationActions");
       AppDispatcher.dispatch({
         actionType: AppConstants.OBSERVATION_GET,
         observations: observations

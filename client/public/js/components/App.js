@@ -12,11 +12,11 @@ var App = React.createClass({
     the app even when their use cases are very different.
 
     Navigation allows us to dynamically create hrefs in the render section.
-    
-    State allows us to check what the current router state is, 
-    and if the user is in the event-create or event-detail routes, 
+
+    State allows us to check what the current router state is,
+    and if the user is in the event-create or event-detail routes,
     disable the button for toggling the mode.
-    
+
     With the mixins property, we allow the entire React component
     to reference all the enclosed functionalities using "this".
   */
@@ -103,14 +103,13 @@ var App = React.createClass({
             <h1>Joseki</h1>
             <nav>
               <ul>
-                <li><a href={this.makeHref('home')}>Home</a></li>
-                <li><a href={this.makeHref('events')}>Events</a></li>
+                <li><a href={this.makeHref('events')}>Home</a></li>
                 {/*
                   This is the toggler for shepherd/sheep.
                   It will be disabled when viewing the event-create and event-detail components
                 */}
                 <li>
-                  <button onClick={this._changeMode} 
+                  <button onClick={this._changeMode}
                     disabled={this.isActive('event-create') || this.isActive('event-detail') ? 'disabled' : false}>
                     {this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}
                   </button>
@@ -136,7 +135,7 @@ var App = React.createClass({
               </ul>
             </nav>
           </header>
-          
+
           {/* The RouteHandler component renders the active child route's handler */}
           <RouteHandler mode={this.state.mode}/>
         </div>
