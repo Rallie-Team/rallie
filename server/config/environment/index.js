@@ -2,7 +2,6 @@
 
 var path = require('path');
 var _ = require('lodash');
-var localServices = require('./thirdPartyServices.js');
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {

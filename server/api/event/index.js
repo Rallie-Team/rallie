@@ -1,12 +1,17 @@
 var router = require('express').Router();
 var db = require('../../db');
 
-// Return a list of all events
+// Return a list of all active events
 router.get('/', function(req, res) {
- db.Event.findAll()
-   .then(function(results){
-     res.json(results);
-   });
+ db.Event.findAll({
+  where: {
+    end: {
+      $gt: new Date() // Filters events where end date is greater than the current timestamp
+    }
+  }
+ }).then(function(results) {
+   res.json(results);
+ });
 });
 
 // Return one specific event by eventId
@@ -30,7 +35,13 @@ router.get('/user/:userId', function(req, res) {
   }).then(function(user) {
     if (user) {
       // For the user, find all events where the user is a shepherd
-      user.getShepherdEvents().then(function(results) {
+      user.getShepherdEvents({
+        where: {
+          end: {
+            $gt: new Date() // Filters events where end date is greater than the current timestamp
+          }
+        }
+      }).then(function(results) {
         res.json(results);
       });
     } else {
@@ -83,9 +94,11 @@ router.put('/:eventId', function(req, res) {
   }).then(function(event) {
     if (event) {
       // Found event in db, continue to update
+      // Selectively choose which columns to update
       event.updateAttributes({
         name: req.body.name,
-        location: req.body.location
+        location: req.body.location,
+        end: req.body.end
       }).then(function(event) {
         res.json(event);
       });

@@ -1,20 +1,30 @@
 var React = require('react'),
-    Navigation = require('react-router').Navigation,
-    RouteHandler = require('react-router').RouteHandler,
+    Router = require('react-router'),
+    Navigation = Router.Navigation,
+    State = Router.State,
+    RouteHandler = Router.RouteHandler,
     AppActions = require('../actions/AppActions'),
     AppStore = require('../stores/AppStore');
 
 var App = React.createClass({
-  // Mixins allows users to reuse code from different parts of
-  // the app even when their use cases are very different.
-  // Navigation allows us to dynamically create hrefs in the render
-  // section. With the mixins property, we allow the entire React component
-  // to reference all the enclosed functionalities using "this".
-  mixins: [Navigation],
+  /*
+    Mixins allows users to reuse code from different parts of
+    the app even when their use cases are very different.
+
+    Navigation allows us to dynamically create hrefs in the render section.
+
+    State allows us to check what the current router state is,
+    and if the user is in the event-create or event-detail routes,
+    disable the button for toggling the mode.
+
+    With the mixins property, we allow the entire React component
+    to reference all the enclosed functionalities using "this".
+  */
+  mixins: [Navigation, State],
 
   getParameterByName: function(name){
-  var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-  return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
   },
 
   // The default mode for a new user is a sheep
@@ -28,7 +38,6 @@ var App = React.createClass({
 
   //sets current user as logged in after they successfully log into facebook
   _loggedIn: function(){
-    console.log('inside of app.js loggedIn')
       this.setState({
         currentUser: AppStore.getCurrentUser()
     });
@@ -66,7 +75,7 @@ var App = React.createClass({
         id: id,
         token: token
       };
-    AppActions.setCurrentUser(data);
+      AppActions.setCurrentUser(data);
     }
   },
 
@@ -94,23 +103,28 @@ var App = React.createClass({
             <h1>Joseki</h1>
             <nav>
               <ul>
-                <li><a href={this.makeHref('home')}>Home</a></li>
-                <li><a href={this.makeHref('events')}>Events</a></li>
-                {/* This is the toggler for shepherd/sheep */}
-                <li><button onClick={this._changeMode}>{this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}</button></li>
+                <li><a href={this.makeHref('events')}>Home</a></li>
+                {/*
+                  This is the toggler for shepherd/sheep.
+                  It will be disabled when viewing the event-create and event-detail components
+                */}
+                <li>
+                  <button onClick={this._changeMode}
+                    disabled={this.isActive('event-create') || this.isActive('event-detail') ? 'disabled' : false}>
+                    {this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}
+                  </button>
+                </li>
                 {currentUserLi}
                 <li><a onClick={this.removeCurrentUser} href={this.makeHref('home')}>Logout</a></li>
               </ul>
             </nav>
           </header>
 
-            {/* The RouteHandler component renders the active child route's handler */}
-            <RouteHandler mode={this.state.mode}/>
+          {/* The RouteHandler component renders the active child route's handler */}
+          <RouteHandler mode={this.state.mode}/>
         </div>
       );
-
     } else {
-
       return (
         <div>
           <header>
@@ -122,13 +136,11 @@ var App = React.createClass({
             </nav>
           </header>
 
-            {/* The RouteHandler component renders the active child route's handler */}
-            <RouteHandler mode={this.state.mode}/>
-          </div>
+          {/* The RouteHandler component renders the active child route's handler */}
+          <RouteHandler mode={this.state.mode}/>
+        </div>
       );
-
     }
-
   },
 
   // Notifies AppAction to change the state.mode

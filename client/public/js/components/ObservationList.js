@@ -47,7 +47,7 @@ var ObservationList = React.createClass({
     var observations = this.state.observations.map(function(observation, i) {
       return <ObservationListItem key={observation.id} observation={observation}/>
     });
-    
+
     //this.props.mode references the mode set in App.js which is made
     //possible because Event List is a child Route of App.js
     //Please reference routes.js

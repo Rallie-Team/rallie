@@ -1,7 +1,8 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
     EventStore = require('../stores/EventStore'),
-    EventActions = require('../actions/EventActions');
+    EventActions = require('../actions/EventActions'),
+    AppStore = require('../stores/AppStore');
 
 var EventCreate = React.createClass({
   mixins: [Navigation],
@@ -30,9 +31,9 @@ var EventCreate = React.createClass({
   render: function() {
     return (
       <div className="event-create">
-        <form onSubmit={this._save}>
-          <input type="text" name="name" placeholder="Event name" value={this.state.name} onChange={this._onChange} />
-          <input type="text" name="location" placeholder="Event location" value={this.state.location} onChange={this._onChange} />
+        <form className="eventCreateForm" onSubmit={this._save}>
+          <input className="inputBox" type="text" name="name" placeholder="Event name" value={this.state.name} onChange={this._onChange} />
+          <input className="inputBox" type="text" name="location" placeholder="Event location" value={this.state.location} onChange={this._onChange} />
           <input type="submit" value="Submit" />
         </form>
         <div className="event-create-result">{this.state.result}</div>
@@ -45,7 +46,7 @@ var EventCreate = React.createClass({
   _save: function(e) {
     e.preventDefault();
     var data = {
-      userId: 2, // TODO: NEED TO DYNAMICALLY RETRIEVE USERID OF SHEPHERD
+      userId: AppStore.getCurrentUser().id,
       name: e.target.name.value.trim(),
       location: e.target.location.value.trim()
     };
