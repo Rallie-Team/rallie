@@ -49,14 +49,14 @@ AppDispatcher.register(function(payload) {
     case AppConstants.SHEPHERDS_GET:
       // Set current sheep collection to the fetched results
       _shepherds = payload.shepherds;
-      console.log(_shepherds, 'inside of attendee store!!')
+      // console.log(_shepherds, 'inside of attendee store!!')
       AttendeeStore.emitEvent('aquiredShepherds');
       break;
 
     case AppConstants.SHEEPS_GET:
       // Set current sheep collection to the fetched results
       _sheeps = payload.sheeps;
-      console.log(_sheeps, 'inside of attendee store!!')
+      // console.log(_sheeps, 'inside of attendee store!!')
       AttendeeStore.emitEvent('aquiredSheep');
       break;
 

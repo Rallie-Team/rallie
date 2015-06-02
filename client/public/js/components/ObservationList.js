@@ -58,19 +58,19 @@ var ObservationList = React.createClass({
     //referenced the observations retrieved from EventDetailStore using getAllObservations()
     //sends each observation to ObservationListItem so that it will be properly
     //displayed
-      console.log(this.state.observations, '--------------------');
+      // console.log(this.state.observations, '--------------------');
     var observations = this.state.observations.map(function(observation, i) {
       return <ObservationListItem key={observation.id} observation={observation}/>
-    })
+    });
 
     var shepherds = this.state.shepherds.map(function(shepherd, i) {
-      console.log(shepherd, 'inside of render ObservationList')
+      // console.log(shepherd, 'inside of render ObservationList')
       return <ShepherdListItem key={shepherd.id} shepherd={shepherd}/>
     });
 
-      var sheeps = this.state.sheeps.map(function(sheep, i) {
-        return <SheepListItem key={sheep.id} sheep={sheep}/>
-    }
+    var sheeps = this.state.sheeps.map(function(sheep, i) {
+      return <SheepListItem key={sheep.id} sheep={sheep}/>
+    });
     //this.props.mode references the mode set in App.js which is made
     //possible because Event List is a child Route of App.js
     //Please reference routes.js
@@ -86,7 +86,7 @@ var ObservationList = React.createClass({
         <h3>Sheeps</h3>
         {sheeps}
       </div>
-    );
+    )
   },
 
   _onGet: function() {
@@ -99,7 +99,7 @@ var ObservationList = React.createClass({
     this.setState({
       shepherds: AttendeeStore.getAllShepherd()
     })
-    console.log(this.state.shepherds, "_acquiredShepherds")
+    // console.log(this.state.shepherds, "_acquiredShepherds")
   },
 
   _acquiredSheeps: function(){

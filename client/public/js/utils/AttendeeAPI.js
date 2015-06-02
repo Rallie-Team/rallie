@@ -8,7 +8,7 @@ var AttendeesAPI = {
    * @param {number} eventId The primary key of the event in the database
    */
   getAllShepherdsByEvent: function(eventId) {
-    console.log(eventId, 'inside of getAllAttendeesByEvent');
+    // console.log(eventId, 'inside of getAllAttendeesByEvent');
     // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/attendees/shepherd/' + eventId,
@@ -25,7 +25,7 @@ var AttendeesAPI = {
   },
 
    getAllSheepsByEvent: function(eventId) {
-    console.log(eventId, 'inside of getAllAttendeesByEvent');
+    // console.log(eventId, 'inside of getAllAttendeesByEvent');
     // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/attendees/sheep/' + eventId,

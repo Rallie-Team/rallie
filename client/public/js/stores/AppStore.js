@@ -54,12 +54,12 @@ AppDispatcher.register(function(payload) {
     case AppConstants.SET_CURRENT_USER:
       _currentUser.id = payload.user.id;
       _currentUser.username = payload.user.username;
-      console.log(payload, 'payloaddd');
+      // console.log(payload, 'payloaddd');
       AppStore.emitEvent('loggedIn');
       break;
 
     case AppConstants.REMOVE_CURRENT_USER:
-      console.log('removing user inside of appstore.js');
+      // console.log('removing user inside of appstore.js');
       _currentUser.id = undefined;
       _currentUser.name = undefined;
       window.localStorage.removeItem('joseki');

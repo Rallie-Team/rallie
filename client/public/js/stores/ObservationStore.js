@@ -44,7 +44,7 @@ AppDispatcher.register(function(payload) {
     case AppConstants.OBSERVATION_GET:
       // Set current observations collection to the fetched results
       _observations = payload.observations;
-      console.log(_observations, "observations inside of ObservationStore");
+      // console.log(_observations, "observations inside of ObservationStore");
       ObservationStore.emitEvent('get');
       break;
 
