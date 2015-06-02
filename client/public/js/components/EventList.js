@@ -1,5 +1,6 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
+    AppStore = require('../stores/AppStore'),
     EventListItem = require('./EventListItem'),
     EventStore = require('../stores/EventStore'),
     EventActions = require('../actions/EventActions');
@@ -19,15 +20,20 @@ var EventList = React.createClass({
   getInitialState: function() {
     // Set initial state to the initial set of events defined in EventStore
     return {
-      events: getEvents()
+      events: getEvents(),
+      mode: AppStore.getCurrentMode()
     };
   },
 
-  // Fetch all events after component is mounted
-  // Fetching via AJAX needs to happen after mounting due to async
   componentDidMount: function() {
     // Add event listener for getting events from the server when the component is mounted
+    // Fetching via AJAX needs to happen after mounting due to async
     EventStore.addEventListener('get', this._onGet);
+
+    // Add event listener to get the current mode when the mode changes
+    // For the EventList component, the create event button should only be 
+    // available when the mode is sherpherd.
+    AppStore.addEventListener('toggleMode', this._changeStateMode);
 
     if (this.isMounted()) {
       // TODO: REFACTOR TO GET ALL EVENTS BY USERID FOR A SHEPHERD
@@ -41,28 +47,25 @@ var EventList = React.createClass({
   },
 
   componentWillUnmount: function() {
-    // Remove event listener when the DOM element is removed
+    // Remove event listeners when the DOM element is removed
     EventStore.removeEventListener('get', this._onGet);
+    AppStore.removeEventListener('toggleMode', this._changeStateMode);
+
   },
 
   render: function() {
-    //referenced the states created in getEventState
-    //sends each event to EventListItem so that it will be properly
-    //displayed
-    var mode = this.props.mode;
+    // Sends each event to EventListItem where each event will be rendered
     var events = this.state.events.map(function(event) {
-      return <EventListItem key={event.id} event={event} mode={mode}/>
-    });
+      return <EventListItem key={event.id} event={event} mode={this.state.mode}/>
+    }.bind(this));
 
-    //this.props.mode references the mode set in App.js which is made
-    //possible because Event List is a child Route of App.js
-    //Please reference routes.js
-    //this checks to see if the user is a shepherd and only allows
-    //the create button to appear is that is true
+    // this.state.mode references the mode set in AppStore.js
+    // The event create button only appears if the current mode
+    // is shepherd
     return (
       <div className="event-list">
         <h2>Events</h2>
-        { this.props.mode === 'shepherd' ?
+        { this.state.mode === 'shepherd' ?
         <div className="event-create-button">
           <a href={this.makeHref('event-create')}>Create Event</a>
         </div> : null
@@ -75,6 +78,13 @@ var EventList = React.createClass({
   _onGet: function() {
     this.setState({
       events: getEvents()
+    });
+  },
+
+  // Updates the views when the state mode changes from sheep to shepherd and vice versa
+  _changeStateMode: function() {
+    this.setState({
+      mode: AppStore.getCurrentMode()
     });
   }
 });

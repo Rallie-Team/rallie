@@ -51,10 +51,14 @@ var EventActions = {
     });
   },
 
-  prepareForSegue: function(state){
+  /**
+   * Set the current event
+   * @param {object} event An object containing the attributes of the event
+   */
+  setCurrentEvent: function(event) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.UPDATE_STATE,
-      state: state
+      actionType: AppConstants.UPDATE_CURRENT_EVENT,
+      event: event
     });
   }
 };

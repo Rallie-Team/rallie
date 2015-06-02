@@ -32,7 +32,7 @@ var App = React.createClass({
   getInitialState: function() {
     return {
       currentUser: undefined,
-      mode: 'sheep'
+      mode: AppStore.getCurrentMode()
     };
   },
 
@@ -145,13 +145,13 @@ var App = React.createClass({
 
   // Notifies AppAction to change the state.mode
   _changeMode: function() {
-    AppActions.toggleMode(this.state.mode === 'shepherd' ? 'sheep' : 'shepherd', this.state.userId);
+    AppActions.toggleMode(this.state.mode === 'shepherd' ? 'sheep' : 'shepherd');
   },
 
   // Updates the views when the state mode changes from sheep to shepherd and vice versa
   _changeStateMode: function() {
     this.setState({
-      mode: this.state.mode === 'shepherd' ? 'sheep' : 'shepherd'
+      mode: AppStore.getCurrentMode()
     });
   }
 });
