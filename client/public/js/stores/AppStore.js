@@ -61,7 +61,7 @@ AppDispatcher.register(function(payload) {
       break;
 
     case AppConstants.REMOVE_CURRENT_USER:
-      console.log('removing cookie user inside of appstore.js');
+      // console.log('removing cookie user inside of appstore.js');
       _currentUser.id = undefined;
       _currentUser.name = undefined;
       cookie.remove('username');
