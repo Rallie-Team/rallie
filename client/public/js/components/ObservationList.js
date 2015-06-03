@@ -1,8 +1,6 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
     ObservationListItem = require('./ObservationListItem'),
-    EventStore = require('../stores/EventStore'),
-    EventDetailStore = require('../stores/EventDetailStore'),
     ObservationStore = require('../stores/ObservationStore'),
     ObservationActions = require('../actions/ObservationActions');
 
@@ -48,11 +46,6 @@ var ObservationList = React.createClass({
       return <ObservationListItem key={observation.id} observation={observation}/>
     });
 
-    //this.props.mode references the mode set in App.js which is made
-    //possible because Event List is a child Route of App.js
-    //Please reference routes.js
-    //this checks to see if the user is a shepherd and only allows
-    //the create button to appear is that is true
     return (
       <div className="event-list">
         <h2>Observations</h2>
