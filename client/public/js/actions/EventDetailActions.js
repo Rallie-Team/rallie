@@ -35,14 +35,26 @@ var EventDetailActions = {
   },
 
   /**
-   * Join the event as a sheep
+   * Attend the event as a sheep
    */
-  join: function (event) {
-    console.log('Hit join in EventDetailActions');
-    // EventAPI.joinEvent(event).then(function(event) {
-    //   // var data = assign 
-    //   // AppDispatcher.dispatch(data);
-    // })
+  attend: function (event, user, attending) {
+    if (attending) {
+      EventAPI.addParticipant(event, user).then(function (user) {
+        AppDispatcher.dispatch({
+          actionType: AppConstants.EVENT_SHEEP_ATTEND,
+          user: user,
+          attendee: attending
+        });
+      });
+    } else {
+      EventAPI.removeParticipant(event, user).then(function (user) {
+        AppDispatcher.dispatch({
+          actionType: AppConstants.EVENT_SHEEP_ATTEND,
+          user: user,
+          attendee: attending
+        });
+      });
+    }
   }
 };
 

@@ -96,7 +96,34 @@ var EventAPI = {
       // Return empty array on error
       return [];
     });
+  },
+
+  addParticipant: function(event, sheep) {
+    return $.ajax({
+      url: 'api/event/add-participant/' + event.id,
+      method: 'POST',
+      dataType: 'json',
+      data: sheep
+    }).then(function (data){
+      return data;
+    }, function() {
+      return [];
+    });
+  },
+
+  removeParticipant: function(event, sheep) {
+    return $.ajax({
+      url: 'api/event/remove-participant/' + event.id,
+      method: 'DELETE',
+      dataType: 'json',
+      data: sheep
+    }).then(function (data){
+      return data;
+    }, function() {
+      return [];
+    });
   }
+
 };
 
 module.exports = EventAPI;

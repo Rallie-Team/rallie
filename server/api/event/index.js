@@ -56,39 +56,34 @@ router.get('/user/:userId', function(req, res) {
 // Create a new event and return event
 router.post('/create', function(req, res) {
   var currentDate = new Date();
-  if (req.body.userId) {
-    // Make sure user exists
-    db.User.findOne({
-      where: {
-        id: req.body.userId
-      }
-    }).then(function (user) {
-      if (user) {
-        // User exists, continue to create event
-        db.Event.create({
-          name: req.body.name || '',
-          // If no start time specified, default to now
-          start: req.body.start || currentDate,
-          // If no end time specified, default to 24 hours from now
-          end: req.body.end || new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
-          location: req.body.location || '',
-          action: req.body.action || '',
-          minParticipants: req.body.minParticipants || null,
-          maxParticipants: req.body.maxParticipants || null
-        }).then(function(event) {
-          // After creating the event, associate the event with the user as a shepherd
-          user.addShepherdEvent(event).then(function(shepherdEvent) {
-            event.addShepherd(user).then(function(){
-              res.json(event);
-            });
+  
+  db.User.findOne({
+    where: {
+      id: req.body.userId
+    }
+  }).then(function (user) {
+    if (user) {
+      // User exists, continue to create event
+      db.Event.create({
+        name: req.body.name || '',
+        // If no start time specified, default to now
+        start: req.body.start || currentDate,
+        // If no end time specified, default to 24 hours from now
+        end: req.body.end || new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
+        location: req.body.location || '',
+        action: req.body.action || '',
+        minParticipants: req.body.minParticipants || null,
+        maxParticipants: req.body.maxParticipants || null
+      }).then(function(event) {
+        // After creating the event, associate the event with the user as a shepherd
+        user.addShepherdEvent(event).then(function(shepherdEvent) {
+          event.addShepherd(user).then(function(){
+            res.json(event);
           });
         });
-      }
-    });
-  } else {
-    console.error('User ID was not sent in the body');
-    res.sendStatus(400);
-  }
+      });
+    }
+  });
 });
 
 // Edit details for an event
@@ -120,10 +115,11 @@ router.put('/:eventId', function (req, res) {
 // Adds a sheep and event to the Sheep Event table
 router.post('/add-participant/:eventId', function (req, res) {
   var sheep; 
-  if (req.body.userId) {
+  console.log(req.body);
+  if (req.body.id) {
     db.User.findOne({
       where: {
-        id: req.body.userId
+        id: req.body.id
       }
     }).then(function (user) {
       sheep = user;
@@ -148,10 +144,11 @@ router.post('/add-participant/:eventId', function (req, res) {
 // Removes a sheep and event from the Sheep Event table
 router.delete('/remove-participant/:eventId', function (req, res) {
   var sheep;
-  if (req.body.userId) {
+  console.log(req.body);
+  if (req.body.id) {
     db.User.findOne({
       where: {
-        id: req.body.userId
+        id: req.body.id
       }
     }).then(function (user) {
       sheep = user;

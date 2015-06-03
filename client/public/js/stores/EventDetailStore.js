@@ -4,11 +4,16 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants');
 
 var _currentEvent = {name: '', location: '', action: ''};
+var _attendee = false;  // TODO: Pull from Stephen's list
 var _observations = [];
 
 var EventDetailStore = assign({}, EventEmitter.prototype, {
   getCurrentEvent: function() {
     return _currentEvent;
+  },
+
+  getAttendee: function() {
+    return _attendee;
   },
 
   getAllObservations: function() {
@@ -58,6 +63,11 @@ AppDispatcher.register(function(payload) {
     case AppConstants.UPDATE_CURRENT_EVENT:
       _currentEvent = payload.event;
       EventDetailStore.emitEvent('updateCurrentEvent');
+      break;
+
+    case AppConstants.EVENT_SHEEP_ATTEND:
+      _attendee = payload.attendee;
+      EventDetailStore.emitEvent('attend');
       break;
 
     default:

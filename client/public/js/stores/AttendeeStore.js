@@ -16,6 +16,18 @@ var AttendeeStore = assign({}, EventEmitter.prototype, {
   },
 
   /**
+   * Check if the sheep is an attendee
+   */
+  checkSheep: function(attendeeName) {
+    for (var i = 0; i < _sheeps.length; i++) {
+      if (_sheeps[i] === attendeeName) {
+        return true;
+      }
+    }
+    return false;
+  },
+
+  /**
    * Trigger an sheep
    * @param {string} attendeeName The name of the attendee
    */
@@ -33,7 +45,7 @@ var AttendeeStore = assign({}, EventEmitter.prototype, {
   },
 
   /**
-   * Prsheep a callback from being invoked when an sheep is triggered
+   * Prevent sheep a callback from being invoked when an sheep is triggered
    * @param {string} attendeeName The name of the sheep
    * @param {function} callback Stops the callback function from being invoked when the sheep is triggered
    */
