@@ -84,6 +84,9 @@ router.post('/create', function(req, res) {
         });
       }
     });
+  } else {
+    console.error('User ID was not sent in the body');
+    res.sendStatus(400);
   }
 });
 
@@ -134,6 +137,9 @@ router.post('/add-participant/:eventId', function (req, res) {
         }
       });
     });
+  } else {
+    console.error('User ID was not sent in the body');
+    res.sendStatus(400);
   }
 });
 
@@ -159,6 +165,9 @@ router.delete('/remove-participant/:eventId', function (req, res) {
         }
       });
     });
+  } else {
+    console.error('User ID was not sent in the body');
+    res.sendStatus(400);
   }
 });
 
