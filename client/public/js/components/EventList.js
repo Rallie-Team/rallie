@@ -10,11 +10,19 @@ var getEvents = function() {
 };
 
 var EventList = React.createClass({
-//mixins allows users to reuse code from different parts of
-//the app even when their use cases are very different
-//Navigation allows us to dynamically create hrefs in the render
-//section.  Inside of mixin, we allow the entire react component
-//to reference the functionalities using "this"
+  /*
+    Mixins allows users to reuse code from different parts of
+    the app even when their use cases are very different.
+
+    Navigation allows us to dynamically create hrefs in the render section.
+
+    State allows us to check what the current router state is,
+    and if the user is in the event-create or event-detail routes,
+    disable the button for toggling the mode.
+
+    With the mixins property, we allow the entire React component
+    to reference all the enclosed functionalities using "this".
+  */
   mixins: [Navigation],
 
   getInitialState: function() {

@@ -9,6 +9,19 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
 
 var EventDetailActions = {
   /**
+   * Get a specific event
+   * @param {number} eventId The primary key of the event in the database
+   */
+   get: function(eventId) {
+    EventAPI.getEvent(eventId).then(function(event) {
+      AppDispatcher.dispatch({
+        actionType: AppConstants.UPDATE_CURRENT_EVENT,
+        event: event
+      });
+    });
+   },
+
+   /**
    * Edit and update event details
    * @param {object} event An updated representation of the event attributes
    */

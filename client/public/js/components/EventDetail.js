@@ -17,6 +17,12 @@ var EventDetail = React.createClass({
     };
   },
 
+  componentWillMount: function() {
+    if (this.props.params.eventId) {
+      EventDetailActions.get(this.props.params.eventId);
+    }
+  },
+
   // Adds event listeners when events are created or edited
   componentDidMount: function() {
     EventDetailStore.addEventListener('edit', this._onEdit);
@@ -48,17 +54,17 @@ var EventDetail = React.createClass({
         { /* Display Join or Leave event based on whether the sheep is currently in the event */ }
         { (this.state.mode === 'sheep' && true) ? <button onClick={this._toggleJoin}>Leave Event</button> : null }
         { (this.state.mode === 'sheep' && false) ? <button onClick={this._toggleJoin}>Join Event</button> : null }
-        <AttendeesList eventId={this.state.event.id}/>
+        <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
 
         { /* Add the observation create if and only if sheep is attending event */ }
         { (this.state.mode === 'sheep' && true) ? <ObservationCreate eventId={this.state.event.id}/> : null }
-        <ObservationList eventId={this.state.event.id}/>
+        <ObservationList eventId={this.state.event.id || this.props.params.eventId}/>
       </div>
     );
   },
 
   _onEventSet: function() {
-    this.setState({event: EventDetail.getCurrentEvent()});
+    this.setState({event: EventDetailStore.getCurrentEvent()});
   },
 
   // Created a prompt to change the event name

@@ -35,11 +35,10 @@ var EventActions = {
    */
   create: function(data) {
     EventAPI.addEvent(data).then(function(event) {
-      AppDispatcher.dispatch(
-        // Use object-assign to combine event properties with the action property
-        // and dispatch the collective properties as one object
-        assign({actionType: AppConstants.EVENT_CREATE}, event)
-      );
+      AppDispatcher.dispatch({
+        actionType: AppConstants.EVENT_CREATE,
+        event: event
+      });
     });
   },
 
