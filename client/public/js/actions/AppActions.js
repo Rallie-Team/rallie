@@ -21,6 +21,7 @@ var AppActions = {
   //relays information to App Store to add the information
   //of the current user
   setCurrentUser: function(user){
+    // console.log(user);
     AppDispatcher.dispatch({
       actionType: AppConstants.SET_CURRENT_USER,
       user: user
@@ -30,7 +31,7 @@ var AppActions = {
   //relays information to App Store to remove the information
   //of the current user
   removeCurrentUser: function(){
-    console.log('inside of appactions removeCurrentUser');
+    // console.log('inside of appactions removeCurrentUser');
     AppDispatcher.dispatch({
       actionType: AppConstants.REMOVE_CURRENT_USER
     });

@@ -12,11 +12,15 @@ module.exports = function(app){
         return next(err);
       } else {
         var token = jwt.encode(user, 'secret');
-        res.redirect(
-          '/?' + querystring.stringify({user: user.username}) +
-          '&' + querystring.stringify({id: user.table_id})+
-          '&' + querystring.stringify({token: token})
-        );
+        res.cookie('username', user.username);
+        res.cookie('id', user.table_id);
+        res.redirect('/events');
+
+        // res.redirect(
+        //   '/?' + querystring.stringify({user: user.username}) +
+        //   '&' + querystring.stringify({id: user.table_id})+
+        //   '&' + querystring.stringify({token: token})
+        // );
       }
     })(req,res,next);
   });

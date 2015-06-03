@@ -2,7 +2,8 @@ var EventEmitter = require('events').EventEmitter,
     assign = require('object-assign'),
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants'),
-    AppActions = require('../actions/AppActions');
+    AppActions = require('../actions/AppActions'),
+    cookie = require('react-cookie');
 
 var _currentUser = {id: undefined, username: undefined};
 var _currentMode = 'sheep'; // the default mode is sheep
@@ -60,11 +61,11 @@ AppDispatcher.register(function(payload) {
       break;
 
     case AppConstants.REMOVE_CURRENT_USER:
-      // console.log('removing user inside of appstore.js');
+      // console.log('removing cookie user inside of appstore.js');
       _currentUser.id = undefined;
       _currentUser.name = undefined;
-      window.localStorage.removeItem('joseki');
-      window.location = '/';
+      cookie.remove('username');
+      cookie.remove('id');
       AppStore.emitEvent('loggedOut');
       break;
 
