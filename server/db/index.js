@@ -68,27 +68,58 @@ var init = function() {
   Event.hasMany(Observation);
   Observation.belongsTo(Event);
 
-  /* EXAMPLE OF HOW TO CREATE A USER, THEN AN EVENT, AND FINALLY AN OBSERVATION TIED TO THE USER AND EVENT:
-  User.create({
-    username: 'Kev'
-  }).then(function(user) {
-    Event.create({
-      name: 'Dance party',
-      location: 'San Francisco'
-    }).then(function(event) {
-      Observation.create({
-        content: 'It is poppin in herrr',
-        completed: false
-      }).then(function(observation) {
-        // Associate the observation to the event
-        return event.addObservation(observation);
-      }).then(function(observation) {
-        // Associate the observation to the user
-        user.addObservation(observation);
-      });
-    });
-  });
-  */
+  // EXAMPLE OF HOW TO CREATE A USER, THEN AN EVENT, AND FINALLY AN OBSERVATION TIED TO THE USER AND EVENT:
+  // User.create({
+  //   username: 'Kev'
+  // }).then(function (user) {
+  //   Event.create({
+  //     name: 'Dance party',
+  //     location: 'San Francisco'
+  //   }).then(function (event) {
+  //     Observation.create({
+  //       content: 'It is poppin in herrr',
+  //       completed: false
+  //     }).then(function (observation) {
+  //       // Associate the observation to the event
+  //       return event.addObservation(observation);
+  //     }).then(function (observation) {
+  //       // Associate the observation to the user
+  //       user.addObservation(observation);
+  //     });
+  //   });
+  // });
+
+  // EXAMPLE OF HOW TO CREATE A USER, A SHEEP, AND ADD THE USER TO AN EXISTING EVENT
+  // User.create({
+  //   username: 'Derek'
+  // }).then(function (user) {
+  //   var sheepId = user.id;
+  //   Event.findOne({
+  //     where: {
+  //       name: 'Dance party'
+  //     }
+  //   }).then(function (event) {
+  //     event.addSheep(sheepId);
+  //   });
+  // });
+
+  // EXAMPLE OF HOW TO CREATE A USER, A SHEEP, ADD AND THEN REMOVE THE USER TO AND FROM AN EXISTING EVENT
+  // var eventId, eventInstance, userInstance;
+  // User.create({
+  //   username: 'Eddie'
+  // }).then(function (user) {
+  //   userInstance = user;
+  //   Event.findOne({
+  //     where: {
+  //       name: 'Dance party'
+  //     }
+  //   }).then(function (event) {
+  //     eventInstance = event
+  //     event.addSheep(user);
+  //   }).then(function (user) {
+  //     userInstance.removeSheepEvent(eventInstance);
+  //   });
+  // });
 
   // export all models
   exports.User = User;

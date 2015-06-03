@@ -5,14 +5,14 @@ var app = require('../server.js');
 var db = require('../db');
 var expect = require('chai').expect;
 
-var eventInstance, eventId, userInstance, userId;
+var eventInstance, eventId, userInstance, userId, sheepId;
 
 // Create test user and event in db before tests
 before(function(done) {
   db.init().then(function() {    
     db.User.create({
       username: 'Sheepish Shepherd'
-    }).then(function(user) {
+    }).then(function (user) {
       userInstance = user;
       userId = user.id;
       var currentDate = new Date();
@@ -23,7 +23,7 @@ before(function(done) {
         location: 'San Francisco',
         minParticipants: 1,
         maxParticipants: 10
-      }).then(function(event) {
+      }).then(function (event) {
         eventInstance = event;
         eventId = event.id;
         user.addShepherdEvent(event).then(function(shepherdEvent) {
@@ -33,6 +33,26 @@ before(function(done) {
         });
       });
     });
+    // db.User.create({
+    //   username: 'Shepherdish Sheep'
+    // }).then(function (user) {
+    //   userInstance = user;
+    //   sheepId = user.id;
+    //   db.Event.findOne({
+    //     where: {
+    //       id: eventId
+    //     }
+    //   }).then(function (event) {
+    //     if (event) {
+    //       event.addSheep(sheepId).then(function () {
+    //         done();
+    //       });
+    //       // event.addSheep(sheep).then(function (SheepEvent) {
+    //       //   user.addSheepEvent(event).then(function () {
+    //       // res.json(event);
+    //     });
+    //   });
+    // });
   });
 });
 
