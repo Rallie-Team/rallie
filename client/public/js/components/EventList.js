@@ -5,6 +5,8 @@ var React = require('react'),
     EventStore = require('../stores/EventStore'),
     EventActions = require('../actions/EventActions');
 
+var intervalId;
+
 var getEvents = function() {
   return EventStore.getAll();
 };
@@ -50,7 +52,9 @@ var EventList = React.createClass({
       // OR GET ALL EVENTS BY USERID (FOR A SHEPHERD)
 
       // Get all events (for sheep)
+      // Start polling every 2 seconds for new events
       EventActions.getAll();
+      intervalId = setInterval(function(){EventActions.getAll();}, 2000);
     }
   },
 
@@ -58,7 +62,8 @@ var EventList = React.createClass({
     // Remove event listeners when the DOM element is removed
     EventStore.removeEventListener('get', this._onGet);
     AppStore.removeEventListener('toggleMode', this._changeStateMode);
-
+    // Remove setInterval for polling
+    clearInterval(intervalId);
   },
 
   render: function() {
