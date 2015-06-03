@@ -74,8 +74,8 @@ var EventList = React.createClass({
   },
 
   render: function() {
-    console.log(this.state.notShepherdEvents, 'notShepherdEvents');
-    console.log(this.state.shepherdEvents, 'shepherdEvents');
+    // console.log(this.state.notShepherdEvents, 'notShepherdEvents');
+    // console.log(this.state.shepherdEvents, 'shepherdEvents');
     // Sends each event to EventListItem where each event will be rendered
 
     if(this.state.mode === 'shepherd'){
@@ -108,14 +108,14 @@ var EventList = React.createClass({
     this.setState({
       shepherdEvents: EventStore.getAllEventsByShepherd()
     })
-    console.log(this.state.shepherdEvents);
+    // console.log(this.state.shepherdEvents);
   },
 
   _onNotShepherdEvents: function(){
     this.setState({
       notShepherdEvents: EventStore.getAllEventsNotByShepherd()
     })
-    console.log(this.state.notShepherdEvents);
+    // console.log(this.state.notShepherdEvents);
   },
 
   // _onGet: function() {

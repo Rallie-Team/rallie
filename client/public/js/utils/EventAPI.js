@@ -32,7 +32,7 @@ var EventAPI = {
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      console.log('sheep events returned', data);
+      // console.log('sheep events returned', data);
       // Return events on success
       return data;
     }, function() {
@@ -51,7 +51,7 @@ var EventAPI = {
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      console.log('shepherd events returned', data);
+      // console.log('shepherd events returned', data);
       // Return events on success
       return data;
     }, function() {

@@ -13,7 +13,7 @@ var EventActions = {
    * Get all events
    */
   getAllEventsByShepherd: function(shepherdId) {
-    console.log("inside of getAllEventsByShepherd EVENT ACTION");
+    // console.log("inside of getAllEventsByShepherd EVENT ACTION");
     EventAPI.getAllEventsByShepherd(shepherdId).then(function(events) {
       AppDispatcher.dispatch({
         actionType: AppConstants.SHEPHERD_EVENT_GET,
@@ -23,7 +23,7 @@ var EventActions = {
   },
 
   getAllEventsNotByShepherd:  function(shepherdId) {
-    console.log("inside of getAllEventsByNotShepherd EVENT ACTION");
+    // console.log("inside of getAllEventsByNotShepherd EVENT ACTION");
     EventAPI.getAllEventsNotByShepherd(shepherdId).then(function(events) {
       AppDispatcher.dispatch({
         actionType: AppConstants.NOT_SHEPHERD_EVENT_GET,
