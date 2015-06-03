@@ -3,7 +3,14 @@ var db = require('../../db');
 
 // Return a list of all events
 router.get('/', function (req, res) {
-  db.Event.findAll().then(function(results){
+  db.Event.findAll({
+    where: {
+      end: {
+        // Filters events where end date is greater than the current timestamp
+        $gt: new Date() 
+      }
+    }
+  }).then(function(results){
      res.json(results);
   });
 });
@@ -29,7 +36,14 @@ router.get('/user/:userId', function(req, res) {
   }).then(function (user) {
     if (user) {
       // For the user, find all events where the user is a shepherd
-      user.getShepherdEvents().then(function(results) {
+      user.getShepherdEvents({
+        where: {
+          end: {
+            // Filters events where end date is greater than the current timestamp
+            $gt: new Date()
+          }
+        }
+      }).then(function(results) {
         res.json(results);
       });
     } else {
