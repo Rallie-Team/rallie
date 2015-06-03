@@ -54,12 +54,9 @@ AppDispatcher.register(function(payload) {
       EventStore.emitEvent('get');
       break;
 
-    // TODO: NEED TO IMPLEMENT HANDLER FOR CREATING EVENTS
     case AppConstants.EVENT_CREATE:
-      // Optimistically add new event to the collection of events before POSTing to the server
-      _events.push({name: payload.name, location: payload.location});
-
-      // TODO: CALL SERVER TO CREATE NEW EVENT IN DB AND THEN INVOKE EventStore.emitEvent('create') ON SUCCESS
+      // Add new event to the current collection of events
+      _events.push(payload.event);
       EventStore.emitEvent('create');
       // TODO: DO SOMETHING ELSE IF THERE WAS AN ERROR DURING EVENT CREATION
       break;

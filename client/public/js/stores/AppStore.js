@@ -6,7 +6,10 @@ var EventEmitter = require('events').EventEmitter,
     cookie = require('react-cookie');
 
 var _currentUser = {id: undefined, username: undefined};
-var _currentMode = 'sheep'; // the default mode is sheep
+
+// Utilize localStorage to store mode so that it persists after the browser is closed or refreshed
+// The default mode is sheep
+var _currentMode = window.localStorage ? window.localStorage.getItem('joseki-mode') || 'sheep' : 'sheep'; 
 
 var AppStore = assign({}, EventEmitter.prototype, {
 
@@ -50,6 +53,7 @@ AppDispatcher.register(function(payload) {
   switch(payload.actionType) {
     case AppConstants.TOGGLE_MODE:
       _currentMode = payload.mode;
+      window.localStorage.setItem('joseki-mode', _currentMode);
       AppStore.emitEvent('toggleMode');
       break;
 
