@@ -39,24 +39,24 @@ var EventDetail = React.createClass({
     return (
       <div className="event-detail">
         <div className="event-detail-name">Event: {this.state.event.name}
-          {this.state.mode === 'shepherd' ? <button onClick={this._editName}>Edit Name</button> : null}
+          {this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editName}>Edit Name</button> : null}
         </div>
         {/* Use Moment.js to format start and end times to the following format: Mon, Jun 1, 2015 4:30 PM */}
         <div className="event-detail-start">Start: {moment(this.state.event.start).format('llll')}</div>
         <div className="event-detail-end">
           End: {moment(this.state.event.end).format('llll')}
-          { this.state.mode === 'shepherd' ? <button onClick={this._endEvent}>End Event</button> : null }
+          { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._endEvent}>End Event</button> : null }
         </div>
         <div className="event-detail-location">Location: {this.state.event.location}
-          { this.state.mode === 'shepherd' ? <button onClick={this._editLocation}>Edit Location</button> : null }
+          { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editLocation}>Edit Location</button> : null }
         </div>
         <div className="event-detail-action">Action: {this.state.event.action}
-          { this.state.mode === 'shepherd' ? <button onClick={this._editAction}>Edit Action</button> : null }
+          { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editAction}>Edit Action</button> : null }
         </div>
         { /* TODO: Set up API end point to track whether a user is in an event */ }
         { /* Display Join or Leave event based on whether the sheep is currently in the event */ }
-        { (this.state.mode === 'sheep' && true) ? <button onClick={this._toggleJoin}>Leave Event</button> : null }
-        { (this.state.mode === 'sheep' && false) ? <button onClick={this._toggleJoin}>Join Event</button> : null }
+        { (this.state.mode === 'sheep' && true) ? <button className="btn btn-default" onClick={this._toggleJoin}>Leave Event</button> : null }
+        { (this.state.mode === 'sheep' && false) ? <button className="btn btn-default" onClick={this._toggleJoin}>Join Event</button> : null }
         <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
 
         { /* Add the observation create if and only if sheep is attending event */ }
