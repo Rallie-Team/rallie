@@ -4,7 +4,8 @@ var React = require('react'),
     State = Router.State,
     RouteHandler = Router.RouteHandler,
     AppActions = require('../actions/AppActions'),
-    AppStore = require('../stores/AppStore');
+    AppStore = require('../stores/AppStore'),
+    cookie = require('react-cookie');
 
 var App = React.createClass({
   /*
@@ -65,18 +66,15 @@ var App = React.createClass({
     AppStore.addEventListener('loggedIn', this._loggedIn);
     AppStore.addEventListener('loggedOut', this._loggedOut);
 
-    if(this.getParameterByName("user")){
-      var username = this.getParameterByName("user");
-      var id = this.getParameterByName('id');
-      var token = this.getParameterByName("token");
+    var username = cookie.load("username");
+    var id = cookie.load('id');
 
-      var data = {
-        username: username,
-        id: id,
-        token: token
-      };
-      AppActions.setCurrentUser(data);
-    }
+    var data = {
+      username: username,
+      id: id
+    };
+    // console.log(data);
+    AppActions.setCurrentUser(data);
   },
 
   //removes event listener when the dom element is removed
@@ -92,7 +90,7 @@ var App = React.createClass({
   //the application will determine which parts of the render function
   //to be displayed
   render: function() {
-    if(this.getParameterByName("user")){
+    if(cookie.load("username")){
       var currentUserLi;
       if (this.state.currentUser && this.state.currentUser.username) {
         currentUserLi = <li>{this.state.currentUser.username}</li>
