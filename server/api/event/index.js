@@ -56,34 +56,35 @@ router.get('/user/:userId', function(req, res) {
 // Create a new event and return event
 router.post('/create', function(req, res) {
   var currentDate = new Date();
-
-  // Make sure user exists
-  db.User.findOne({
-    where: {
-      id: req.body.userId
-    }
-  }).then(function (user) {
-    if (user) {
-      // User exists, continue to create event
-      db.Event.create({
-        name: req.body.name || '',
-        // If no start time specified, default to now
-        start: req.body.start || currentDate,
-        // If no end time specified, default to 24 hours from now
-        end: req.body.end || new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
-        location: req.body.location || '',
-        minParticipants: req.body.minParticipants || null,
-        maxParticipants: req.body.maxParticipants || null
-      }).then(function(event) {
-        // After creating the event, associate the event with the user as a shepherd
-        user.addShepherdEvent(event).then(function(shepherdEvent) {
-          event.addShepherd(user).then(function(){
-            res.json(event);
+  if (req.body.userId) {
+    // Make sure user exists
+    db.User.findOne({
+      where: {
+        id: req.body.userId
+      }
+    }).then(function (user) {
+      if (user) {
+        // User exists, continue to create event
+        db.Event.create({
+          name: req.body.name || '',
+          // If no start time specified, default to now
+          start: req.body.start || currentDate,
+          // If no end time specified, default to 24 hours from now
+          end: req.body.end || new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
+          location: req.body.location || '',
+          minParticipants: req.body.minParticipants || null,
+          maxParticipants: req.body.maxParticipants || null
+        }).then(function(event) {
+          // After creating the event, associate the event with the user as a shepherd
+          user.addShepherdEvent(event).then(function(shepherdEvent) {
+            event.addShepherd(user).then(function(){
+              res.json(event);
+            });
           });
         });
-      });
-    }
-  });
+      }
+    });
+  }
 });
 
 // Edit details for an event
@@ -128,13 +129,11 @@ router.post('/add-participant/:eventId', function (req, res) {
       }).then(function (event) {
         if (event) {
           event.addSheep(sheep).then(function () {
-            res.json(event);
+            res.json(sheep);
           });
         }
       });
     });
-  } else {
-    console.err('User ID is not in the body');
   }
 });
 
@@ -155,13 +154,11 @@ router.delete('/remove-participant/:eventId', function (req, res) {
       }).then(function (event) {
         if (event) {
           event.removeSheep(sheep).then(function () {
-            res.json(event);
+            res.json(sheep);
           });
         }
       });
     });
-  } else {
-    console.err('User ID is not in the body');
   }
 });
 
