@@ -19,5 +19,7 @@ module.exports = keyMirror({
   SET_CURRENT_USER: null,
   SHEEPS_GET: null,
   SHEPHERDS_GET: null,
-  EVENT_SHEEP_ATTEND: null
+  EVENT_SHEEP_ATTEND: null,
+  SHEPHERD_EVENT_GET: null,
+  NOT_SHEPHERD_EVENT_GET: null
 });

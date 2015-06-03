@@ -3,13 +3,10 @@ var React = require('react'),
     AppStore = require('../stores/AppStore'),
     EventListItem = require('./EventListItem'),
     EventStore = require('../stores/EventStore'),
-    EventActions = require('../actions/EventActions');
+    EventActions = require('../actions/EventActions'),
+    cookie = require('react-cookie');
 
 var intervalId;
-
-var getEvents = function() {
-  return EventStore.getAll();
-};
 
 var EventList = React.createClass({
   /*
@@ -30,7 +27,8 @@ var EventList = React.createClass({
   getInitialState: function() {
     // Set initial state to the initial set of events defined in EventStore
     return {
-      events: getEvents(),
+      shepherdEvents: EventStore.getAllEventsByShepherd(cookie.load('id')),
+      notShepherdEvents: EventStore.getAllEventsNotByShepherd(cookie.load('id')),
       mode: AppStore.getCurrentMode()
     };
   },
@@ -38,10 +36,12 @@ var EventList = React.createClass({
   componentDidMount: function() {
     // Add event listener for getting events from the server when the component is mounted
     // Fetching via AJAX needs to happen after mounting due to async
-    EventStore.addEventListener('get', this._onGet);
+    EventStore.addEventListener('shepherd_events_get', this._onShepherdEvents);
+
+    EventStore.addEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
 
     // Add event listener to get the current mode when the mode changes
-    // For the EventList component, the create event button should only be 
+    // For the EventList component, the create event button should only be
     // available when the mode is sherpherd.
     AppStore.addEventListener('toggleMode', this._changeStateMode);
 
@@ -52,25 +52,43 @@ var EventList = React.createClass({
       // OR GET ALL EVENTS BY USERID (FOR A SHEPHERD)
 
       // Get all events (for sheep)
+
       // Start polling every 2 seconds for new events
-      EventActions.getAll();
-      intervalId = setInterval(function(){EventActions.getAll();}, 2000);
+
+      EventActions.getAllEventsByShepherd(cookie.load('id'));
+
+      intervalId = setInterval(function(){
+        EventActions.getAllEventsByShepherd(cookie.load('id'));
+        EventActions.getAllEventsNotByShepherd(cookie.load('id'));
+      }, 2000);
+
     }
   },
 
   componentWillUnmount: function() {
     // Remove event listeners when the DOM element is removed
-    EventStore.removeEventListener('get', this._onGet);
+    EventStore.removeEventListener('shepherd_events_get', this._onShepherdEvents);
+
+    EventStore.removeEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
     AppStore.removeEventListener('toggleMode', this._changeStateMode);
     // Remove setInterval for polling
     clearInterval(intervalId);
   },
 
   render: function() {
+    // console.log(this.state.notShepherdEvents, 'notShepherdEvents');
+    // console.log(this.state.shepherdEvents, 'shepherdEvents');
     // Sends each event to EventListItem where each event will be rendered
-    var events = this.state.events.map(function(event) {
-      return <EventListItem key={event.id} event={event}/>
-    }.bind(this));
+
+    if(this.state.mode === 'shepherd'){
+      var events = this.state.shepherdEvents.map(function(event) {
+        return <EventListItem key={event.id} event={event} mode={this.state.mode}/>
+      }.bind(this));
+    } else {
+      var events = this.state.notShepherdEvents.map(function(event) {
+        return <EventListItem key={event.id} event={event} mode={this.state.mode}/>
+      }.bind(this));
+    }
 
     // this.state.mode references the mode set in AppStore.js
     // The event create button only appears if the current mode
@@ -88,11 +106,25 @@ var EventList = React.createClass({
     );
   },
 
-  _onGet: function() {
+  _onShepherdEvents: function(){
     this.setState({
-      events: getEvents()
-    });
+      shepherdEvents: EventStore.getAllEventsByShepherd()
+    })
+    // console.log(this.state.shepherdEvents);
   },
+
+  _onNotShepherdEvents: function(){
+    this.setState({
+      notShepherdEvents: EventStore.getAllEventsNotByShepherd()
+    })
+    // console.log(this.state.notShepherdEvents);
+  },
+
+  // _onGet: function() {
+  //   this.setState({
+  //     events: getEvents()
+  //   });
+  // },
 
   // Updates the views when the state mode changes from sheep to shepherd and vice versa
   _changeStateMode: function() {

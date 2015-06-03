@@ -30,6 +30,7 @@ var ObservationActions = {
    */
   create: function(data) {
     ObservationAPI.addObservation(data).then(function(observations) {
+      console.log(observations);
       // The server will respond with an array containing only the newly-created observation
       AppDispatcher.dispatch({
         actionType: AppConstants.OBSERVATION_CREATE,

@@ -6,21 +6,40 @@ var EventAPI = {
   /**
    * Get all events
    */
-  getAllEvents: function() {
+  // getAllEvents: function() {
+  //   // Return a promise so the requester can chain the response
+  //   return $.ajax({
+  //     url: '/api/event',
+  //     method: 'GET',
+  //     dataType: 'json'
+  //   }).then(function(data) {
+  //     // On success, return event data
+  //     return data;
+  //   }, function() {
+  //     // On error, return empty array
+  //     return [];
+  //   });
+  // },
+
+  /**
+   * Get all events for a shepherd
+   * @param {number} shepherdId The primary key of the user in the database
+   */
+  getAllEventsNotByShepherd: function(shepherdId) {
     // Return a promise so the requester can chain the response
     return $.ajax({
-      url: '/api/event',
+      url: '/api/event/sheep/' + shepherdId,
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // On success, return event data
+      // console.log('sheep events returned', data);
+      // Return events on success
       return data;
     }, function() {
-      // On error, return empty array
+      // Return empty array on error
       return [];
     });
   },
-
   /**
    * Get all events for a shepherd
    * @param {number} shepherdId The primary key of the user in the database
@@ -28,10 +47,11 @@ var EventAPI = {
   getAllEventsByShepherd: function(shepherdId) {
     // Return a promise so the requester can chain the response
     return $.ajax({
-      url: '/api/event/user/' + shepherdId,
+      url: '/api/event/shepherd/' + shepherdId,
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
+      // console.log('shepherd events returned', data);
       // Return events on success
       return data;
     }, function() {
