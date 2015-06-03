@@ -134,7 +134,7 @@ router.post('/add-participant/:eventId', function (req, res) {
       });
     });
   } else {
-    throw new Error(res.sendStatus(400) + 'User ID is not in the body');
+    console.err('User ID is not in the body');
   }
 });
 
@@ -161,7 +161,7 @@ router.delete('/remove-participant/:eventId', function (req, res) {
       });
     });
   } else {
-    throw new Error(res.sendStatus(400) + 'User ID is not in the body');
+    console.err('User ID is not in the body');
   }
 });
 
