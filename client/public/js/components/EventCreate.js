@@ -48,7 +48,8 @@ var EventCreate = React.createClass({
     var data = {
       userId: AppStore.getCurrentUser().id,
       name: this.state.name,
-      location: this.state.location
+      location: this.state.location,
+      action: ''
     };
     EventActions.create(data);
   },

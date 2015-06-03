@@ -50,6 +50,9 @@ var EventDetail = React.createClass({
         <div className="event-detail-location">Location: {this.state.event.location}
           { this.state.mode === 'shepherd' ? <button onClick={this._editLocation}>Edit Location</button> : null }
         </div>
+        <div className="event-detail-action">Action: {this.state.event.action}
+          { this.state.mode === 'shepherd' ? <button onClick={this._editAction}>Edit Action</button> : null }
+        </div>
         { /* TODO: Set up API end point to track whether a user is in an event */ }
         { /* Display Join or Leave event based on whether the sheep is currently in the event */ }
         { (this.state.mode === 'sheep' && true) ? <button onClick={this._toggleJoin}>Leave Event</button> : null }
@@ -78,6 +81,13 @@ var EventDetail = React.createClass({
   _editLocation: function(){
     var obj = this.state.event;
     obj.location = prompt('Where is the location?');
+    EventDetailActions.edit(obj);
+  },
+
+  // Created a prompt to change the event action
+  _editAction: function(){
+    var obj = this.state.event;
+    obj.action = prompt('What is the action?');
     EventDetailActions.edit(obj);
   },
 

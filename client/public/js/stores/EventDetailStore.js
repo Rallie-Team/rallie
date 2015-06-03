@@ -3,7 +3,7 @@ var EventEmitter = require('events').EventEmitter,
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants');
 
-var _currentEvent = {name: '', location: ''};
+var _currentEvent = {name: '', location: '', action: ''};
 var _observations = [];
 
 var EventDetailStore = assign({}, EventEmitter.prototype, {
