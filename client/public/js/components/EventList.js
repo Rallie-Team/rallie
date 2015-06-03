@@ -69,7 +69,7 @@ var EventList = React.createClass({
   render: function() {
     // Sends each event to EventListItem where each event will be rendered
     var events = this.state.events.map(function(event) {
-      return <EventListItem key={event.id} event={event} mode={this.state.mode}/>
+      return <EventListItem key={event.id} event={event}/>
     }.bind(this));
 
     // this.state.mode references the mode set in AppStore.js

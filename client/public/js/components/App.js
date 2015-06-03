@@ -138,7 +138,7 @@ var App = React.createClass({
           <div className="row">
             <div className="col-lg-8">
               {/* The RouteHandler component renders the active child route's handler */}
-              <RouteHandler mode={this.state.mode}/>
+              <RouteHandler/>
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@ var App = React.createClass({
           </header>
 
           {/* The RouteHandler component renders the active child route's handler */}
-          <RouteHandler mode={this.state.mode}/>
+          <RouteHandler/>
         </div>
       );
     }
