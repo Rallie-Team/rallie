@@ -5,7 +5,8 @@ var React = require('react'),
     RouteHandler = Router.RouteHandler,
     AppActions = require('../actions/AppActions'),
     AppStore = require('../stores/AppStore'),
-    cookie = require('react-cookie');
+    cookie = require('react-cookie'),
+    Bootstrap;
 
 var App = React.createClass({
   /*
@@ -93,44 +94,83 @@ var App = React.createClass({
     if(cookie.load("username")){
       var currentUserLi;
       if (this.state.currentUser && this.state.currentUser.username) {
-        currentUserLi = <li>{this.state.currentUser.username}</li>
+        currentUserLi = <p className="navbar-text">Hi, {this.state.currentUser.username}</p>
       }
       return (
-        <div>
+        <div className="col-lg-12">
           <header>
-            <h1>Joseki</h1>
-            <nav>
-              <ul>
-                <li><a href={this.makeHref('events')}>Home</a></li>
-                {/*
-                  This is the toggler for shepherd/sheep.
-                  It will be disabled when viewing the event-create and event-detail components
-                */}
-                <li>
-                  <button className='toggleButton' onClick={this._changeMode} 
-                    disabled={this.isActive('event-create') || this.isActive('event-detail') ? 'disabled' : false}>
-                    {this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}
+            <nav className="navbar navbar-default">
+              <div className="container-fluid">
+                {/* Brand and toggle get grouped for better mobile display */}
+                <div className="navbar-header">
+                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
                   </button>
-                </li>
-                {currentUserLi}
-                <li><a onClick={this.removeCurrentUser} href={this.makeHref('home')}>Logout</a></li>
-              </ul>
+                  <a className="navbar-brand" href={this.makeHref('events')}>Joseki</a>
+                </div>
+
+                {/* Collect the nav links for toggling */}
+                <div className="collapse navbar-collapse" id="navbar-collapse-1">
+                  <ul className="nav navbar-nav">
+                    {/*
+                      This is the toggler for shepherd/sheep.
+                      It will be disabled when viewing the event-create and event-detail components
+                    */}
+                    <li>
+                      <button className="btn btn-info navbar-btn" onClick={this._changeMode} 
+                        disabled={this.isActive('event-create') || this.isActive('event-detail') ? 'disabled' : false}>
+                        {this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}
+                      </button>
+                    </li>
+                  </ul>
+                  <ul className="nav navbar-nav navbar-right">
+                    {currentUserLi}
+                    <li><a onClick={this.removeCurrentUser} href={this.makeHref('home')}>Logout</a></li>
+                  </ul>
+                </div>
+              </div>
             </nav>
           </header>
 
-          {/* The RouteHandler component renders the active child route's handler */}
-          <RouteHandler mode={this.state.mode}/>
+          <div className="row">
+            <div className="col-lg-8">
+              {/* The RouteHandler component renders the active child route's handler */}
+              <RouteHandler mode={this.state.mode}/>
+            </div>
+          </div>
         </div>
       );
     } else {
       return (
-        <div>
+        <div className="col-lg-12">
           <header>
-            <h1>Joseki</h1>
-            <nav>
-              <ul>
-                <li><a href='/Server/auth/facebook'>Login</a></li>
-              </ul>
+            <nav className="navbar navbar-default">
+              <div className="container-fluid">
+                {/* Brand and toggle get grouped for better mobile display */}
+                <div className="navbar-header">
+                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                  <a className="navbar-brand" href="#">Joseki</a>
+                </div>
+
+                {/* Collect the nav links for toggling */}
+                <div className="collapse navbar-collapse" id="navbar-collapse-1">
+                  <ul className="nav navbar-nav navbar-right">
+                    {/*
+                      This is the toggler for shepherd/sheep.
+                      It will be disabled when viewing the event-create and event-detail components
+                    */}
+                    <li><a href="/Server/auth/facebook">Login</a></li>
+                  </ul>
+                </div>
+              </div>
             </nav>
           </header>
 

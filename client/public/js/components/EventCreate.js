@@ -32,9 +32,15 @@ var EventCreate = React.createClass({
     return (
       <div className="event-create">
         <form className="eventCreateForm" onSubmit={this._save}>
-          <input className="inputBox" type="text" name="name" placeholder="Event name" value={this.state.name} onChange={this._onChange} />
-          <input className="inputBox" type="text" name="location" placeholder="Event location" value={this.state.location} onChange={this._onChange} />
-          <input type="submit" value="Submit" />
+          <div className="form-group">
+            <label for="name">Event name</label>
+            <input className="form-control inputBox" type="text" name="name" id="name" placeholder="Event name" value={this.state.name} onChange={this._onChange} />
+          </div>
+          <div className="form-group">
+            <label for="location">Event location</label>
+            <input className="form-control inputBox" type="text" name="location" id="location" placeholder="Event location" value={this.state.location} onChange={this._onChange} />
+          </div>
+          <button type="submit" className="btn btn-default">Submit</button>
         </form>
         <div className="event-create-result">{this.state.result}</div>
       </div>
