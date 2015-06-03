@@ -72,10 +72,7 @@ var EventDetail = React.createClass({
         <div className="event-detail-action">Action: {this.state.event.action}
           { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editAction}>Edit Action</button> : null }
         </div>
-        { /* TODO: Set up API end point to track whether a user is in an event */ }
-        { /* Display Join or Leave event based on whether the sheep is currently in the event */ }
         
-        { (this.state.mode === 'sheep' && !this.state.attendee) ? <button className="btn btn-default" onClick={this._toggleJoin}>Join Event</button> : null }
         <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
 
         { /* Add the observation create if and only if sheep is attending event */ }
