@@ -109,7 +109,7 @@ var App = React.createClass({
                   It will be disabled when viewing the event-create and event-detail components
                 */}
                 <li>
-                  <button onClick={this._changeMode}
+                  <button className='toggleButton' onClick={this._changeMode} 
                     disabled={this.isActive('event-create') || this.isActive('event-detail') ? 'disabled' : false}>
                     {this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}
                   </button>

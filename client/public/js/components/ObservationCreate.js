@@ -28,9 +28,9 @@ var ObservationCreate = React.createClass({
   render: function() {
     return (
       <div className="event-create">
-        <form onSubmit={this._save}>
-          <input type="text" name="content" placeholder="Your Observation" value={this.state.content} onChange={this._onChange} />
-          <input type="submit" value="Submit" />
+        <form className="observationCreateForm" onSubmit={this._save}>
+          <input className="inputBox" type="text" name="content" placeholder="Your Observation" value={this.state.content} onChange={this._onChange} />
+          <input className="inputBox" type="submit" value="Submit" />
         </form>
       </div>
     );
@@ -43,7 +43,7 @@ var ObservationCreate = React.createClass({
     var newObservation = {
       userId: this.state.userId,
       eventId: this.props.eventId,
-      content: e.target.content.value.trim()
+      content: this.state.content
     };
     ObservationActions.create(newObservation);
   },
