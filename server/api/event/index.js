@@ -113,35 +113,56 @@ router.put('/:eventId', function (req, res) {
 
 // Adds a sheep and event to the Sheep Event table
 router.post('/add-participant/:eventId', function (req, res) {
-  var sheep = req.body.user;
-  db.Event.findOne({
-    where: {
-      id: req.params.eventId
-    }
-  }).then(function (event) {
-    if (event) {
-      event.addSheep(sheep).then(function () {
-        res.json(event);
+  var sheep; 
+  if (req.body.userId) {
+    db.User.findOne({
+      where: {
+        id: req.body.userId
+      }
+    }).then(function (user) {
+      sheep = user;
+      db.Event.findOne({
+        where: {
+          id: req.params.eventId
+        }
+      }).then(function (event) {
+        if (event) {
+          event.addSheep(sheep).then(function () {
+            res.json(event);
+          });
+        }
       });
-    }
-  });
+    });
+  } else {
+    throw new Error(res.sendStatus(400) + 'User ID is not in the body');
+  }
 });
-
 
 // Removes a sheep and event from the Sheep Event table
 router.delete('/remove-participant/:eventId', function (req, res) {
-  var sheep = req.body.user;
-  db.Event.findOne({
-    where: {
-      id: req.params.eventId
-    }
-  }).then(function (event) {
-    if (event) {
-      event.removeSheep(sheep).then(function () {
-        res.json(event);
+  var sheep;
+  if (req.body.userId) {
+    db.User.findOne({
+      where: {
+        id: req.body.userId
+      }
+    }).then(function (user) {
+      sheep = user;
+      db.Event.findOne({
+        where: {
+          id: req.params.eventId
+        }
+      }).then(function (event) {
+        if (event) {
+          event.removeSheep(sheep).then(function () {
+            res.json(event);
+          });
+        }
       });
-    }
-  });
+    });
+  } else {
+    throw new Error(res.sendStatus(400) + 'User ID is not in the body');
+  }
 });
 
 module.exports = router;
