@@ -7,32 +7,35 @@ var React = require('react'),
     ObservationCreate = require('./ObservationCreate'),
     AttendeesList = require('./AttendeesList');
 
+var intervalId;
+var prevEvent;
+
 var EventDetail = React.createClass({
   mixins: [Navigation],
 
   getInitialState: function() {
+    prevEvent = EventDetailStore.getCurrentEvent();
     return {
       mode: AppStore.getCurrentMode(),
       event: EventDetailStore.getCurrentEvent()
     };
   },
 
-  componentWillMount: function() {
-    if (this.props.params.eventId) {
-      EventDetailActions.get(this.props.params.eventId);
-    }
-  },
-
   // Adds event listeners when events are created or edited
   componentDidMount: function() {
     EventDetailStore.addEventListener('edit', this._onEdit);
     EventDetailStore.addEventListener('updateCurrentEvent', this._onEventSet);
+    if (this.props.params.eventId) {
+      EventDetailActions.get(this.props.params.eventId);
+      intervalId = setInterval(function(){EventDetailActions.edit(this.state.event)}.bind(this), 2000);
+    }
   },
 
   // Removes event listener when events are deleted or edited
   componentWillUnmount: function() {
     EventDetailStore.removeEventListener('edit', this._onEdit);
     EventDetailStore.removeEventListener('updateCurrentEvent', this._onEventSet);
+    clearInterval(intervalId);
   },
 
   render: function() {
@@ -93,7 +96,14 @@ var EventDetail = React.createClass({
 
   // Updates the current event properties on the page
   _onEdit: function(){
-    this.setState({event: EventDetailStore.getCurrentEvent()});
+    var storeCurrentEvent = EventDetailStore.getCurrentEvent();
+    if (prevEvent.action !== storeCurrentEvent.action){
+      prevEvent = storeCurrentEvent;
+      if (this.state.mode === 'sheep'){
+        alert(storeCurrentEvent.action);
+      }
+    }
+    this.setState({event: storeCurrentEvent});
 
     // If the event's end time is updated and is earlier than now,
     // redirect to the events list.
