@@ -21,9 +21,6 @@ var EventStore = assign({}, EventEmitter.prototype, {
     return _currentEvent;
   },
 
-  getAllShepherdEventsIds: function() {
-    return _shepherdEventsIds;
-  },
 
   /**
    * Trigger an event

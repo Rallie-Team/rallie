@@ -22,9 +22,9 @@ var EventActions = {
     });
   },
 
-  getAllEventsNotByShepherd:  function(shepherdId) {
+  getAllEventsNotByShepherd:  function() {
     // console.log("inside of getAllEventsByNotShepherd EVENT ACTION");
-    EventAPI.getAllEventsNotByShepherd(shepherdId).then(function(events) {
+    EventAPI.getAllEventsNotByShepherd().then(function(events) {
       AppDispatcher.dispatch({
         actionType: AppConstants.NOT_SHEPHERD_EVENT_GET,
         events: events

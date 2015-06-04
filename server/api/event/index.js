@@ -41,7 +41,7 @@ router.get('/shepherd/:userId', function(req, res) {
 
 
 // Reurn a list of all events that have not ended yet, filtering is done in EventStore
-router.get('/sheep/:userId', function(req, res) {
+router.get('/sheep', function(req, res) {
   db.Event.findAll({
     where: {
       end: {

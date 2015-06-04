@@ -27,8 +27,8 @@ var EventList = React.createClass({
   getInitialState: function() {
     // Set initial state to the initial set of events defined in EventStore
     return {
-      shepherdEvents: EventStore.getAllEventsByShepherd(cookie.load('id')),
-      notShepherdEvents: EventStore.getAllEventsNotByShepherd(cookie.load('id')),
+      shepherdEvents: EventStore.getAllEventsByShepherd(),
+      notShepherdEvents: EventStore.getAllEventsNotByShepherd(),
       mode: AppStore.getCurrentMode()
     };
   },
@@ -59,7 +59,7 @@ var EventList = React.createClass({
 
       intervalId = setInterval(function(){
         EventActions.getAllEventsByShepherd(cookie.load('id'));
-        EventActions.getAllEventsNotByShepherd(cookie.load('id'));
+        EventActions.getAllEventsNotByShepherd();
       }, 2000);
 
     }

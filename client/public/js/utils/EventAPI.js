@@ -25,10 +25,10 @@ var EventAPI = {
    * Get all events for a shepherd
    * @param {number} shepherdId The primary key of the user in the database
    */
-  getAllEventsNotByShepherd: function(shepherdId) {
+  getAllEventsNotByShepherd: function() {
     // Return a promise so the requester can chain the response
     return $.ajax({
-      url: '/api/event/sheep/' + shepherdId,
+      url: '/api/event/sheep/',
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
