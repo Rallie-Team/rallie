@@ -49,6 +49,7 @@ router.post('/create', function(req, res) {
               model: db.User
             }
           }).then(function(observation) {
+            // console.log(JSON.stringify(observation), '-------------------------');
             res.json(observation);
           });
         });

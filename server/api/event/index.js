@@ -5,29 +5,15 @@ var db = require('../../db');
 router.get('/', function (req, res) {
   db.Event.findAll({
     where: {
-      end: {
         // Filters events where end date is greater than the current timestamp
-        $gt: new Date() 
       }
-    }
   }).then(function(results){
      res.json(results);
   });
 });
 
-// Return one specific event by eventId
-router.get('/:eventId', function (req, res) {
-  db.Event.findOne({
-    where: {
-      id: req.params.eventId
-    }
-  }).then(function(event) {
-    res.json(event);
-  });
-});
-
 // Return a list of all events for a user where the user is a shepherd
-router.get('/user/:userId', function(req, res) {
+router.get('/shepherd/:userId', function(req, res) {
   // First find user by userId
   db.User.findOne({
     where: {
@@ -52,6 +38,24 @@ router.get('/user/:userId', function(req, res) {
     }
   });
 });
+
+
+// Reurn a list of all events that have not ended yet, filtering is done in EventStore
+router.get('/sheep', function(req, res) {
+  db.Event.findAll({
+    where: {
+      end: {
+        // Filters events where end date is greater than the current timestamp
+        $gt: new Date()
+      }
+        // Filters events where end date is greater than the current timestamp
+      }
+  }).then(function(results){
+     res.json(results);
+  });
+});
+
+
 
 // Create a new event and return event
 router.post('/create', function(req, res) {
@@ -90,6 +94,7 @@ router.post('/create', function(req, res) {
   }
 });
 
+
 // Edit details for an event
 router.put('/:eventId', function (req, res) {
   // Find the event by ID
@@ -118,7 +123,7 @@ router.put('/:eventId', function (req, res) {
 
 // Adds a sheep and event to the Sheep Event table
 router.post('/add-participant/:eventId', function (req, res) {
-  var sheep; 
+  var sheep;
   console.log(req.body);
   if (req.body.id) {
     db.User.findOne({

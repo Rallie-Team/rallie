@@ -12,21 +12,24 @@ var EventActions = {
   /**
    * Get all events
    */
-  getAll: function() {
-    EventAPI.getAllEvents().then(function(events) {
+  getAllEventsByShepherd: function(shepherdId) {
+    // console.log("inside of getAllEventsByShepherd EVENT ACTION");
+    EventAPI.getAllEventsByShepherd(shepherdId).then(function(events) {
       AppDispatcher.dispatch({
-        actionType: AppConstants.EVENT_GET,
+        actionType: AppConstants.SHEPHERD_EVENT_GET,
         events: events
       });
     });
   },
 
-  /**
-   * Get all events for a specific shepherd
-   * @param {number} shepherdId The primary key of the user in the database
-   */
-  getAllByShepherd: function(shepherdId) {
-    // TODO
+  getAllEventsNotByShepherd:  function() {
+    // console.log("inside of getAllEventsByNotShepherd EVENT ACTION");
+    EventAPI.getAllEventsNotByShepherd().then(function(events) {
+      AppDispatcher.dispatch({
+        actionType: AppConstants.NOT_SHEPHERD_EVENT_GET,
+        events: events
+      });
+    });
   },
 
   /**
