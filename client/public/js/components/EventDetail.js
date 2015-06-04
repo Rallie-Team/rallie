@@ -17,8 +17,7 @@ var EventDetail = React.createClass({
     prevEvent = EventDetailStore.getCurrentEvent();
     return {
       mode: AppStore.getCurrentMode(),
-      // TODO: Refactor to get from overall attendance pull
-      attendee: EventDetailStore.getAttendee(),
+      isAttendee: EventDetailStore.isAttendee(),
       event: EventDetailStore.getCurrentEvent()
     };
   },
@@ -47,10 +46,10 @@ var EventDetail = React.createClass({
       <div className="event-detail">
         <div className="event-detail-attendee">
           <h3>
-            Currently {this.state.attendee ? 'Attending' : 'Observing'} Event
+            Currently {this.state.isAttendee ? 'Attending' : 'Observing'} Event
               { (this.state.mode === 'sheep') ? 
               <button className="btn btn-default" onClick={this._attend}>
-                {this.state.attendee ? 'Leave' : 'Attend'} Event
+                {this.state.isAttendee ? 'Leave' : 'Attend'} Event
               </button> : null }
           </h3>
         </div>
@@ -76,7 +75,7 @@ var EventDetail = React.createClass({
         <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
 
         { /* Add the observation create if and only if sheep is attending event */ }
-        { (this.state.mode === 'sheep' && this.state.attendee) ? <ObservationCreate eventId={this.state.event.id}/> : null }
+        { (this.state.mode === 'sheep' && this.state.isAttendee) ? <ObservationCreate eventId={this.state.event.id}/> : null }
         <ObservationList eventId={this.state.event.id || this.props.params.eventId}/>
       </div>
     );
@@ -116,13 +115,13 @@ var EventDetail = React.createClass({
 
   // Toggles whether a sheep is participating or not in an event
   _attend: function () {
-    this.state.attendee = !this.state.attendee;
-    EventDetailActions.attend(this.state.event, AppStore.getCurrentUser(), this.state.attendee);
+    this.state.isAttendee = !this.state.isAttendee;
+    EventDetailActions.attend(this.state.event, AppStore.getCurrentUser(), this.state.isAttendee);
   },
 
   _onAttend: function() {
-    console.log(EventDetailStore.getAttendee());
-    this.setState({attendee: EventDetailStore.getAttendee()});
+    console.log(EventDetailStore.isAttendee());
+    this.setState({isAttendee: EventDetailStore.isAttendee()});
   },
 
   // Updates the current event properties on the page

@@ -12,7 +12,7 @@ var EventDetailStore = assign({}, EventEmitter.prototype, {
     return _currentEvent;
   },
 
-  getAttendee: function() {
+  isAttendee: function() {
     return _attendee;
   },
 
