@@ -23,7 +23,6 @@ var EventAPI = {
 
   /**
    * Get all events for a shepherd
-   * @param {number} shepherdId The primary key of the user in the database
    */
   getAllEventsNotByShepherd: function() {
     // Return a promise so the requester can chain the response
