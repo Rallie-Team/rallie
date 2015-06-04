@@ -27,7 +27,7 @@ router.get('/:eventId', function (req, res) {
 });
 
 // Return a list of all events for a user where the user is a shepherd
-router.get('/sheep/:userId', function(req, res) {
+router.get('/shepherd/:userId', function(req, res) {
   // First find user by userId
   db.User.findOne({
     where: {
@@ -55,7 +55,7 @@ router.get('/sheep/:userId', function(req, res) {
 
 
 // Reurn a list of all events for a user where the user is a shepherd
-router.get('/shepherd/:userId', function(req, res) {
+router.get('/sheep/:userId', function(req, res) {
   // First find user by userId
   db.User.findOne({
     where: {
@@ -66,7 +66,7 @@ router.get('/shepherd/:userId', function(req, res) {
       // For the user, find all events where the user is a shepherd
       user.getShepherdEvents({
         where: {
-          id: {
+          UserId: {
             // Filters events where end date is greater than the current timestamp
             $ne: req.params.userId
           },

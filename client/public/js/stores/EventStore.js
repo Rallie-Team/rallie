@@ -56,14 +56,14 @@ AppDispatcher.register(function(payload) {
     case AppConstants.SHEPHERD_EVENT_GET:
       // Set current events collection to the fetched results
       _shepherdEvents = payload.events;
-      // console.log('inside of eventstore Shepherd get', _shepherdEvents);
+      console.log('inside of eventstore Shepherd get', _shepherdEvents);
       EventStore.emitEvent('shepherd_events_get');
       break;
 
     case AppConstants.NOT_SHEPHERD_EVENT_GET:
       // Set current events collection to the fetched results
       _notShepherdEvents = payload.events;
-      // console.log('inside of eventstore not Shepherd get', _notShepherdEvents);
+      console.log('inside of eventstore not Shepherd get', _notShepherdEvents);
       EventStore.emitEvent('not_shepherd_events_get');
       break;
 
