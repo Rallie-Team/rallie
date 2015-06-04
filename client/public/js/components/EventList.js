@@ -38,7 +38,7 @@ var EventList = React.createClass({
     // Fetching via AJAX needs to happen after mounting due to async
     EventStore.addEventListener('shepherd_events_get', this._onShepherdEvents);
 
-   EventStore.addEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
+    EventStore.addEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
 
     // Add event listener to get the current mode when the mode changes
     // For the EventList component, the create event button should only be
@@ -54,22 +54,23 @@ var EventList = React.createClass({
       // Get all events (for sheep)
 
       // Start polling every 2 seconds for new events
+
       EventActions.getAllEventsNotByShepherd(cookie.load('id'));
       EventActions.getAllEventsByShepherd(cookie.load('id'));
 
-      intervalId = setInterval(function(){
-        EventActions.getAllEventsNotByShepherd(cookie.load('id'));
-        EventActions.getAllEventsByShepherd(cookie.load('id'));
-      }, 2000);
+      // intervalId = setInterval(function(){
+      //   EventActions.getAllEventsNotByShepherd(cookie.load('id'));
+      //   EventActions.getAllEventsByShepherd(cookie.load('id'));
+      // }, 2000);
 
     }
   },
 
   componentWillUnmount: function() {
     // Remove event listeners when the DOM element is removed
-    EventStore.addEventListener('shepherd_events_get', this._onShepherdEvents);
+    EventStore.removeEventListener('shepherd_events_get', this._onShepherdEvents);
 
-   EventStore.addEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
+    EventStore.removeEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
     AppStore.removeEventListener('toggleMode', this._changeStateMode);
     // Remove setInterval for polling
     clearInterval(intervalId);
