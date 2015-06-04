@@ -10,7 +10,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
 
 var AttendeeActions = {
   /**
-   * Get all observations for an event
+   * Get all attendees for an event
    * @param {number} eventId The primary key of the event in the database
    */
   getAllSheepsByEvent: function(eventId) {
@@ -23,7 +23,11 @@ var AttendeeActions = {
       });
     });
   },
-
+  /**
+   * getAllShepherdsByEvent gets all shephards for a specific event
+   * the response is an array of objects containing information about
+   * the shepherds
+   */
   getAllShepherdsByEvent: function(eventId) {
     // console.log(eventId, 'inside of AttendeeActions');
     AttendeeAPI.getAllShepherdsByEvent(eventId).then(function(shepherds) {

@@ -99,6 +99,7 @@ var App = React.createClass({
       return (
         <div className="col-lg-12">
           <header>
+
             <nav className="navbar navbar-default">
               <div className="container-fluid">
                 {/* Brand and toggle get grouped for better mobile display */}
@@ -108,6 +109,7 @@ var App = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
+
                   </button>
                   <a className="navbar-brand" href={this.makeHref('events')}>Joseki</a>
                 </div>
@@ -120,7 +122,7 @@ var App = React.createClass({
                       It will be disabled when viewing the event-create and event-detail components
                     */}
                     <li>
-                      <button className="btn btn-info navbar-btn" onClick={this._changeMode} 
+                      <button className="btn btn-info navbar-btn" onClick={this._changeMode}
                         disabled={this.isActive('event-create') || this.isActive('event-detail') ? 'disabled' : false}>
                         {this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}
                       </button>
