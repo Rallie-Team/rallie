@@ -13,7 +13,7 @@ module.exports = function(app){
       } else {
         var token = jwt.encode(user, 'secret');
         res.cookie('username', user.username);
-        res.cookie('id', user.table_id);
+        res.cookie('id', user.id);
         res.redirect('/events');
 
         // res.redirect(

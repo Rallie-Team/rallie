@@ -17,6 +17,7 @@ var EventDetail = React.createClass({
     prevEvent = EventDetailStore.getCurrentEvent();
     return {
       mode: AppStore.getCurrentMode(),
+      isAttendee: EventDetailStore.isAttendee(),
       event: EventDetailStore.getCurrentEvent()
     };
   },
@@ -25,6 +26,7 @@ var EventDetail = React.createClass({
   componentDidMount: function() {
     EventDetailStore.addEventListener('edit', this._onEdit);
     EventDetailStore.addEventListener('updateCurrentEvent', this._onEventSet);
+    EventDetailStore.addEventListener('attend', this._onAttend);
     if (this.props.params.eventId) {
       EventDetailActions.get(this.props.params.eventId);
       intervalId = setInterval(function(){EventDetailActions.get(this.props.params.eventId)}.bind(this), 2000);
@@ -35,14 +37,27 @@ var EventDetail = React.createClass({
   componentWillUnmount: function() {
     EventDetailStore.removeEventListener('edit', this._onEdit);
     EventDetailStore.removeEventListener('updateCurrentEvent', this._onEventSet);
+    EventDetailStore.removeEventListener('attend', this._onAttend);
     clearInterval(intervalId);
   },
 
   render: function() {
     return (
       <div className="event-detail">
-        <div className="event-detail-name">Event: {this.state.event.name}
-          {this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editName}>Edit Name</button> : null}
+        <div className="event-detail-attendee">
+          <h3>
+            Currently {this.state.isAttendee ? 'Attending' : 'Observing'} Event
+              { (this.state.mode === 'sheep') ? 
+              <button className="btn btn-default" onClick={this._attend}>
+                {this.state.isAttendee ? 'Leave' : 'Attend'} Event
+              </button> : null }
+          </h3>
+        </div>
+
+        <div className="event-detail-name">
+          <h2>{this.state.event.name}
+            {this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editName}>Edit Name</button> : null}
+          </h2>
         </div>
         {/* Use Moment.js to format start and end times to the following format: Mon, Jun 1, 2015 4:30 PM */}
         <div className="event-detail-start">Start: {moment(this.state.event.start).format('llll')}</div>
@@ -56,14 +71,11 @@ var EventDetail = React.createClass({
         <div className="event-detail-action">Action: {this.state.event.action}
           { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editAction}>Edit Action</button> : null }
         </div>
-        { /* TODO: Set up API end point to track whether a user is in an event */ }
-        { /* Display Join or Leave event based on whether the sheep is currently in the event */ }
-        { (this.state.mode === 'sheep' && true) ? <button className="btn btn-default" onClick={this._toggleJoin}>Leave Event</button> : null }
-        { (this.state.mode === 'sheep' && false) ? <button className="btn btn-default" onClick={this._toggleJoin}>Join Event</button> : null }
+        
         <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
 
         { /* Add the observation create if and only if sheep is attending event */ }
-        { (this.state.mode === 'sheep' && true) ? <ObservationCreate eventId={this.state.event.id}/> : null }
+        { (this.state.mode === 'sheep' && this.state.isAttendee) ? <ObservationCreate eventId={this.state.event.id}/> : null }
         <ObservationList eventId={this.state.event.id || this.props.params.eventId}/>
       </div>
     );
@@ -101,6 +113,17 @@ var EventDetail = React.createClass({
     EventDetailActions.edit(obj);
   },
 
+  // Toggles whether a sheep is participating or not in an event
+  _attend: function () {
+    this.state.isAttendee = !this.state.isAttendee;
+    EventDetailActions.attend(this.state.event, AppStore.getCurrentUser(), this.state.isAttendee);
+  },
+
+  _onAttend: function() {
+    console.log(EventDetailStore.isAttendee());
+    this.setState({isAttendee: EventDetailStore.isAttendee()});
+  },
+
   // Updates the current event properties on the page
   _onEdit: function(){
     this.setState({event: EventDetailStore.getCurrentEvent()});
@@ -111,13 +134,6 @@ var EventDetail = React.createClass({
     if (new Date() > new Date(this.state.event.end)) {
       this.transitionTo('events');
     }
-  },
-
-  // Toggles whether a sheep is participating or not in an event
-  // TODO: Add functionality to this function
-  _toggleJoin: function () {
-    console.log('Joining the event in EventDetail.js');
-    // EventDetailActions.join(this.)
   },
 
   // Set the event end time to now so that it is no longer considered an active event

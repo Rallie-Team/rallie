@@ -57,7 +57,6 @@ router.get('/user/:userId', function(req, res) {
 router.post('/create', function(req, res) {
   var currentDate = new Date();
   if (req.body.userId) {
-    // Make sure user exists
     db.User.findOne({
       where: {
         id: req.body.userId
@@ -120,10 +119,11 @@ router.put('/:eventId', function (req, res) {
 // Adds a sheep and event to the Sheep Event table
 router.post('/add-participant/:eventId', function (req, res) {
   var sheep; 
-  if (req.body.userId) {
+  console.log(req.body);
+  if (req.body.id) {
     db.User.findOne({
       where: {
-        id: req.body.userId
+        id: req.body.id
       }
     }).then(function (user) {
       sheep = user;
@@ -148,10 +148,11 @@ router.post('/add-participant/:eventId', function (req, res) {
 // Removes a sheep and event from the Sheep Event table
 router.delete('/remove-participant/:eventId', function (req, res) {
   var sheep;
-  if (req.body.userId) {
+  console.log(req.body);
+  if (req.body.id) {
     db.User.findOne({
       where: {
-        id: req.body.userId
+        id: req.body.id
       }
     }).then(function (user) {
       sheep = user;

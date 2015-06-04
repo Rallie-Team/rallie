@@ -38,7 +38,7 @@ module.exports = function(passport){
 
           var currentUser = {
             username: user.username,
-            table_id: user.id
+            id: user.id
           };
            // null value represents that there were no errors
           return done(null, currentUser);
