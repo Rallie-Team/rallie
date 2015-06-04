@@ -22,7 +22,7 @@ var EventAPI = {
   // },
 
   /**
-   * Get all events for a shepherd
+   * Get all events for a sheep
    */
   getAllEventsNotByShepherd: function() {
     // Return a promise so the requester can chain the response
