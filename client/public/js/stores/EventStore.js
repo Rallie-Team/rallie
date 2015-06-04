@@ -3,12 +3,17 @@ var EventEmitter = require('events').EventEmitter,
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants');
 
-var _events = [];
+var _shepherdEvents = [];
+var _notShepherdEvents = [];
 var _currentEvent = {name: '', location: ''};
 
 var EventStore = assign({}, EventEmitter.prototype, {
-  getAll: function() {
-    return _events;
+  getAllEventsByShepherd: function() {
+    return _shepherdEvents;
+  },
+
+  getAllEventsNotByShepherd: function(){
+    return _notShepherdEvents;
   },
 
   getCurrentEvent: function() {
@@ -48,15 +53,23 @@ var EventStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   switch(payload.actionType) {
     // When events are fetched
-    case AppConstants.EVENT_GET:
+    case AppConstants.SHEPHERD_EVENT_GET:
       // Set current events collection to the fetched results
-      _events = payload.events;
-      EventStore.emitEvent('get');
+      _shepherdEvents = payload.events;
+      // console.log('inside of eventstore Shepherd get', _shepherdEvents);
+      EventStore.emitEvent('shepherd_events_get');
+      break;
+
+    case AppConstants.NOT_SHEPHERD_EVENT_GET:
+      // Set current events collection to the fetched results
+      _notShepherdEvents = payload.events;
+      // console.log('inside of eventstore not Shepherd get', _notShepherdEvents);
+      EventStore.emitEvent('not_shepherd_events_get');
       break;
 
     case AppConstants.EVENT_CREATE:
       // Add new event to the current collection of events
-      _events.push(payload.event);
+      _shepherdEvents.push(payload.event);
       EventStore.emitEvent('create');
       // TODO: DO SOMETHING ELSE IF THERE WAS AN ERROR DURING EVENT CREATION
       break;

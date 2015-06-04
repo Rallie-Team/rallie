@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
     where: {
       end: {
         // Filters events where end date is greater than the current timestamp
-        $gt: new Date() 
+        $gt: new Date()
       }
     }
   }).then(function(results){
@@ -27,7 +27,7 @@ router.get('/:eventId', function (req, res) {
 });
 
 // Return a list of all events for a user where the user is a shepherd
-router.get('/user/:userId', function(req, res) {
+router.get('/sheep/:userId', function(req, res) {
   // First find user by userId
   db.User.findOne({
     where: {
@@ -52,6 +52,40 @@ router.get('/user/:userId', function(req, res) {
     }
   });
 });
+
+
+// Reurn a list of all events for a user where the user is a shepherd
+router.get('/shepherd/:userId', function(req, res) {
+  // First find user by userId
+  db.User.findOne({
+    where: {
+      id: req.params.userId
+    }
+  }).then(function (user) {
+    if (user) {
+      // For the user, find all events where the user is a shepherd
+      user.getShepherdEvents({
+        where: {
+          id: {
+            // Filters events where end date is greater than the current timestamp
+            $ne: req.params.userId
+          },
+          end: {
+            // Filters events where end date is greater than the current timestamp
+            $gt: new Date()
+          }
+        }
+      }).then(function(results) {
+        res.json(results);
+      });
+    } else {
+      // If user not found, send back null
+      res.json(user);
+    }
+  });
+});
+
+
 
 // Create a new event and return event
 router.post('/create', function(req, res) {
@@ -118,9 +152,9 @@ router.put('/:eventId', function (req, res) {
 
 // Adds a sheep and event to the Sheep Event table
 router.post('/add-participant/:eventId', function (req, res) {
-  var sheep; 
-  console.log(req.body);
-  if (req.body.id) {
+
+  var sheep;
+  if (req.body.userId) {
     db.User.findOne({
       where: {
         id: req.body.id
