@@ -69,6 +69,10 @@ router.get('/shepherd/:userId', function(req, res) {
           id: {
             // Filters events where end date is greater than the current timestamp
             $ne: req.params.userId
+          },
+          end: {
+            // Filters events where end date is greater than the current timestamp
+            $gt: new Date()
           }
         }
       }).then(function(results) {
