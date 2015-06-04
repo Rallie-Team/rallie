@@ -4,6 +4,8 @@ var React = require('react'),
     ObservationStore = require('../stores/ObservationStore'),
     ObservationActions = require('../actions/ObservationActions');
 
+var intervalId;
+
 var ObservationList = React.createClass({
 //mixins allows users to reuse code from different parts of
 //the app even when their use cases are very different
@@ -29,6 +31,9 @@ var ObservationList = React.createClass({
     // Fetching via AJAX needs to happen after mounting due to async
     if (this.isMounted()) {
       ObservationActions.getAllByEvent(this.props.eventId);
+      intervalId = setInterval(function(){
+        ObservationActions.getAllByEvent(this.props.eventId);
+      }.bind(this), 2000)
     }
   },
 
@@ -36,6 +41,7 @@ var ObservationList = React.createClass({
     // Remove event listeners when the DOM element is removed
     ObservationStore.removeEventListener('get', this._onGet);
     ObservationStore.removeEventListener('create', this._onCreate);
+    clearInterval(intervalId);
   },
 
   render: function() {
