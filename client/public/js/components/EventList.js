@@ -58,7 +58,7 @@ var EventList = React.createClass({
       EventActions.getAllEventsByShepherd(cookie.load('id'));
 
       intervalId = setInterval(function(){
-        EventActions.getAllEventsNotByShepherd(cookie.load('id');
+        EventActions.getAllEventsNotByShepherd(cookie.load('id'));
         EventActions.getAllEventsByShepherd(cookie.load('id'));
       }, 2000);
 
@@ -67,7 +67,9 @@ var EventList = React.createClass({
 
   componentWillUnmount: function() {
     // Remove event listeners when the DOM element is removed
-    EventStore.removeEventListener('get', this._onGet);
+    EventStore.addEventListener('shepherd_events_get', this._onShepherdEvents);
+
+   EventStore.addEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
     AppStore.removeEventListener('toggleMode', this._changeStateMode);
     // Remove setInterval for polling
     clearInterval(intervalId);
