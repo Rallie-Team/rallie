@@ -69,7 +69,7 @@ AppDispatcher.register(function(payload) {
 
     case AppConstants.EVENT_CREATE:
       // Add new event to the current collection of events
-      _events.push(payload.event);
+      _shepherdEvents.push(payload.event);
       EventStore.emitEvent('create');
       // TODO: DO SOMETHING ELSE IF THERE WAS AN ERROR DURING EVENT CREATION
       break;
