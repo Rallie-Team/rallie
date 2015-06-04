@@ -27,7 +27,7 @@ var EventDetail = React.createClass({
     EventDetailStore.addEventListener('updateCurrentEvent', this._onEventSet);
     if (this.props.params.eventId) {
       EventDetailActions.get(this.props.params.eventId);
-      intervalId = setInterval(function(){EventDetailActions.edit(this.state.event)}.bind(this), 2000);
+      intervalId = setInterval(function(){EventDetailActions.get(this.props.params.eventId)}.bind(this), 2000);
     }
   },
 
@@ -70,6 +70,13 @@ var EventDetail = React.createClass({
   },
 
   _onEventSet: function() {
+    var storeCurrentEvent = EventDetailStore.getCurrentEvent();
+    if (prevEvent.action !== storeCurrentEvent.action){
+      prevEvent = storeCurrentEvent;
+      if (this.state.mode === 'sheep'){
+        alert(storeCurrentEvent.action);
+      }
+    }
     this.setState({event: EventDetailStore.getCurrentEvent()});
   },
 
@@ -96,13 +103,6 @@ var EventDetail = React.createClass({
 
   // Updates the current event properties on the page
   _onEdit: function(){
-    var storeCurrentEvent = EventDetailStore.getCurrentEvent();
-    if (prevEvent.action !== storeCurrentEvent.action){
-      prevEvent = storeCurrentEvent;
-      if (this.state.mode === 'sheep'){
-        alert(storeCurrentEvent.action);
-      }
-    }
     this.setState({event: storeCurrentEvent});
 
     // If the event's end time is updated and is earlier than now,
