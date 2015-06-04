@@ -77,7 +77,7 @@ var EventDetail = React.createClass({
         alert(storeCurrentEvent.action);
       }
     }
-    this.setState({event: EventDetailStore.getCurrentEvent()});
+    this.setState({event: storeCurrentEvent});
   },
 
   // Created a prompt to change the event name
@@ -103,7 +103,7 @@ var EventDetail = React.createClass({
 
   // Updates the current event properties on the page
   _onEdit: function(){
-    this.setState({event: storeCurrentEvent});
+    this.setState({event: EventDetailStore.getCurrentEvent()});
 
     // If the event's end time is updated and is earlier than now,
     // redirect to the events list.
