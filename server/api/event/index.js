@@ -12,17 +12,6 @@ router.get('/', function (req, res) {
   });
 });
 
-// // Return one specific event by eventId
-// router.get('/:eventId', function (req, res) {
-//   db.Event.findOne({
-//     where: {
-//       id: req.params.eventId
-//     }
-//   }).then(function(event) {
-//     res.json(event);
-//   });
-// });
-
 // Return a list of all events for a user where the user is a shepherd
 router.get('/shepherd/:userId', function(req, res) {
   // First find user by userId
@@ -51,10 +40,8 @@ router.get('/shepherd/:userId', function(req, res) {
 });
 
 
-// Reurn a list of all events for a user where the user is a shepherd
+// Reurn a list of all events that have not ended yet, filtering is done in EventStore
 router.get('/sheep/:userId', function(req, res) {
-  // First find user by userId
-
   db.Event.findAll({
     where: {
       end: {
