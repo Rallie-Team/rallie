@@ -1,8 +1,8 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
-    EventStore = require('../stores/EventStore'),
-    EventActions = require('../actions/EventActions'),
-    AppStore = require('../stores/AppStore');
+    EventStore = require('../../stores/EventStore'),
+    EventActions = require('../../actions/EventActions'),
+    AppStore = require('../../stores/AppStore');
 
 var EventCreate = React.createClass({
   mixins: [Navigation],

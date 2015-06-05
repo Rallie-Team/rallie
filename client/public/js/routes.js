@@ -3,9 +3,9 @@ var React = require('react'),
     Route = Router.Route,
     DefaultRoute = Router.DefaultRoute,
     App = require('./components/App'),
-    EventList = require('./components/EventList'),
-    EventCreate = require('./components/EventCreate'),
-    EventDetail = require('./components/EventDetail');
+    EventList = require('./components/EventList/EventList'),
+    EventCreate = require('./components/EventDetail/EventCreate'),
+    EventDetail = require('./components/EventDetail/EventDetail');
 
 //routes show that App is the parent of EventList and EventCreate
 //App will always be rendered and will determine which/if EventList

@@ -1,9 +1,9 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
-    AppStore = require('../stores/AppStore'),
+    AppStore = require('../../stores/AppStore'),
     EventListItem = require('./EventListItem'),
-    EventStore = require('../stores/EventStore'),
-    EventActions = require('../actions/EventActions'),
+    EventStore = require('../../stores/EventStore'),
+    EventActions = require('../../actions/EventActions'),
     cookie = require('react-cookie');
 
 var intervalId;
