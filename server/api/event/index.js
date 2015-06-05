@@ -6,7 +6,6 @@ router.get('/', function (req, res) {
   db.Event.findAll().then(function(results) {
     res.json(results);    
   }, function() {
-    // Unexpected error from finding events
     res.sendStatus(500);
   });    
 });
@@ -28,6 +27,46 @@ router.get('/shepherd/:userId', function(req, res) {
           where: {
             end: {
               // Filters events where end date is greater than the current timestamp
+              $gt: new Date()
+            }
+          }
+        }).then(function(results) {
+          // Return all events where the user is a shepherd
+          res.json(results);
+        }, function() {
+          // Unexpected error from retrieving a shepherd's events
+          res.sendStatus(500);
+        });
+      } else {
+        // User does not exist
+        res.status(400).send('User does not exist');
+      }
+    }, function() {
+      // Unexpected error from finding a user
+      res.sendStatus(500);
+    });
+  } else {
+    // userId was not supplied or is not a number
+    res.status(400).send('Invalid userId');
+  }
+});
+
+// Return a list of all events for a user where the user is a shepherd
+router.get('/sheep/:userId', function(req, res) {
+  // Check if userId was supplied and is a number
+  if (!isNaN(req.params.userId)) {
+    // userId was supplied and is a number
+    // First find user by userId
+    db.User.findOne({
+      where: {
+        id: +req.params.userId
+      }
+    }).then(function (user) {
+      if (user) {
+        // User exists, find all events where the user is a shepherd
+        user.getSheepEvents({
+          where: {
+            end: {
               $gt: new Date()
             }
           }

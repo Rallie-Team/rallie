@@ -8,13 +8,14 @@ var React = require('react'),
     AttendeesList = require('../AttendeesList/AttendeesList');
 
 var intervalId;
-var prevEvent;
+var prevEvent, prevIsAttendee;
 
 var EventDetail = React.createClass({
   mixins: [Navigation],
 
   getInitialState: function() {
     prevEvent = EventDetailStore.getCurrentEvent();
+    prevIsAttendee = EventDetailStore.isAttendee();
     return {
       mode: AppStore.getCurrentMode(),
       isAttendee: EventDetailStore.isAttendee(),
@@ -83,13 +84,14 @@ var EventDetail = React.createClass({
 
   _onEventSet: function() {
     var storeCurrentEvent = EventDetailStore.getCurrentEvent();
+    var storeCurrentIsAttendee = EventDetailStore.isAttendee();
     if (prevEvent.action !== storeCurrentEvent.action){
       prevEvent = storeCurrentEvent;
       if (this.state.mode === 'sheep'){
         alert(storeCurrentEvent.action);
       }
-    }
-    this.setState({event: storeCurrentEvent});
+    } 
+    this.setState({isAttendee: storeCurrentIsAttendee, event: storeCurrentEvent});
   },
 
   // Created a prompt to change the event name

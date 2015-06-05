@@ -6,10 +6,10 @@ var EventEmitter = require('events').EventEmitter,
     cookie = require('react-cookie');
 
 var _currentUser = {id: undefined, username: undefined};
+// Utilize localStorage to store the state of the mode. The default mode is sheep
+var _currentMode = window.localStorage ? 
+  window.localStorage.getItem('joseki-mode') || 'sheep' : 'sheep';
 
-// Utilize localStorage to store mode so that it persists after the browser is closed or refreshed
-// The default mode is sheep
-var _currentMode = window.localStorage ? window.localStorage.getItem('joseki-mode') || 'sheep' : 'sheep'; 
 
 var AppStore = assign({}, EventEmitter.prototype, {
 

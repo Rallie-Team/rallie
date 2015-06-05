@@ -13,7 +13,6 @@ var EventActions = {
    * Get all events
    */
   getAllEventsByShepherd: function(shepherdId) {
-    // console.log("inside of getAllEventsByShepherd EVENT ACTION");
     EventAPI.getAllEventsByShepherd(shepherdId).then(function(events) {
       AppDispatcher.dispatch({
         actionType: AppConstants.SHEPHERD_EVENT_GET,
@@ -22,8 +21,16 @@ var EventActions = {
     });
   },
 
+  getAllEventsBySheep: function(sheepId) {
+    EventAPI.getAllEventsBySheep(sheepId).then(function(events) {
+      AppDispatcher.dispatch({
+        actionType: AppConstants.SHEEP_EVENT_GET,
+        events: events
+      });
+    });
+  },
+
   getAllEventsNotByShepherd:  function() {
-    // console.log("inside of getAllEventsByNotShepherd EVENT ACTION");
     EventAPI.getAllEventsNotByShepherd().then(function(events) {
       AppDispatcher.dispatch({
         actionType: AppConstants.NOT_SHEPHERD_EVENT_GET,

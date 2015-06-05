@@ -38,23 +38,41 @@ var EventDetailActions = {
    * Attend the event as a sheep
    */
   attend: function (event, user, attending) {
-    if (attending) {
-      EventAPI.addParticipant(event, user).then(function (user) {
+    EventAPI.getAllEventsBySheep(user.id).then(function (events) {
+      var currentAttendance = false;
+      for (var i = 0; i < events.length; i++) {
+        if (events[i]['id'] === event.id) {
+          currentAttendance = true;
+        }
+      }
+      if (currentAttendance === attending) {
+        // Get initial state of attendance
         AppDispatcher.dispatch({
           actionType: AppConstants.EVENT_SHEEP_ATTEND,
           user: user,
-          attendee: attending
-        });
-      });
-    } else {
-      EventAPI.removeParticipant(event, user).then(function (user) {
-        AppDispatcher.dispatch({
-          actionType: AppConstants.EVENT_SHEEP_ATTEND,
-          user: user,
-          attendee: attending
-        });
-      });
-    }
+          attendee: currentAttendance
+        });        
+      } else {
+        // Change state of attendance
+        if (attending) {
+          EventAPI.addParticipant(event, user).then(function (user) {
+            AppDispatcher.dispatch({
+              actionType: AppConstants.EVENT_SHEEP_ATTEND,
+              user: user,
+              attendee: attending
+            });
+          });
+        } else {
+          EventAPI.removeParticipant(event, user).then(function (user) {
+            AppDispatcher.dispatch({
+              actionType: AppConstants.EVENT_SHEEP_ATTEND,
+              user: user,
+              attendee: attending
+            });
+          });
+        }
+      }
+    });
   }
 };
 

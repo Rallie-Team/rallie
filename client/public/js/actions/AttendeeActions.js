@@ -14,9 +14,7 @@ var AttendeeActions = {
    * @param {number} eventId The primary key of the event in the database
    */
   getAllSheepsByEvent: function(eventId) {
-    // console.log(eventId, 'inside of AttendeeActions');
     AttendeeAPI.getAllSheepsByEvent(eventId).then(function(sheeps) {
-      // console.log(sheeps, 'sheeps inside of AttendeeActions');
       AppDispatcher.dispatch({
         actionType: AppConstants.SHEEPS_GET,
         sheeps: sheeps
@@ -29,9 +27,7 @@ var AttendeeActions = {
    * the shepherds
    */
   getAllShepherdsByEvent: function(eventId) {
-    // console.log(eventId, 'inside of AttendeeActions');
     AttendeeAPI.getAllShepherdsByEvent(eventId).then(function(shepherds) {
-      // console.log(shepherds, 'shepherds inside of AttendeeActions');
       AppDispatcher.dispatch({
         actionType: AppConstants.SHEPHERDS_GET,
         shepherds: shepherds

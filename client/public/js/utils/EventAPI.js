@@ -3,39 +3,33 @@
  */
 
 var EventAPI = {
+
   /**
    * Get all, unfiltered events
    */
   getAllEvents: function() {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event',
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // On success, return array of events
       return data;
     }, function() {
-      // On error, return empty array
       return [];
     });
   },
 
   /**
-   * Get all events for a sheep
+   * Get all events for all non-shepherds
    */
   getAllEventsNotByShepherd: function() {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/sheep/',
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // console.log('sheep events returned', data);
-      // Return events on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
@@ -45,16 +39,29 @@ var EventAPI = {
    * @param {number} shepherdId The primary key of the user in the database
    */
   getAllEventsByShepherd: function(shepherdId) {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/shepherd/' + shepherdId,
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // Return events on success
       return data;
     }, function() {
-      // Return empty array on error
+      return [];
+    });
+  },
+
+  /**
+   * Get all events for a sheep
+   * @param {number} sheepId The primary key of the user in the database
+   */
+  getAllEventsBySheep: function(sheepId) {
+    return $.ajax({
+      url: '/api/event/sheep/' + sheepId,
+      method: 'GET',
+      dataType: 'json'
+    }).then(function(data) {
+      return data;
+    }, function() {
       return [];
     });
   },
@@ -69,10 +76,8 @@ var EventAPI = {
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // Return event on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
@@ -82,17 +87,14 @@ var EventAPI = {
    * @param {object} data An object containing the shepherd ID and all the event attributes
    */
   addEvent: function(data) {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/create',
       method: 'POST',
       dataType: 'json',
       data: data
     }).then(function(data) {
-      // Return event on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
@@ -102,17 +104,14 @@ var EventAPI = {
    * @param {object} event An object containing all the event attributes
    */
   editEvent: function(event) {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/' + event.id,
       method: 'PUT',
       dataType: 'json',
       data: event
     }).then(function(data) {
-      // Return updated event on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },

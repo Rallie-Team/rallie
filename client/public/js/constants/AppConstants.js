@@ -21,5 +21,6 @@ module.exports = keyMirror({
   SHEPHERDS_GET: null,
   EVENT_SHEEP_ATTEND: null,
   SHEPHERD_EVENT_GET: null,
+  SHEEP_EVENT_GET: null,
   NOT_SHEPHERD_EVENT_GET: null
 });
