@@ -79,6 +79,17 @@ router.post('/create', function(req, res) {
   }
 });
 
+// Return one specific event by eventId    
+router.get('/:eventId', function (req, res) {    
+  db.Event.findOne({   
+    where: {   
+      id: req.params.eventId   
+    }    
+  }).then(function(event) {    
+    res.json(event);   
+  });    
+});
+
 // Edit details for an event
 router.put('/:eventId', function (req, res) {
   // Find the event by ID
