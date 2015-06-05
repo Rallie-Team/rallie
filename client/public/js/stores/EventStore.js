@@ -3,8 +3,8 @@ var EventEmitter = require('events').EventEmitter,
     AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants');
 
-var _shepherdEvents = [];
-var _notShepherdEvents = [];
+var _shepherdEvents = [];     // stores an array of events
+var _notShepherdEvents = [];  // stores an array of events
 var _shepherdEventsIds = [];
 var _currentEvent = {name: '', location: ''};
 

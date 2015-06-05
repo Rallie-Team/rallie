@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var db = require('../../db');
 
-// Return a collection of observations selected corresponding to an eventId
+// Return an array of shepherds. These are the user objects
 router.get('/shepherd/:eventId', function(req, res) {
   db.Event.findOne({where: {id: req.params.eventId}})
   .then(function(event){
@@ -12,6 +12,7 @@ router.get('/shepherd/:eventId', function(req, res) {
   });
 });
 
+// Return an array of sheep. These are the user objects
 router.get('/sheep/:eventId', function(req, res) {
   db.Event.findOne({where: {id: req.params.eventId}})
   .then(function(event){
@@ -21,6 +22,5 @@ router.get('/sheep/:eventId', function(req, res) {
     res.json(sheeps);
   });
 });
-
 
 module.exports = router;
