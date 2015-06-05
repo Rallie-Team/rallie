@@ -6,55 +6,45 @@ var EventAPI = {
   /**
    * Get all events
    */
-  // getAllEvents: function() {
-  //   // Return a promise so the requester can chain the response
-  //   return $.ajax({
-  //     url: '/api/event',
-  //     method: 'GET',
-  //     dataType: 'json'
-  //   }).then(function(data) {
-  //     // On success, return event data
-  //     return data;
-  //   }, function() {
-  //     // On error, return empty array
-  //     return [];
-  //   });
-  // },
+  getAllEvents: function() {
+    return $.ajax({
+      url: '/api/event',
+      method: 'GET',
+      dataType: 'json'
+    }).then(function(data) {
+      return data;
+    }, function() {
+      return [];
+    });
+  },
 
   /**
-   * Get all events for a sheep
+   * Get all events where the date is end date is greater than the current date
    */
   getAllEventsNotByShepherd: function() {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/sheep/',
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // console.log('sheep events returned', data);
-      // Return events on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
+
   /**
    * Get all events for a shepherd
    * @param {number} shepherdId The primary key of the user in the database
    */
   getAllEventsByShepherd: function(shepherdId) {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/shepherd/' + shepherdId,
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // console.log('shepherd events returned', data);
-      // Return events on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
@@ -102,17 +92,14 @@ var EventAPI = {
    * @param {object} event An object containing all the event attributes
    */
   editEvent: function(event) {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/' + event.id,
       method: 'PUT',
       dataType: 'json',
       data: event
     }).then(function(data) {
-      // Return updated event on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },

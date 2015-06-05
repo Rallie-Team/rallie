@@ -4,8 +4,21 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants');
 
 var _currentEvent = {name: '', location: '', action: ''};
-var _attendee = false;  // TODO: Pull from Stephen's list
+var _isAttendee = false;
+var _currentUserId = 0;
 var _observations = [];
+
+/**
+ * Check if the sheep is an attendee
+ */
+var checkSheep = function(sheeps, currentSheepId) {
+  for (var i = 0; i < sheeps.length; i++) {
+    if (sheeps[i]['id'] === currentSheepId) {
+      return true;
+    }
+  }
+  return false;
+};
 
 var EventDetailStore = assign({}, EventEmitter.prototype, {
   getCurrentEvent: function() {
@@ -13,7 +26,7 @@ var EventDetailStore = assign({}, EventEmitter.prototype, {
   },
 
   isAttendee: function() {
-    return _attendee;
+    return _isAttendee;
   },
 
   getAllObservations: function() {
@@ -45,6 +58,7 @@ var EventDetailStore = assign({}, EventEmitter.prototype, {
   removeEventListener: function(eventName, callback) {
     this.removeListener(eventName, callback);
   }
+
 });
 
 // Register callback to handle all updates
@@ -66,9 +80,19 @@ AppDispatcher.register(function(payload) {
       break;
 
     case AppConstants.EVENT_SHEEP_ATTEND:
-      _attendee = payload.attendee;
+      _isAttendee = payload.attendee;
       EventDetailStore.emitEvent('attend');
       break;
+
+    case AppConstants.SHEEPS_GET:
+      _isAttendee = checkSheep(payload.sheeps, _currentUserId);
+      EventDetailStore.emitEvent('attend');
+      break;
+
+    case AppConstants.SET_CURRENT_USER:
+      _currentUserId = payload.user.id;
+      break;
+
 
     default:
       // no op

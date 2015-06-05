@@ -5,6 +5,8 @@ var EventEmitter = require('events').EventEmitter,
 
 var _sheeps = [];
 var _shepherds = [];
+var _currentUserId = 0;
+var _isAttendee = false;
 
 var AttendeeStore = assign({}, EventEmitter.prototype, {
   getAllSheep: function() {
@@ -13,18 +15,6 @@ var AttendeeStore = assign({}, EventEmitter.prototype, {
 
   getAllShepherd: function() {
     return _shepherds;
-  },
-
-  /**
-   * Check if the sheep is an attendee
-   */
-  checkSheep: function(attendeeName) {
-    for (var i = 0; i < _sheeps.length; i++) {
-      if (_sheeps[i] === attendeeName) {
-        return true;
-      }
-    }
-    return false;
   },
 
   /**
@@ -68,7 +58,6 @@ AppDispatcher.register(function(payload) {
     case AppConstants.SHEEPS_GET:
       // Set current sheep collection to the fetched results
       _sheeps = payload.sheeps;
-      // console.log(_sheeps, 'inside of attendee store!!')
       AttendeeStore.emitEvent('acquiredSheep');
       break;
 

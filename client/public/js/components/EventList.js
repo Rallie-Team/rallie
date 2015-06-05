@@ -60,7 +60,7 @@ var EventList = React.createClass({
       intervalId = setInterval(function(){
         EventActions.getAllEventsByShepherd(cookie.load('id'));
         EventActions.getAllEventsNotByShepherd();
-      }, 2000);
+      }, 200);
 
     }
   },
@@ -76,10 +76,7 @@ var EventList = React.createClass({
   },
 
   render: function() {
-    // console.log(this.state.notShepherdEvents, 'notShepherdEvents');
-    // console.log(this.state.shepherdEvents, 'shepherdEvents');
     // Sends each event to EventListItem where each event will be rendered
-
     if(this.state.mode === 'shepherd'){
       var events = this.state.shepherdEvents.map(function(event) {
         return <EventListItem key={event.id} event={event} mode={this.state.mode}/>
@@ -110,14 +107,12 @@ var EventList = React.createClass({
     this.setState({
       shepherdEvents: EventStore.getAllEventsByShepherd()
     })
-    // console.log(this.state.shepherdEvents);
   },
 
   _onNotShepherdEvents: function(){
     this.setState({
       notShepherdEvents: EventStore.getAllEventsNotByShepherd()
     })
-    // console.log(this.state.notShepherdEvents);
   },
 
   // _onGet: function() {

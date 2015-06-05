@@ -3,11 +3,7 @@ var db = require('../../db');
 
 // Return a list of all events
 router.get('/', function (req, res) {
-  db.Event.findAll({
-    where: {
-        // Filters events where end date is greater than the current timestamp
-      }
-  }).then(function(results){
+  db.Event.findAll().then(function(results){
      res.json(results);
   });
 });
