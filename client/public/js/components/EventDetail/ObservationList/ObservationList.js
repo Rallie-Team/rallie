@@ -1,8 +1,8 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
     ObservationListItem = require('./ObservationListItem'),
-    ObservationStore = require('../stores/ObservationStore'),
-    ObservationActions = require('../actions/ObservationActions');
+    ObservationStore = require('../../../stores/ObservationStore'),
+    ObservationActions = require('../../../actions/ObservationActions');
 
 var intervalId;
 

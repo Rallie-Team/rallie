@@ -1,7 +1,7 @@
 var React = require('react'),
-    AppStore = require('../stores/AppStore'),
-    ObservationStore = require('../stores/ObservationStore'),
-    ObservationActions = require('../actions/ObservationActions');
+    AppStore = require('../../../stores/AppStore'),
+    ObservationStore = require('../../../stores/ObservationStore'),
+    ObservationActions = require('../../../actions/ObservationActions');
 
 var ObservationCreate = React.createClass({
   getInitialState: function() {

@@ -1,7 +1,7 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
-    AttendeeStore = require('../stores/AttendeeStore'),
-    AttendeeActions = require('../actions/AttendeeActions'),
+    AttendeeStore = require('../../../stores/AttendeeStore'),
+    AttendeeActions = require('../../../actions/AttendeeActions'),
     SheepListItem = require('./SheepListItem'),
     ShepherdListItem = require('./ShepherdListItem');
 
