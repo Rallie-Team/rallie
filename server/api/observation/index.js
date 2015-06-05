@@ -22,6 +22,7 @@ router.post('/create', function(req, res) {
  db.Observation.create({
    content: req.body.content || '',
    completed: req.body.completed || false,
+   rawImage: req.body.rawImage || undefined,
    UserId: req.body.userId,
    EventId: req.body.eventId
  }).then(function(observation){

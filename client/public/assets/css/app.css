@@ -16,3 +16,25 @@ body {
 .event-list-item-location {
   font-style: italic;
 }
+
+#upload-file-container{
+	padding: 0;
+}
+#upload-file-container button{
+   background: url(../images/pic.png) no-repeat;
+   background-size: 100%;
+   height: 30px;
+   width: 80px;
+   padding: 0;
+}
+
+#upload-file-container input {
+   filter: alpha(opacity=0);
+   opacity: 0;
+   width: 30px;
+   height: 30px;
+}
+
+#uploaded-picture {
+
+}

@@ -34,7 +34,8 @@ var init = function() {
 
   Observation = orm.define('Observation', {
     content: Sequelize.STRING,
-    completed: Sequelize.BOOLEAN
+    completed: Sequelize.BOOLEAN,
+    rawImage: Sequelize.TEXT
   });
 
   /**

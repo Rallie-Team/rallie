@@ -11,6 +11,7 @@ var ObservationListItem = React.createClass({
         <div className="event-list-item-name">{this.props.observation.User.username}</div>
         <div className="list-item-datetime">{this.props.observation.createdAt}</div>
         <div className="event-list-item-location">{this.props.observation.content}</div>
+        <img src={this.props.observation.rawImage}/>
       </div>
     );
   }
