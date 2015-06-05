@@ -1,11 +1,11 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
-    AppStore = require('../stores/AppStore'),
-    EventDetailStore = require('../stores/EventDetailStore'),
-    EventDetailActions = require('../actions/EventDetailActions'),
-    ObservationList = require('./ObservationList'),
-    ObservationCreate = require('./ObservationCreate'),
-    AttendeesList = require('./AttendeesList');
+    AppStore = require('../../stores/AppStore'),
+    EventDetailStore = require('../../stores/EventDetailStore'),
+    EventDetailActions = require('../../actions/EventDetailActions'),
+    ObservationList = require('../ObservationList/ObservationList'),
+    ObservationCreate = require('../ObservationList/ObservationCreate'),
+    AttendeesList = require('../AttendeesList/AttendeesList');
 
 var intervalId;
 var prevEvent;
