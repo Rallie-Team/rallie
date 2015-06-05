@@ -36,3 +36,6 @@ dist
 
 # Build files
 client/public/js/bundle.js
+
+# Local db files
+.DS_Store
