@@ -1,6 +1,6 @@
 var React = require('react'),
 	  Navigation = require('react-router').Navigation,
-	  EventActions = require('../actions/EventActions');
+	  EventActions = require('../../actions/EventActions');
 
 // EventListItem is referenced in EventList.js
 // This will render each event in the event list
