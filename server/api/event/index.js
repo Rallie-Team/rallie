@@ -1,15 +1,11 @@
 var router = require('express').Router();
 var db = require('../../db');
 
-// Return a list of all events
+// Return a list of all, unfiltered events
 router.get('/', function (req, res) {
-  db.Event.findAll({
-    where: {
-        // Filters events where end date is greater than the current timestamp
-      }
-  }).then(function(results){
-     res.json(results);
-  });
+  db.Event.findAll().then(function(results) {
+    res.json(results);    
+  });    
 });
 
 // Return a list of all events for a user where the user is a shepherd
@@ -39,7 +35,6 @@ router.get('/shepherd/:userId', function(req, res) {
   });
 });
 
-
 // Reurn a list of all events that have not ended yet, filtering is done in EventStore
 router.get('/sheep', function(req, res) {
   db.Event.findAll({
@@ -48,14 +43,11 @@ router.get('/sheep', function(req, res) {
         // Filters events where end date is greater than the current timestamp
         $gt: new Date()
       }
-        // Filters events where end date is greater than the current timestamp
-      }
+    }
   }).then(function(results){
      res.json(results);
   });
 });
-
-
 
 // Create a new event and return event
 router.post('/create', function(req, res) {
@@ -94,6 +86,16 @@ router.post('/create', function(req, res) {
   }
 });
 
+// Return one specific event by eventId    
+router.get('/:eventId', function (req, res) {    
+  db.Event.findOne({   
+    where: {   
+      id: req.params.eventId   
+    }    
+  }).then(function(event) {    
+    res.json(event);   
+  });    
+});
 
 // Edit details for an event
 router.put('/:eventId', function (req, res) {

@@ -4,22 +4,22 @@
 
 var EventAPI = {
   /**
-   * Get all events
+   * Get all, unfiltered events
    */
-  // getAllEvents: function() {
-  //   // Return a promise so the requester can chain the response
-  //   return $.ajax({
-  //     url: '/api/event',
-  //     method: 'GET',
-  //     dataType: 'json'
-  //   }).then(function(data) {
-  //     // On success, return event data
-  //     return data;
-  //   }, function() {
-  //     // On error, return empty array
-  //     return [];
-  //   });
-  // },
+  getAllEvents: function() {
+    // Return a promise so the requester can chain the response
+    return $.ajax({
+      url: '/api/event',
+      method: 'GET',
+      dataType: 'json'
+    }).then(function(data) {
+      // On success, return array of events
+      return data;
+    }, function() {
+      // On error, return empty array
+      return [];
+    });
+  },
 
   /**
    * Get all events for a sheep
@@ -39,6 +39,7 @@ var EventAPI = {
       return [];
     });
   },
+
   /**
    * Get all events for a shepherd
    * @param {number} shepherdId The primary key of the user in the database
@@ -50,7 +51,6 @@ var EventAPI = {
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // console.log('shepherd events returned', data);
       // Return events on success
       return data;
     }, function() {
