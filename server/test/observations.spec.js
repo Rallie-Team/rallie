@@ -113,7 +113,7 @@ describe('Observation API Endpoints', function() {
 
   describe('/api/observation/create', function() {
     it('Should create a new observation on POST', function(done) {
-      var observation = {content: 'Smelly cats!!!', userId: sheepId, eventId: eventId};
+      var observation = {content: 'Smelly cats!', userId: sheepId, eventId: eventId};
       request(app)
         .post(basePath + '/create')
         .set({'Content-Type': 'application/json', Accept: 'application/json'})
@@ -131,14 +131,14 @@ describe('Observation API Endpoints', function() {
           });
         })
         .expect(function(res) {
-          if (res.body.content !== 'Smelly cats')
+          if (res.body.content !== 'Smelly cats!')
             throw new Error('Expected observation ' + JSON.stringify(observation) + ', received ' + JSON.stringify(res.body));
         })
         .end(done);
     });
 
     it('Should not create a new observation on POST for an invalid eventId', function(done) {
-      var observation = {content: 'Smelly cats~', userId: sheepId, eventId: 0};
+      var observation = {content: 'Smelly cats', userId: sheepId, eventId: 0};
       request(app)
         .post(basePath + '/create')
         .set({'Content-Type': 'application/json', Accept: 'application/json'})
@@ -147,7 +147,7 @@ describe('Observation API Endpoints', function() {
     });
 
     it('Should not create a new observation on POST for an invalid userId', function(done) {
-      var observation = {content: 'Smelly cats!', userId: 0, eventId: eventId};
+      var observation = {content: 'Smelly cats', userId: 0, eventId: eventId};
       request(app)
         .post(basePath + '/create')
         .set({'Content-Type': 'application/json', Accept: 'application/json'})
@@ -156,7 +156,7 @@ describe('Observation API Endpoints', function() {
     });
 
     it('Should correctly handle POSTs with no userId', function(done) {
-      var observation = {content: 'Smelly cats@', eventId: eventId};
+      var observation = {content: 'Smelly cats', eventId: eventId};
       request(app)
         .post(basePath + '/create')
         .set({'Content-Type': 'application/json', Accept: 'application/json'})
@@ -165,7 +165,7 @@ describe('Observation API Endpoints', function() {
     });
 
     it('Should correctly handle POSTs with no eventId', function(done) {
-      var observation = {content: 'Smelly cats#', userId: sheepId};
+      var observation = {content: 'Smelly cats', userId: sheepId};
       request(app)
         .post(basePath + '/create')
         .set({'Content-Type': 'application/json', Accept: 'application/json'})
