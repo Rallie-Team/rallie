@@ -10,7 +10,8 @@ var ObservationCreate = React.createClass({
     return {
       userId: AppStore.getCurrentUser().id,
       username: AppStore.getCurrentUser().username,
-      content: ''
+      content: '',
+      image: undefined
     };
   },
 
@@ -30,10 +31,39 @@ var ObservationCreate = React.createClass({
       <div className="event-create">
         <form className="observationCreateForm" onSubmit={this._save}>
           <input className="inputBox" type="text" name="content" placeholder="Your Observation" value={this.state.content} onChange={this._onChange} />
+          <div></div>
+          <img id="uploaded-picture"src={this.state.image}/>
+          <div></div>
+          <div id="upload-file-container">
+            <button><input type="file" id="take-picture" accept="image/*" ref="camera" onChange={this.handleFiles}/></button>
+          </div>
           <input className="inputBox" type="submit" value="Submit" />
         </form>
       </div>
     );
+  },
+
+  handleFiles: function(e){
+    var files = e.target.files,
+        file;
+    if (files && files.length > 0) {
+        file = files[0];
+    }
+    var imgUrl = window.URL.createObjectURL(file);
+    this.convert(file, imgUrl);
+  },
+
+  convert: function (blob, url) {
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+      this.setState({
+        image: reader.result,
+        rawImage: reader.result
+      })
+    }.bind(this);
+
+    reader.readAsDataURL(blob);
   },
 
   // Add new observation to the database
@@ -43,7 +73,8 @@ var ObservationCreate = React.createClass({
     var newObservation = {
       userId: this.state.userId,
       eventId: this.props.eventId,
-      content: this.state.content
+      content: this.state.content,
+      rawImage: this.state.rawImage
     };
     ObservationActions.create(newObservation);
   },
@@ -61,7 +92,9 @@ var ObservationCreate = React.createClass({
   // Clears the input field on the observation form
   _onCreate: function() {
     this.setState({
-      content: ''
+      content: '',
+      image: undefined,
+      rawImage: undefined
     });
   }
 });
