@@ -5,6 +5,7 @@ var React = require('react'),
     SheepListItem = require('./SheepListItem'),
     ShepherdListItem = require('./ShepherdListItem');
 
+var intervalId;
 
 var AttendeesList = React.createClass({
   getInitialState: function() {
@@ -25,6 +26,10 @@ var AttendeesList = React.createClass({
     if (this.isMounted()) {
       AttendeeActions.getAllSheepsByEvent(this.props.eventId);
       AttendeeActions.getAllShepherdsByEvent(this.props.eventId);
+      intervalId = setInterval(function(){
+        AttendeeActions.getAllSheepsByEvent(this.props.eventId);
+        AttendeeActions.getAllShepherdsByEvent(this.props.eventId);
+      }.bind(this), 2000);
     }
   },
 
@@ -32,6 +37,7 @@ var AttendeesList = React.createClass({
     // Remove event listeners when the DOM element is removed
     AttendeeStore.removeEventListener('acquiredShepherds', this._acquiredShepherds);
     AttendeeStore.removeEventListener('acquiredSheep', this._acquiredSheeps);
+    clearInterval(intervalId);
   },
 
   render: function() {
@@ -61,7 +67,6 @@ var AttendeesList = React.createClass({
     this.setState({
       shepherds: AttendeeStore.getAllShepherd()
     })
-    // console.log(this.state.shepherds, "_acquiredShepherds")
   },
 
   _acquiredSheeps: function(){
