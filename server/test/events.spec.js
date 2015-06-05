@@ -58,6 +58,25 @@ after(function(done) {
 describe('Event API Endpoints', function() {
   var basePath = '/api/event';
 
+  describe('basePath', function() {
+    it('Should include the test event in the array of events', function(done) {
+      request(app)
+        .get(basePath)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(function(res) {
+          var events = res.body;
+          var testEvent = events.filter(function(event) {
+            return event.id === eventId;
+          });
+          if (!testEvent.length)
+            throw new Error('Expected eventId ' + eventId + ' within array, received ' + JSON.stringify(events));
+        })
+        .end(done);
+    });
+  });
+
   describe(basePath + '/:eventId', function() {
     it('Should return the correct event on GET for a valid eventId', function(done) {
       request(app)

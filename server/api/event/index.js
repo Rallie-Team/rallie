@@ -1,6 +1,13 @@
 var router = require('express').Router();
 var db = require('../../db');
 
+// Return a list of all, unfiltered events
+router.get('/', function (req, res) {
+  db.Event.findAll().then(function(results) {
+    res.json(results);    
+  });    
+});
+
 // Return a list of all events for a user where the user is a shepherd
 router.get('/shepherd/:userId', function(req, res) {
   // First find user by userId

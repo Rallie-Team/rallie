@@ -4,6 +4,24 @@
 
 var EventAPI = {
   /**
+   * Get all, unfiltered events
+   */
+  getAllEvents: function() {
+    // Return a promise so the requester can chain the response
+    return $.ajax({
+      url: '/api/event',
+      method: 'GET',
+      dataType: 'json'
+    }).then(function(data) {
+      // On success, return array of events
+      return data;
+    }, function() {
+      // On error, return empty array
+      return [];
+    });
+  },
+
+  /**
    * Get all events for a sheep
    */
   getAllEventsNotByShepherd: function() {
