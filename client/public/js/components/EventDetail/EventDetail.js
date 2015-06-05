@@ -47,7 +47,7 @@ var EventDetail = React.createClass({
         <div className="event-detail-attendee">
           <h3>
             Currently {this.state.isAttendee ? 'Attending' : 'Observing'} Event
-              { (this.state.mode === 'sheep') ? 
+              { (this.state.mode === 'sheep') ?
               <button className="btn btn-default" onClick={this._attend}>
                 {this.state.isAttendee ? 'Leave' : 'Attend'} Event
               </button> : null }
@@ -71,7 +71,7 @@ var EventDetail = React.createClass({
         <div className="event-detail-action">Action: {this.state.event.action}
           { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editAction}>Edit Action</button> : null }
         </div>
-        
+
         <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
 
         { /* Add the observation create if and only if sheep is attending event */ }
@@ -135,7 +135,7 @@ var EventDetail = React.createClass({
   },
 
   _onAttend: function() {
-    console.log(EventDetailStore.isAttendee());
+    // console.log(EventDetailStore.isAttendee());
     this.setState({isAttendee: EventDetailStore.isAttendee()});
   },
 
