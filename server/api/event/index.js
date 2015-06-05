@@ -5,34 +5,51 @@ var db = require('../../db');
 router.get('/', function (req, res) {
   db.Event.findAll().then(function(results) {
     res.json(results);    
+  }, function() {
+    // Unexpected error from finding events
+    res.sendStatus(500);
   });    
 });
 
 // Return a list of all events for a user where the user is a shepherd
 router.get('/shepherd/:userId', function(req, res) {
-  // First find user by userId
-  db.User.findOne({
-    where: {
-      id: req.params.userId
-    }
-  }).then(function (user) {
-    if (user) {
-      // For the user, find all events where the user is a shepherd
-      user.getShepherdEvents({
-        where: {
-          end: {
-            // Filters events where end date is greater than the current timestamp
-            $gt: new Date()
+  // Check if userId was supplied and is a number
+  if (!isNaN(req.params.userId)) {
+    // userId was supplied and is a number
+    // First find user by userId
+    db.User.findOne({
+      where: {
+        id: +req.params.userId
+      }
+    }).then(function (user) {
+      if (user) {
+        // User exists, find all events where the user is a shepherd
+        user.getShepherdEvents({
+          where: {
+            end: {
+              // Filters events where end date is greater than the current timestamp
+              $gt: new Date()
+            }
           }
-        }
-      }).then(function(results) {
-        res.json(results);
-      });
-    } else {
-      // If user not found, send back null
-      res.json(user);
-    }
-  });
+        }).then(function(results) {
+          // Return all events where the user is a shepherd
+          res.json(results);
+        }, function() {
+          // Unexpected error from retrieving a shepherd's events
+          res.sendStatus(500);
+        });
+      } else {
+        // User does not exist
+        res.status(400).send('User does not exist');
+      }
+    }, function() {
+      // Unexpected error from finding a user
+      res.sendStatus(500);
+    });
+  } else {
+    // userId was not supplied or is not a number
+    res.status(400).send('Invalid userId');
+  }
 });
 
 // Reurn a list of all events that have not ended yet, filtering is done in EventStore
@@ -46,16 +63,22 @@ router.get('/sheep', function(req, res) {
     }
   }).then(function(results){
      res.json(results);
+  }, function() {
+    // Unexpected error from finding events
+    res.sendStatus(500);
   });
 });
 
 // Create a new event and return event
 router.post('/create', function(req, res) {
-  var currentDate = new Date();
-  if (req.body.userId) {
+  // Check if userId was supplied and is a number
+  if (!isNaN(req.body.userId)) {
+    // userId was supplied and is a number
+    var currentDate = new Date();
+    // Check if user exists
     db.User.findOne({
       where: {
-        id: req.body.userId
+        id: +req.body.userId
       }
     }).then(function (user) {
       if (user) {
@@ -75,109 +98,185 @@ router.post('/create', function(req, res) {
           user.addShepherdEvent(event).then(function(shepherdEvent) {
             event.addShepherd(user).then(function(){
               res.json(event);
+            }, function() {
+              // Unexpected error from adding shepherd to event
+              res.sendStatus(500);
             });
+          }, function() {
+            // Unexpected error from adding event to the shepherd
+            res.sendStatus(500);
           });
+        }, function() {
+          // Unexpected error from creating a new event
+          res.sendStatus(500);
         });
+      } else {
+        // User does not exist
+        res.status(400).send('User does not exist');
       }
+    }, function() {
+      // Unexpected error from finding a user
+      res.sendStatus(500);
     });
   } else {
-    console.error('User ID was not sent in the body');
-    res.sendStatus(400);
+    // userId was not supplied or is not a number
+    res.status(400).send('Invalid userId');
   }
 });
 
-// Return one specific event by eventId    
-router.get('/:eventId', function (req, res) {    
-  db.Event.findOne({   
-    where: {   
-      id: req.params.eventId   
-    }    
-  }).then(function(event) {    
-    res.json(event);   
-  });    
+// Return one specific event by eventId
+router.get('/:eventId', function (req, res) {
+  // Check if eventId was supplied and is a number
+  if (!isNaN(req.params.eventId)) {
+    // eventId was supplied and is a number
+    db.Event.findOne({
+      where: {
+        id: +req.params.eventId
+      }
+    }).then(function(event) {
+      res.json(event);
+    }, function() {
+      // Unexpected error from finding an event
+      res.sendStatus(500);
+    });
+  } else {
+    // eventId was not supplied or is not a number
+    res.status(400).send('Invalid eventId');
+  }
 });
 
 // Edit details for an event
 router.put('/:eventId', function (req, res) {
-  // Find the event by ID
-  db.Event.findOne({
-    where: {
-      id: req.params.eventId
-    }
-  }).then(function(event) {
-    if (event) {
-      // Found event in db, continue to update
-      // Selectively choose which columns to update
-      event.updateAttributes({
-        name: req.body.name,
-        location: req.body.location,
-        end: req.body.end,
-        action: req.body.action
-      }).then(function(event) {
-        res.json(event);
-      });
-    } else {
-      // Event not found
-      res.sendStatus(400);
-    }
-  });
-});
-
-// Adds a sheep and event to the Sheep Event table
-router.post('/add-participant/:eventId', function (req, res) {
-  var sheep;
-  console.log(req.body);
-  if (req.body.id) {
-    db.User.findOne({
+  // Check if eventId was supplied and is a number
+  if (!isNaN(req.params.eventId)) {
+    // eventId was supplied and is a number
+    // Find the event by ID
+    db.Event.findOne({
       where: {
-        id: req.body.id
+        id: +req.params.eventId
       }
-    }).then(function (user) {
-      sheep = user;
-      db.Event.findOne({
-        where: {
-          id: req.params.eventId
-        }
-      }).then(function (event) {
-        if (event) {
-          event.addSheep(sheep).then(function () {
-            res.json(sheep);
-          });
-        }
-      });
+    }).then(function(event) {
+      if (event) {
+        // Found event in db, continue to update
+        // Selectively choose which columns to update
+        event.updateAttributes({
+          name: req.body.name,
+          location: req.body.location,
+          end: req.body.end,
+          action: req.body.action
+        }).then(function(event) {
+          res.json(event);
+        }, function() {
+          // Unexpected error from updating event attributes
+          res.sendStatus(500);
+        });
+      } else {
+        // Event not found
+        res.status(400).send('Event does not exist');
+      }
+    }, function() {
+      // Unexpected error from finding an event
+      res.sendStatus(500);
     });
   } else {
-    console.error('User ID was not sent in the body');
-    res.sendStatus(400);
+    // eventId was not supplied or is not a number
+    res.status(400).send('Invalid eventId');
   }
 });
 
-// Removes a sheep and event from the Sheep Event table
-router.delete('/remove-participant/:eventId', function (req, res) {
-  var sheep;
-  console.log(req.body);
-  if (req.body.id) {
+// Adds a sheep and event to the SheepEvent table
+router.post('/add-participant/:eventId', function (req, res) {
+  // Check if eventId and userId were supplied and are numbers
+  if (!isNaN(req.params.eventId) && !isNaN(req.body.id)) {
+    // eventId and userId were supplied and are numbers
+    // Check if user exists
     db.User.findOne({
       where: {
-        id: req.body.id
+        id: +req.body.id
       }
     }).then(function (user) {
-      sheep = user;
-      db.Event.findOne({
-        where: {
-          id: req.params.eventId
-        }
-      }).then(function (event) {
-        if (event) {
-          event.removeSheep(sheep).then(function () {
-            res.json(sheep);
-          });
-        }
-      });
+      if (user) {
+        // User exists, check if event exists
+        db.Event.findOne({
+          where: {
+            id: +req.params.eventId
+          }
+        }).then(function (event) {
+          if (event) {
+            // Event exists, add user to event as a sheep
+            event.addSheep(user).then(function () {
+              res.json(user);
+            }, function() {
+              // Unexpected error from adding the user to the event as a sheep
+              res.sendStatus(500);
+            });
+          } else {
+            // Event does not exist
+            res.status(400).send('Event does not exist');
+          }
+        }, function() {
+          // Unexpected error from finding an event
+          res.sendStatus(500);
+        });
+      } else {
+        // User does not exist
+        res.status(400).send('User does not exist');
+      }
+    }, function() {
+      // Unexpected error from finding a user
+      res.sendStatus(500);
     });
   } else {
-    console.error('User ID was not sent in the body');
-    res.sendStatus(400);
+    // eventId or userId were not supplied or are not numbers
+    res.status(400).send('Invalid eventId or userId');
+  }
+});
+
+// Removes a sheep and event from the SheepEvent table
+router.delete('/remove-participant/:eventId', function (req, res) {
+  // Check if eventId and userId were supplied and are numbers
+  if (!isNaN(req.params.eventId) && !isNaN(req.body.id)) {
+    // eventId and userId were supplied and are numbers
+    // Check if user exists
+    db.User.findOne({
+      where: {
+        id: +req.body.id
+      }
+    }).then(function (user) {
+      if (user) {
+        // User exists, check if event exists
+        db.Event.findOne({
+          where: {
+            id: +req.params.eventId
+          }
+        }).then(function (event) {
+          if (event) {
+            // Event exists, remove user from event as a sheep
+            event.removeSheep(user).then(function () {
+              res.json(user);
+            }, function() {
+              // Unexpected error from removing the user from the event as a sheep
+              res.sendStatus(500);
+            });
+          } else {
+            // Event does not exist
+            res.status(400).send('Event does not exist');
+          }
+        }, function() {
+          // Unexpected error from finding an event
+          res.sendStatus(500);
+        });
+      } else {
+        // User does not exist
+        res.status(400).send('User does not exist');
+      }
+    }, function() {
+      // Unexpected error from finding a user
+      res.sendStatus(500);
+    });
+  } else {
+    // eventId or userId were not supplied or are not numbers
+    res.status(400).send('Invalid eventId or userId');
   }
 });
 
