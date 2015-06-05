@@ -25,7 +25,7 @@ router.get('/:eventId', function(req, res) {
 // Create a new observation and return it
 router.post('/create', function(req, res) {
   // Check if userId and eventId exist and are numbers
-  if (req.body.userId && !isNaN(req.body.userId) && req.body.eventId && !isNaN(req.body.eventId)) {
+  if (!isNaN(req.body.userId) && !isNaN(req.body.eventId)) {
     // userId and eventId exist and are numbers
     // Check if user exists
     db.User.findOne({
