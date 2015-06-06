@@ -1,4 +1,4 @@
-var componentPath = '../../public/js/components/';
+var componentPath = '../../public/js/components/EventDetail/';
 jest.dontMock(componentPath + 'EventCreate.js');
 
 describe('Successfully update values on EventCreate form', function() {

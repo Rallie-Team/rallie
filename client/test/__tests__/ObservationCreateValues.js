@@ -1,4 +1,4 @@
-var componentPath = '../../public/js/components/';
+var componentPath = '../../public/js/components/ObservationList/';
 jest.dontMock(componentPath + 'ObservationCreate.js');
 
 describe('Successfully update values on ObservationCreate form', function() {

@@ -1,5 +1,5 @@
 // __tests__/App-test.js
-var componentPath = '../../public/js/components/'
+var componentPath = '../../public/js/components/EventDetail/'
 jest.dontMock(componentPath + 'EventCreate.js');
 
 
