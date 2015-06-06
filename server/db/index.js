@@ -49,10 +49,10 @@ var init = function() {
    *
    * We create a many-to-many relationship between users and events, and the join table is called ShepherdEvent.
    * The ShepherdEvent table will have a foreign key for EventId and UserId.
-   * The User and Event models will have get, set, and add methods. For example, user.getShepherdEvents() 
-   * will return all instances of a ShepherdEvent belonging to that user, and each instance would reference the 
+   * The User and Event models will have get, set, and add methods. For example, user.getShepherdEvents()
+   * will return all instances of a ShepherdEvent belonging to that user, and each instance would reference the
    * Event the user is a shepherd for.
-   * 
+   *
    * See http://sequelize.readthedocs.org/en/latest/docs/associations/#belongs-to-many-associations
    *
    * hasMany connects a source with multiple targets, but the targets can only connect to one source
@@ -126,7 +126,7 @@ var init = function() {
   exports.User = User;
   exports.Event = Event;
   exports.Observation = Observation;
-  
+
   // sync all models
   return orm.sync();
 };
