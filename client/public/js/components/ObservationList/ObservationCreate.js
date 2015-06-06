@@ -77,6 +77,7 @@ var ObservationCreate = React.createClass({
       rawImage: this.state.rawImage
     };
     ObservationActions.create(newObservation);
+    this._onCreate();
   },
 
   // Update the current state with the new values in the input fields
