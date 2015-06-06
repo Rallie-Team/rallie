@@ -5,18 +5,38 @@ body {
   font-size: 18px;
   line-height: 1.6;
 }
-.event-list-item {
+.event-list-item, .observation-list-item {
   border: 1px solid #C0C0C0;
   border-radius: 10px;
   padding: 10px;
 }
-.event-list-item:not(:last-child) {
+.event-list-item-name, .observation-list-item-user {
+  font-weight: bold;
+}
+.event-list-item:not(:last-child), .observation-list-item:not(:last-child) {
   margin-bottom: 10px;
 }
-.event-list-item-location {
+.event-list-item-location, .observation-list-item-datetime {
+  font-size: 0.8em;
   font-style: italic;
 }
-
+.observation-list-item-text {
+  margin-top: 0.5em;
+}
+.observation-list-item-image {
+  border-top: 1px solid #C0C0C0;
+  margin-top: 0.8em;
+  padding-top: 0.8em;
+  width: 300px;
+}
+.img-border {
+  border: 5px solid #C0C0C0;
+}
+.img-thumbnail {
+  cursor: pointer;
+  height: 140px;
+  width: 140px;
+}
 #upload-file-container{
 	padding: 0;
 }
