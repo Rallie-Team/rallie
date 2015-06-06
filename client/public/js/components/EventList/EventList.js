@@ -111,7 +111,7 @@ var EventList = React.createClass({
     this.setState({
       sheepEvents: EventStore.getAllEventsBySheep()
     })
-    console.log(this.state.sheepEvents);
+    // console.log(this.state.sheepEvents);
   },
 
   _onNotShepherdEvents: function(){

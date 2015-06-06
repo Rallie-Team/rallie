@@ -36,6 +36,9 @@ var EventDetailActions = {
 
   /**
    * Attend the event as a sheep
+   * @param {object} event Current event that in the event detail
+   * @param {object} user Current user that is logged in
+   * @param {boolean} attending Current attendance status, which may update the state in the database
    */
   attend: function (event, user, attending) {
     EventAPI.getAllEventsBySheep(user.id).then(function (events) {
@@ -43,6 +46,7 @@ var EventDetailActions = {
       for (var i = 0; i < events.length; i++) {
         if (events[i]['id'] === event.id) {
           currentAttendance = true;
+          break;
         }
       }
       if (currentAttendance === attending) {

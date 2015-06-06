@@ -51,19 +51,18 @@ router.get('/shepherd/:userId', function(req, res) {
   }
 });
 
-// Return a list of all events for a user where the user is a shepherd
+/**
+ * Returns an array of event objects from the Event table, attended by a sheep, according to the
+ * SheepEvent join table
+ */
 router.get('/sheep/:userId', function(req, res) {
-  // Check if userId was supplied and is a number
   if (!isNaN(req.params.userId)) {
-    // userId was supplied and is a number
-    // First find user by userId
     db.User.findOne({
       where: {
         id: +req.params.userId
       }
     }).then(function (user) {
       if (user) {
-        // User exists, find all events where the user is a shepherd
         user.getSheepEvents({
           where: {
             end: {
@@ -71,10 +70,9 @@ router.get('/sheep/:userId', function(req, res) {
             }
           }
         }).then(function(results) {
-          // Return all events where the user is a shepherd
           res.json(results);
         }, function() {
-          // Unexpected error from retrieving a shepherd's events
+          // Unexpected error from retrieving the sheep's events
           res.sendStatus(500);
         });
       } else {
@@ -91,7 +89,7 @@ router.get('/sheep/:userId', function(req, res) {
   }
 });
 
-// Reurn a list of all events that have not ended yet, filtering is done in EventStore
+// Return a list of all events that have not ended yet, filtering is done in EventStore
 router.get('/sheep', function(req, res) {
   db.Event.findAll({
     where: {
