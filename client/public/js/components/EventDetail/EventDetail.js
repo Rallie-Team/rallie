@@ -5,7 +5,8 @@ var React = require('react'),
     EventDetailActions = require('../../actions/EventDetailActions'),
     ObservationList = require('../ObservationList/ObservationList'),
     ObservationCreate = require('../ObservationList/ObservationCreate'),
-    AttendeesList = require('../AttendeesList/AttendeesList');
+    AttendeesList = require('../AttendeesList/AttendeesList'),
+    AttendeeStore = require('../../stores/AttendeeStore');
 
 var intervalId;
 var prevEvent, prevIsAttendee;
@@ -28,6 +29,7 @@ var EventDetail = React.createClass({
     EventDetailStore.addEventListener('edit', this._onEdit);
     EventDetailStore.addEventListener('updateCurrentEvent', this._onEventSet);
     EventDetailStore.addEventListener('attend', this._onAttend);
+    AttendeeStore.addEventListener('acquiredSheep', this._onAcquireSheep);
     if (this.props.params.eventId) {
       EventDetailActions.get(this.props.params.eventId);
       intervalId = setInterval(function(){EventDetailActions.get(this.props.params.eventId)}.bind(this), 2000);
@@ -39,6 +41,7 @@ var EventDetail = React.createClass({
     EventDetailStore.removeEventListener('edit', this._onEdit);
     EventDetailStore.removeEventListener('updateCurrentEvent', this._onEventSet);
     EventDetailStore.removeEventListener('attend', this._onAttend);
+    AttendeeStore.removeEventListener('acquiredSheep', this._onAcquireSheep);
     clearInterval(intervalId);
   },
 
@@ -84,14 +87,13 @@ var EventDetail = React.createClass({
 
   _onEventSet: function() {
     var storeCurrentEvent = EventDetailStore.getCurrentEvent();
-    var storeCurrentIsAttendee = EventDetailStore.isAttendee();
     if (prevEvent.action !== storeCurrentEvent.action){
       prevEvent = storeCurrentEvent;
       if (this.state.mode === 'sheep'){
         alert(storeCurrentEvent.action);
       }
     } 
-    this.setState({isAttendee: storeCurrentIsAttendee, event: storeCurrentEvent});
+    this.setState({event: storeCurrentEvent});
   },
 
   // Created a prompt to change the event name
@@ -152,16 +154,30 @@ var EventDetail = React.createClass({
       this.transitionTo('events');
     }
   },
+  
+  _onAcquireSheep: function() {
+    var participatingSheep = AttendeeStore.getAllSheep();
+    var currentUserId = AppStore.getCurrentUser().id;
+    var currentUserAttendee = false;
+    for (var i = 0; i < participatingSheep.length; i++) {
+      if (participatingSheep[i]['id'] === currentUserId) {
+        currentUserAttendee = true;
+        break;
+      }
+    }
+    this.setState({isAttendee: currentUserAttendee});
+  },
+
+
+  isResponseValid: function(input){
+    return input.trim() !== '';
+  },
 
   // Set the event end time to now so that it is no longer considered an active event
   _endEvent: function() {
     var obj = this.state.event;
     obj.end = new Date().toISOString();
     EventDetailActions.edit(obj);
-  },
-
-  isResponseValid: function(input){
-    return input.trim() !== '';
   }
 
 });
