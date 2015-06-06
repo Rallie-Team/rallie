@@ -95,22 +95,37 @@ var EventDetail = React.createClass({
   // Created a prompt to change the event name
   _editName: function(){
     var obj = this.state.event;
-    obj.name = prompt('What should the Event be called?');
-    EventDetailActions.edit(obj);
+    var name = prompt('What should the Event be called?').trim();
+    if (this.isResponseValid(name)){
+      obj.name = name;
+      EventDetailActions.edit(obj);
+    } else {
+      alert('Input cannot be an empty string');
+    }
   },
 
   // Created a prompt to change the event location
   _editLocation: function(){
     var obj = this.state.event;
-    obj.location = prompt('Where is the location?');
-    EventDetailActions.edit(obj);
+    var location = prompt('Where is the location?').trim();
+    if (this.isResponseValid(location)){
+      obj.location = location;
+      EventDetailActions.edit(obj);
+    } else {
+      alert('Input cannot be an empty string');
+    }
   },
 
   // Created a prompt to change the event action
   _editAction: function(){
     var obj = this.state.event;
-    obj.action = prompt('What is the action?');
-    EventDetailActions.edit(obj);
+    var action = prompt('What is the action?').trim();
+    if (this.isResponseValid(action)){
+      obj.action = action;
+      EventDetailActions.edit(obj);
+    } else {
+      alert('Input cannot be an empty string');
+    }
   },
 
   // Toggles whether a sheep is participating or not in an event
@@ -141,6 +156,10 @@ var EventDetail = React.createClass({
     var obj = this.state.event;
     obj.end = new Date().toISOString();
     EventDetailActions.edit(obj);
+  },
+
+  isResponseValid: function(input){
+    return input.trim() !== '';
   }
 
 });
