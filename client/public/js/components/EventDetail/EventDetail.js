@@ -9,14 +9,13 @@ var React = require('react'),
     AttendeeStore = require('../../stores/AttendeeStore');
 
 var intervalId;
-var prevEvent, prevIsAttendee;
+var prevEvent;
 
 var EventDetail = React.createClass({
   mixins: [Navigation],
 
   getInitialState: function() {
     prevEvent = EventDetailStore.getCurrentEvent();
-    prevIsAttendee = EventDetailStore.isAttendee();
     return {
       mode: AppStore.getCurrentMode(),
       isAttendee: EventDetailStore.isAttendee(),

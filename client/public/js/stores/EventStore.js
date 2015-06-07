@@ -7,7 +7,6 @@ var _shepherdEvents = [];
 var _sheepEvents = [];
 var _notShepherdEvents = [];
 var _shepherdEventsIds = [];
-var _isAttendeeToNotShepherdEvents = {};
 var _currentEvent = {name: '', location: '', attendee: false};
 
 var EventStore = assign({}, EventEmitter.prototype, {

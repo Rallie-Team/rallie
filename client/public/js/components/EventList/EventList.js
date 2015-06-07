@@ -107,6 +107,7 @@ var EventList = React.createClass({
     // console.log(this.state.shepherdEvents);
   },
 
+  // TODO: Add this functionality to show participants on the home screen
   _onSheepEvents: function(){
     this.setState({
       sheepEvents: EventStore.getAllEventsBySheep()
