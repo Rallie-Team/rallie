@@ -111,7 +111,9 @@ var App = React.createClass({
                     <span className="icon-bar"></span>
 
                   </button>
-                  <a className="navbar-brand" href={this.makeHref('events')}>Joseki</a>
+                  <a className="navbar-brand" href={this.makeHref('events')}>
+                  {this.state.mode === 'shepherd' ? 'Host' : 'Participate'}
+                  </a>
                 </div>
 
                 {/* Collect the nav links for toggling */}
@@ -124,7 +126,7 @@ var App = React.createClass({
                     <li>
                       <button className="btn btn-info navbar-btn" onClick={this._changeMode}
                         disabled={this.isActive('event-create') || this.isActive('event-detail') ? 'disabled' : false}>
-                        {this.state.mode === 'shepherd' ? 'Sheep' : 'Shepherd'}
+                        Change
                       </button>
                     </li>
                   </ul>
@@ -159,7 +161,7 @@ var App = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#">Joseki</a>
+                  <a className="navbar-brand" href="#">Rallie</a>
                 </div>
 
                 {/* Collect the nav links for toggling */}
