@@ -55,9 +55,9 @@ var AttendeesList = React.createClass({
     return (
       <div className="event-list">
         <h2>Attendees</h2>
-        <h3>Shepherds</h3>
+        <h3>Host</h3>
         {shepherds}
-        <h3>Sheeps</h3>
+        <h3>Participants</h3>
         {sheeps}
       </div>
     )
