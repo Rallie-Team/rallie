@@ -13,7 +13,11 @@ var EventCreate = React.createClass({
     return {
       name: '',
       location: '',
-      result: ''
+      result: '',
+      startTime: '',
+      endTime: '',
+      startDate: '',
+      endDate: ''
     };
   },
 
@@ -40,6 +44,22 @@ var EventCreate = React.createClass({
             <label htmlFor="location">Event location</label>
             <input className="form-control inputBox" type="text" name="location" id="location" placeholder="Event location" value={this.state.location} onChange={this._onChange} />
           </div>
+          <div className="form-group">
+            <label htmlFor="date">Start Date</label>
+            <input className="form-control inputBox" type="date" name="startDate" id="startDate" value={this.state.startDate} onChange={this._onChange} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="date">End Date</label>
+            <input className="form-control inputBox" type="date" name="endDate" id="endDate" value={this.state.endDate} onChange={this._onChange} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="time">Start Time</label>
+            <input className="form-control inputBox" type="time" name="startTime" id="startTime" placeholder="Event startTime" value={this.state.startTime} onChange={this._onChange} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="time">End Time</label>
+            <input className="form-control inputBox" type="time" name="endTime" id="endTime" placeholder="Event endTime" value={this.state.endTime} onChange={this._onChange} />
+          </div>
           <button type="submit" className="btn btn-default">Submit</button>
         </form>
         <div className="event-create-result">{this.state.result}</div>
@@ -55,8 +75,21 @@ var EventCreate = React.createClass({
       userId: AppStore.getCurrentUser().id,
       name: this.state.name,
       location: this.state.location,
-      action: ''
+      startTime: this.state.startTime,
+      endTime: this.state.endTime,
+      action: '',
+      startDate: this.state.startDate,
+      endDate: this.state.endDate
     };
+
+    /**
+     * this portion combines the start date with the start time to be store in DB
+     * and does this with the end date and end time
+     * Only the event startTime and endTime are referred to in the DB.
+     */
+    data.startTime = data.startDate.concat(" ", data.startTime);
+    data.endTime = data.endDate.concat(" ", data.endTime);
+
     EventActions.create(data);
   },
 
@@ -75,6 +108,10 @@ var EventCreate = React.createClass({
     this.setState({
       name: '',
       location: '',
+      startTime: '',
+      endTime: '',
+      startDate: '',
+      endDate: '',
       result: 'Event created!'
     });
     this.transitionTo('events');
