@@ -95,6 +95,25 @@ AppDispatcher.register(function(payload) {
       EventStore.emitEvent('delete');
       break;
 
+    // Eagerly add or remove event from _sheepEvents
+    // When participating or leaving an event from the event detail page,
+    // it should update _sheepEvents so that the event list page will accurately
+    // display which events the user is participating in without having to wait to
+    // poll the database
+    case AppConstants.EVENT_SHEEP_ATTEND:
+      if (payload.attendee) {
+        _sheepEvents.push(payload.event);
+      } else {
+        var totalSheepEvents = _sheepEvents.length;
+        for (var i = 0; i < totalSheepEvents; i++) {
+          if (_sheepEvents[i].id === payload.event.id) {
+            _sheepEvents.splice(i, 1);
+            break;
+          }
+        }
+      }
+      break;
+
     default:
       // no op
   }

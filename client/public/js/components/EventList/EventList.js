@@ -35,7 +35,7 @@ var EventList = React.createClass({
   },
 
   componentDidMount: function() {
-    // Add event listener for getting events from the server when the component is mounted
+    // Add event listeners for getting events from the server when the component is mounted
     // Fetching via AJAX needs to happen after mounting due to async
     EventStore.addEventListener('shepherd_events_get', this._onShepherdEvents);
     EventStore.addEventListener('sheep_events_get', this._onSheepEvents);
@@ -47,12 +47,9 @@ var EventList = React.createClass({
     AppStore.addEventListener('toggleMode', this._changeStateMode);
 
     if (this.isMounted()) {
-      // TODO: REFACTOR TO GET ALL EVENTS BY USERID FOR A SHEPHERD WE NEED TO 
-      // PASS THE USER MODE DOWN TO THIS REACT COMPONENT SO THAT WE CAN DISTINGUISH 
-      // WHETHER TO GET ALL EVENTS (FOR SHEEP) OR GET ALL EVENTS BY USERID (FOR A SHEPHERD)
-
-      // Start polling every 2 seconds for new events
       EventActions.getAllEventsByShepherd(cookie.load('id'));
+      
+      // Start polling every 2 seconds for new events
       intervalId = setInterval(function(){
         EventActions.getAllEventsByShepherd(cookie.load('id'));
         EventActions.getAllEventsBySheep(cookie.load('id'));
@@ -77,13 +74,13 @@ var EventList = React.createClass({
     // console.log(this.state.shepherdEvents, 'shepherdEvents');
     // Sends each event to EventListItem where each event will be rendered
 
-    if(this.state.mode === 'shepherd'){
+    if (this.state.mode === 'shepherd') {
       var events = this.state.shepherdEvents.map(function(event) {
         return <EventListItem key={event.id} event={event} mode={this.state.mode}/>
       }.bind(this));
     } else {
       var events = this.state.notShepherdEvents.map(function(event) {
-        return <EventListItem key={event.id} event={event} mode={this.state.mode}/>
+        return <EventListItem key={event.id} event={event} mode={this.state.mode} isParticipating={this._isParticipating(event.id)}/>
       }.bind(this));
     }
 
@@ -122,17 +119,20 @@ var EventList = React.createClass({
     // console.log(this.state.notShepherdEvents);
   },
 
-  // _onGet: function() {
-  //   this.setState({
-  //     events: getEvents()
-  //   });
-  // },
-
   // Updates the views when the state mode changes from sheep to shepherd and vice versa
   _changeStateMode: function() {
     this.setState({
       mode: AppStore.getCurrentMode()
     });
+  },
+
+  _isParticipating: function(eventId) {
+    var sheepEvents = this.state.sheepEvents;
+    var totalSheepEvents = sheepEvents.length;
+    for (var i = 0; i < totalSheepEvents; i++) {
+      if (sheepEvents[i].id === eventId) return true;
+    }
+    return false;
   }
 });
 

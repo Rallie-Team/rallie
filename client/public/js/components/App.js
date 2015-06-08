@@ -5,8 +5,7 @@ var React = require('react'),
     RouteHandler = Router.RouteHandler,
     AppActions = require('../actions/AppActions'),
     AppStore = require('../stores/AppStore'),
-    cookie = require('react-cookie'),
-    Bootstrap;
+    cookie = require('react-cookie');
 
 var App = React.createClass({
   /*

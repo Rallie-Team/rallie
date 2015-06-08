@@ -8,7 +8,11 @@ body {
 .event-list-item, .observation-list-item {
   border: 1px solid #C0C0C0;
   border-radius: 10px;
+  color: #444142;
   padding: 10px;
+}
+.event-list-item-participating {
+  background-color: #00EADB
 }
 .event-list-item-name, .observation-list-item-user {
   font-weight: bold;
