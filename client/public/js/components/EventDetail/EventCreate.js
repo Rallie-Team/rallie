@@ -77,7 +77,7 @@ var EventCreate = React.createClass({
       location: this.state.location,
       startTime: this.state.startTime,
       endTime: this.state.endTime,
-      action: '',
+      action: 'the event has not yet started',
       startDate: this.state.startDate,
       endDate: this.state.endDate
     };
