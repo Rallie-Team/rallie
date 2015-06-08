@@ -4,7 +4,7 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants');
 
 var _currentEvent = {name: '', location: '', action: ''};
-var _attendee = false;  // TODO: Pull from Stephen's list
+var _attendee = false;
 var _observations = [];
 
 var EventDetailStore = assign({}, EventEmitter.prototype, {

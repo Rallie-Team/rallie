@@ -9,21 +9,13 @@ var AppDispatcher = require('../dispatcher/AppDispatcher'),
     assign = require('object-assign');
 
 var EventActions = {
+  
   /**
-   * Get all events
+   * Returns all events where the user in not the host of the event.
+   * Events are returned in the events property of the return object.
+   * The values are an array of event objects from the Events.
    */
-  getAllEventsByShepherd: function(shepherdId) {
-    // console.log("inside of getAllEventsByShepherd EVENT ACTION");
-    EventAPI.getAllEventsByShepherd(shepherdId).then(function(events) {
-      AppDispatcher.dispatch({
-        actionType: AppConstants.SHEPHERD_EVENT_GET,
-        events: events
-      });
-    });
-  },
-
   getAllEventsNotByShepherd:  function() {
-    // console.log("inside of getAllEventsByNotShepherd EVENT ACTION");
     EventAPI.getAllEventsNotByShepherd().then(function(events) {
       AppDispatcher.dispatch({
         actionType: AppConstants.NOT_SHEPHERD_EVENT_GET,
@@ -31,6 +23,39 @@ var EventActions = {
       });
     });
   },
+
+  /**
+   * Returns all events where the user is the host of the event.
+   * Events are returned in the events property of the return object.
+   * The values are an array of event objects from the Events.
+   * @param {int} hostId The current primary key for the host used to access the join between the events and user hosts
+   */
+  getAllEventsByShepherd: function(hostId) {
+    EventAPI.getAllEventsByShepherd(hostId).then(function(events) {
+      AppDispatcher.dispatch({
+        actionType: AppConstants.SHEPHERD_EVENT_GET,
+        events: events
+      });
+    });
+  },
+
+  /**
+   * Returns all events where the user is a participant in the event.
+   * This action is used to show which events where the current user is currently a part participant
+   * on the home screen (Note: TODO: This feature has not yet been implemented). 
+   * Events are returned in the events property of the return object.
+   * The values are an array of event objects from the Events.
+   * @param {int} participantId The current primary key for the host used to access the join between the events and participants
+   */
+  getAllEventsBySheep: function(participantId) {
+    EventAPI.getAllEventsBySheep(participantId).then(function(events) {
+      AppDispatcher.dispatch({
+        actionType: AppConstants.SHEEP_EVENT_GET,
+        events: events
+      });
+    });
+  },
+
 
   /**
    * Create an event

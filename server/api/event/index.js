@@ -6,7 +6,6 @@ router.get('/', function (req, res) {
   db.Event.findAll().then(function(results) {
     res.json(results);    
   }, function() {
-    // Unexpected error from finding events
     res.sendStatus(500);
   });    
 });
@@ -52,7 +51,45 @@ router.get('/shepherd/:userId', function(req, res) {
   }
 });
 
-// Reurn a list of all events that have not ended yet, filtering is done in EventStore
+/**
+ * Returns an array of event objects from the Event table, attended by a sheep, according to the
+ * SheepEvent join table
+ */
+router.get('/sheep/:userId', function(req, res) {
+  if (!isNaN(req.params.userId)) {
+    db.User.findOne({
+      where: {
+        id: +req.params.userId
+      }
+    }).then(function (user) {
+      if (user) {
+        user.getSheepEvents({
+          where: {
+            end: {
+              $gt: new Date()
+            }
+          }
+        }).then(function(results) {
+          res.json(results);
+        }, function() {
+          // Unexpected error from retrieving the sheep's events
+          res.sendStatus(500);
+        });
+      } else {
+        // User does not exist
+        res.status(400).send('User does not exist');
+      }
+    }, function() {
+      // Unexpected error from finding a user
+      res.sendStatus(500);
+    });
+  } else {
+    // userId was not supplied or is not a number
+    res.status(400).send('Invalid userId');
+  }
+});
+
+// Return a list of all events that have not ended yet, filtering is done in EventStore
 router.get('/sheep', function(req, res) {
   db.Event.findAll({
     where: {

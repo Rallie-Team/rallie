@@ -3,65 +3,72 @@
  */
 
 var EventAPI = {
+
   /**
-   * Get all, unfiltered events
+   * Get all, unfiltered events, and return event objects in an array
    */
   getAllEvents: function() {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event',
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // On success, return array of events
       return data;
     }, function() {
-      // On error, return empty array
       return [];
     });
   },
 
   /**
-   * Get all events for a sheep
+   * Return all events for non-shepherds in an array of event objects
    */
   getAllEventsNotByShepherd: function() {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/sheep/',
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // console.log('sheep events returned', data);
-      // Return events on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
 
   /**
-   * Get all events for a shepherd
-   * @param {number} shepherdId The primary key of the user in the database
+   * Return an array of events for a given shepherd, based on the ShepherdEvent join table
+   * @param {number} shepherdId The primary key of the user in User table, while in shepherd mode
    */
   getAllEventsByShepherd: function(shepherdId) {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/shepherd/' + shepherdId,
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // Return events on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
 
   /**
-   * Get a specific event by event ID
-   * @param {number} eventId The primary key of the event in the database
+   * Return an array of events for a given sheep, based on the SheepEvent join table
+   * @param {number} sheepId The primary key of the user in User table, while in sheep mode
+   */
+  getAllEventsBySheep: function(sheepId) {
+    return $.ajax({
+      url: '/api/event/sheep/' + sheepId,
+      method: 'GET',
+      dataType: 'json'
+    }).then(function(data) {
+      return data;
+    }, function() {
+      return [];
+    });
+  },
+
+  /**
+   * Return a specific event object, given an event ID
+   * @param {number} eventId The primary key of the event in the Event table
    */
   getEvent: function(eventId) {
     return $.ajax({
@@ -69,54 +76,52 @@ var EventAPI = {
       method: 'GET',
       dataType: 'json'
     }).then(function(data) {
-      // Return event on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
 
   /**
-   * Create a new event
+   * Adds a new event to the Event table and associates with a given shepherd
    * @param {object} data An object containing the shepherd ID and all the event attributes
    */
   addEvent: function(data) {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/create',
       method: 'POST',
       dataType: 'json',
       data: data
     }).then(function(data) {
-      // Return event on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
 
   /**
-   * Edit an event
-   * @param {object} event An object containing all the event attributes
+   * Edits an event in the Event table
+   * @param {object} event Current event object that will be modified
    */
   editEvent: function(event) {
-    // Return a promise so the requester can chain the response
     return $.ajax({
       url: '/api/event/' + event.id,
       method: 'PUT',
       dataType: 'json',
       data: event
     }).then(function(data) {
-      // Return updated event on success
       return data;
     }, function() {
-      // Return empty array on error
       return [];
     });
   },
 
+  /**
+   * Adds a sheep user participant to an event by adding an entry with the event and the sheep user
+   * to the SheepEvent join table
+   * @param {object} event Current event, only using event.id
+   * @param {object} sheep Current user in sheep mode viewing the event
+   */
   addParticipant: function(event, sheep) {
     return $.ajax({
       url: 'api/event/add-participant/' + event.id,
@@ -130,6 +135,12 @@ var EventAPI = {
     });
   },
 
+  /**
+   * Removes a sheep user participant from an event by removing an entry with the event and 
+   * the sheep user from the SheepEvent join table
+   * @param {object} event Current event, only using event.id
+   * @param {object} sheep Current user in sheep mode viewing the event
+   */
   removeParticipant: function(event, sheep) {
     return $.ajax({
       url: 'api/event/remove-participant/' + event.id,

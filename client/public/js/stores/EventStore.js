@@ -4,13 +4,18 @@ var EventEmitter = require('events').EventEmitter,
     AppConstants = require('../constants/AppConstants');
 
 var _shepherdEvents = [];
+var _sheepEvents = [];
 var _notShepherdEvents = [];
 var _shepherdEventsIds = [];
-var _currentEvent = {name: '', location: ''};
+var _currentEvent = {name: '', location: '', attendee: false};
 
 var EventStore = assign({}, EventEmitter.prototype, {
   getAllEventsByShepherd: function() {
     return _shepherdEvents;
+  },
+
+  getAllEventsBySheep: function() {
+    return _sheepEvents;
   },
 
   getAllEventsNotByShepherd: function(){
@@ -20,7 +25,6 @@ var EventStore = assign({}, EventEmitter.prototype, {
   getCurrentEvent: function() {
     return _currentEvent;
   },
-
 
   /**
    * Trigger an event
@@ -51,36 +55,31 @@ var EventStore = assign({}, EventEmitter.prototype, {
 });
 
 
-// Register callback to handle all updates
 AppDispatcher.register(function(payload) {
   switch(payload.actionType) {
-    // When events are fetched
+
     case AppConstants.SHEPHERD_EVENT_GET:
-      // Set current events collection to the fetched results
       _shepherdEvents = payload.events;
-      // console.log('inside of eventstore Shepherd get', _shepherdEvents);
+      // Cache shepherd eventId's in a local array
       _shepherdEventsIds = [];
       for(var i = 0; i < _shepherdEvents.length; i++){
         _shepherdEventsIds.push(_shepherdEvents[i].id);
       }
-      // console.log(_shepherdEventsIds);
       EventStore.emitEvent('shepherd_events_get');
       break;
 
+    case AppConstants.SHEEP_EVENT_GET:
+      _sheepEvents = payload.events;
+      EventStore.emitEvent('sheep_events_get');
+      break;
+
     case AppConstants.NOT_SHEPHERD_EVENT_GET:
-      // Set current events collection to the fetched results
       _notShepherdEvents = [];
-      // console.log(_shepherdEventsIds, '_shepherdEventsIds');
-      for(var i = 0; i < payload.events.length; i++){
-        // console.log(_shepherdEventsIds, '_shepherdEventsIds');
-        // console.log(payload.events[i].id, 'id of event');
-        if(_shepherdEventsIds.indexOf(payload.events[i].id) < 0){
-          // console.log(EventStore.getAllEventsNotByShepherd(), '--------------------');
+      for (var i = 0; i < payload.events.length; i++) {
+        if (_shepherdEventsIds.indexOf(payload.events[i].id) < 0){
           _notShepherdEvents.push(payload.events[i]);
         }
       }
-
-      // console.log('inside of eventstore not Shepherd get', _notShepherdEvents);
       EventStore.emitEvent('not_shepherd_events_get');
       break;
 

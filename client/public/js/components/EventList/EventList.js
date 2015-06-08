@@ -28,6 +28,7 @@ var EventList = React.createClass({
     // Set initial state to the initial set of events defined in EventStore
     return {
       shepherdEvents: EventStore.getAllEventsByShepherd(),
+      sheepEvents: EventStore.getAllEventsBySheep(),
       notShepherdEvents: EventStore.getAllEventsNotByShepherd(),
       mode: AppStore.getCurrentMode()
     };
@@ -37,7 +38,7 @@ var EventList = React.createClass({
     // Add event listener for getting events from the server when the component is mounted
     // Fetching via AJAX needs to happen after mounting due to async
     EventStore.addEventListener('shepherd_events_get', this._onShepherdEvents);
-
+    EventStore.addEventListener('sheep_events_get', this._onSheepEvents);
     EventStore.addEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
 
     // Add event listener to get the current mode when the mode changes
@@ -46,19 +47,15 @@ var EventList = React.createClass({
     AppStore.addEventListener('toggleMode', this._changeStateMode);
 
     if (this.isMounted()) {
-      // TODO: REFACTOR TO GET ALL EVENTS BY USERID FOR A SHEPHERD
-      // WE NEED TO PASS THE USER MODE DOWN TO THIS REACT COMPONENT
-      // SO THAT WE CAN DISTINGUISH WHETHER TO GET ALL EVENTS (FOR SHEEP)
-      // OR GET ALL EVENTS BY USERID (FOR A SHEPHERD)
-
-      // Get all events (for sheep)
+      // TODO: REFACTOR TO GET ALL EVENTS BY USERID FOR A SHEPHERD WE NEED TO 
+      // PASS THE USER MODE DOWN TO THIS REACT COMPONENT SO THAT WE CAN DISTINGUISH 
+      // WHETHER TO GET ALL EVENTS (FOR SHEEP) OR GET ALL EVENTS BY USERID (FOR A SHEPHERD)
 
       // Start polling every 2 seconds for new events
-
       EventActions.getAllEventsByShepherd(cookie.load('id'));
-
       intervalId = setInterval(function(){
         EventActions.getAllEventsByShepherd(cookie.load('id'));
+        EventActions.getAllEventsBySheep(cookie.load('id'));
         EventActions.getAllEventsNotByShepherd();
       }, 2000);
 
@@ -68,7 +65,7 @@ var EventList = React.createClass({
   componentWillUnmount: function() {
     // Remove event listeners when the DOM element is removed
     EventStore.removeEventListener('shepherd_events_get', this._onShepherdEvents);
-
+    EventStore.removeEventListener('sheep_events_get', this._onSheepEvents);
     EventStore.removeEventListener('not_shepherd_events_get', this._onNotShepherdEvents);
     AppStore.removeEventListener('toggleMode', this._changeStateMode);
     // Remove setInterval for polling
@@ -90,9 +87,6 @@ var EventList = React.createClass({
       }.bind(this));
     }
 
-    // this.state.mode references the mode set in AppStore.js
-    // The event create button only appears if the current mode
-    // is shepherd
     return (
       <div className="event-list">
         <h2>Events</h2>
@@ -111,6 +105,14 @@ var EventList = React.createClass({
       shepherdEvents: EventStore.getAllEventsByShepherd()
     })
     // console.log(this.state.shepherdEvents);
+  },
+
+  // TODO: Add this functionality to show participants on the home screen
+  _onSheepEvents: function(){
+    this.setState({
+      sheepEvents: EventStore.getAllEventsBySheep()
+    })
+    // console.log(this.state.sheepEvents);
   },
 
   _onNotShepherdEvents: function(){
