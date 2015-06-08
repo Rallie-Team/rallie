@@ -133,8 +133,7 @@ var EventDetail = React.createClass({
 
   // Toggles whether a sheep is participating or not in an event
   _attend: function () {
-    this.state.isAttendee = !this.state.isAttendee;
-    EventDetailActions.attend(this.state.event, AppStore.getCurrentUser(), this.state.isAttendee);
+    EventDetailActions.attend(this.state.event, AppStore.getCurrentUser(), !this.state.isAttendee);
   },
 
   _onAttend: function() {

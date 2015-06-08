@@ -10,7 +10,7 @@ var EventListItem = React.createClass({
 
   render: function() {
     return (
-      <div className="event-list-item">
+      <div className={'event-list-item' + (this.props.isParticipating ? ' event-list-item-participating' : '')}>
         <a href={this.makeHref('event-detail', {eventId: this.props.event.id})} onClick={this._setCurrentEvent}>
         <div className="event-list-item-name">{this.props.event.name}</div></a>
         <div className="event-list-item-location">{this.props.event.location}</div>

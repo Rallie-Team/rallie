@@ -5,13 +5,12 @@
 
 var AppDispatcher = require('../dispatcher/AppDispatcher'),
     AppConstants = require('../constants/AppConstants'),
-    EventAPI = require('../utils/EventAPI'),
-    assign = require('object-assign');
+    EventAPI = require('../utils/EventAPI');
 
 var EventActions = {
   
   /**
-   * Returns all events where the user in not the host of the event.
+   * Returns all events where the user is not the host of the event.
    * Events are returned in the events property of the return object.
    * The values are an array of event objects from the Events.
    */
@@ -42,7 +41,7 @@ var EventActions = {
   /**
    * Returns all events where the user is a participant in the event.
    * This action is used to show which events where the current user is currently a part participant
-   * on the home screen (Note: TODO: This feature has not yet been implemented). 
+   * on the home screen.
    * Events are returned in the events property of the return object.
    * The values are an array of event objects from the Events.
    * @param {int} participantId The current primary key for the host used to access the join between the events and participants
