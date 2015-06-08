@@ -4,10 +4,10 @@ var db = require('../../db');
 // Return a list of all, unfiltered events
 router.get('/', function (req, res) {
   db.Event.findAll().then(function(results) {
-    res.json(results);    
+    res.json(results);
   }, function() {
     res.sendStatus(500);
-  });    
+  });
 });
 
 // Return a list of all events for a user where the user is a shepherd
@@ -123,9 +123,9 @@ router.post('/create', function(req, res) {
         db.Event.create({
           name: req.body.name || '',
           // If no start time specified, default to now
-          start: req.body.start || currentDate,
+          start: req.body.startTime || currentDate,
           // If no end time specified, default to 24 hours from now
-          end: req.body.end || new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
+          end: req.body.endTime || new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
           location: req.body.location || '',
           action: req.body.action || '',
           minParticipants: req.body.minParticipants || null,
