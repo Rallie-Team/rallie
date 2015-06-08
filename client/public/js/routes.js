@@ -14,7 +14,7 @@ var React = require('react'),
 //to as "props" in EventList and EventCreate
 var routes = (
   <Route name="home" handler={App} path="/">
-    <Route name="events" handler={EventList} path="events"/>
+    <Route name="events" handler={EventList} path="/"/>
     <Route name="event-create" handler={EventCreate} path="events/create"/>
     <Route name="event-detail" handler={EventDetail} path="events/detail/:eventId"/>
     <Route name="facebook-route" handler={EventList} path="/_=_"/>

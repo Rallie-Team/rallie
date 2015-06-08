@@ -89,8 +89,8 @@ var EventCreate = React.createClass({
      * and does this with the end date and end time
      * Only the event startTime and endTime are referred to in the DB.
      */
-    data.startTime = data.startDate.concat(" ", data.startTime);
-    data.endTime = data.endDate.concat(" ", data.endTime);
+    data.startTime = new Date(data.startDate.concat(" ", data.startTime)).toISOString();
+    data.endTime = new Date(data.endDate.concat(" ", data.endTime)).toISOString();
 
     EventActions.create(data);
   },
