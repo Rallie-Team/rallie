@@ -127,6 +127,7 @@ router.post('/create', function(req, res) {
           // If no end time specified, default to 24 hours from now
           end: req.body.endTime || new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
           location: req.body.location || '',
+          description: req.body.description || '',
           action: req.body.action || '',
           minParticipants: req.body.minParticipants || null,
           maxParticipants: req.body.maxParticipants || null
@@ -199,6 +200,7 @@ router.put('/:eventId', function (req, res) {
         event.updateAttributes({
           name: req.body.name,
           location: req.body.location,
+          description: req.body.description,
           end: req.body.end,
           action: req.body.action
         }).then(function(event) {

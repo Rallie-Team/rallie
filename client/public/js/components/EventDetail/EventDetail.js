@@ -62,6 +62,9 @@ var EventDetail = React.createClass({
             {this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editName}>Edit Name</button> : null}
           </h2>
         </div>
+        <div className="event-detail-description">Description: {this.state.event.description}
+          {this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editDescription}>Edit Description</button> : null}
+        </div>
         {/* Use Moment.js to format start and end times to the following format: Mon, Jun 1, 2015 4:30 PM */}
         <div className="event-detail-start">Start: {moment(this.state.event.start).format('llll')}</div>
         <div className="event-detail-end">
@@ -113,6 +116,17 @@ var EventDetail = React.createClass({
     var location = prompt('Where is the location?').trim();
     if (this.isResponseValid(location)){
       obj.location = location;
+      EventDetailActions.edit(obj);
+    } else {
+      alert('Input cannot be an empty string');
+    }
+  },
+
+  _editDescription: function(){
+    var obj = this.state.event;
+    var description = prompt('What is the new description?').trim();
+    if (this.isResponseValid(description)){
+      obj.description = description;
       EventDetailActions.edit(obj);
     } else {
       alert('Input cannot be an empty string');
