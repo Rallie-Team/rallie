@@ -108,22 +108,20 @@ var App = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
-
                   </button>
-                  <a className="navbar-brand" href={this.makeHref('events')}>
-                  {this.state.mode === 'shepherd' ? 'Host' : 'Participate'}
-                  </a>
+                  <a className="navbar-brand" href={this.makeHref('events')}><img className="navbar-logo" alt="Rallie" src="/assets/images/megaphone.png"/></a>
                 </div>
 
                 {/* Collect the nav links for toggling */}
                 <div className="collapse navbar-collapse" id="navbar-collapse-1">
                   <ul className="nav navbar-nav">
+                    <p className={'navbar-text ' + (this.state.mode === 'shepherd' ? 'pink' : 'teal')}>{this.state.mode === 'shepherd' ? 'Host' : 'Participate'}</p>
                     {/*
                       This is the toggler for shepherd/sheep.
                       It will be disabled when viewing the event-create and event-detail components
                     */}
                     <li>
-                      <button className="btn btn-info navbar-btn" onClick={this._changeMode}
+                      <button className={'btn navbar-btn btn-' + (this.state.mode === 'shepherd' ? 'teal' : 'pink')} onClick={this._changeMode}
                         disabled={this.isActive('event-create') || this.isActive('event-detail') ? 'disabled' : false}>
                         Change
                       </button>
@@ -160,22 +158,36 @@ var App = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#">Rallie</a>
+                  <a className="navbar-brand" href="#"><img className="navbar-logo" alt="Rallie" src="/assets/images/megaphone.png"/></a>
                 </div>
 
                 {/* Collect the nav links for toggling */}
                 <div className="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul className="nav navbar-nav">
+                  <li><a id="brand" href="#">Rallie</a></li>
+                </ul>
                   <ul className="nav navbar-nav navbar-right">
                     {/*
                       This is the toggler for shepherd/sheep.
                       It will be disabled when viewing the event-create and event-detail components
                     */}
-                    <li><a href="/Server/auth/facebook">Login</a></li>
+                    <li><a className="login" href="/Server/auth/facebook">Login</a></li>
                   </ul>
                 </div>
               </div>
             </nav>
           </header>
+
+          <div className="jumbotron">
+            <div className="row">
+              <div className="col-md-6 megaphone"></div>
+              <div className="col-md-6">
+                <h1>Rallie</h1>
+                <p>Real-time event collaboration</p>
+                <a className="login" href="/Server/auth/facebook">Log In / Sign Up with Facebook</a>
+              </div>
+            </div>
+          </div>
 
           {/* The RouteHandler component renders the active child route's handler */}
           <RouteHandler/>
