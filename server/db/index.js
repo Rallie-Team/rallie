@@ -27,6 +27,7 @@ var init = function() {
     start: Sequelize.DATE,
     end: Sequelize.DATE,
     location: Sequelize.STRING,
+    description: Sequelize.TEXT,
     minParticipants: Sequelize.INTEGER,
     maxParticipants: Sequelize.INTEGER,
     action: Sequelize.STRING

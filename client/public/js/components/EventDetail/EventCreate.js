@@ -16,6 +16,7 @@ var EventCreate = React.createClass({
       name: '',
       location: '',
       result: '',
+      description: '',
       startTime: '',
       endTime: '',
       startDate: '',
@@ -45,6 +46,10 @@ var EventCreate = React.createClass({
           <div className="form-group">
             <label htmlFor="location">Event location</label>
             <input className="form-control inputBox" required={true} type="text" name="location" id="location" placeholder="Event location" value={this.state.location} onChange={this._onChange} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <input className="form-control inputBox" required={true} type="text" name="description" id="description" placeholder="Description" value={this.state.description} onChange={this._onChange}/>
           </div>
           <div className="form-group">
             <label htmlFor="date">Start Date</label>
@@ -77,6 +82,7 @@ var EventCreate = React.createClass({
       userId: AppStore.getCurrentUser().id,
       name: this.state.name,
       location: this.state.location,
+      description: this.state.description,
       startTime: this.state.startTime,
       endTime: this.state.endTime,
       action: 'the event has not yet started',
@@ -110,6 +116,7 @@ var EventCreate = React.createClass({
     this.setState({
       name: '',
       location: '',
+      description: '',
       startTime: '',
       endTime: '',
       startDate: '',
