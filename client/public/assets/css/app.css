@@ -1,9 +1,81 @@
+@font-face {
+  font-family: signpainter;
+  src: url(../fonts/signpainter.ttf);
+}
 * {
   font-family: Helvetica, Arial, sans-serif;
 }
 body {
   font-size: 18px;
   line-height: 1.6;
+}
+.navbar a, .navbar-text {
+  font-size: 36px;
+}
+.navbar-text {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#brand {
+  color: #FF3E3F;
+}
+.navbar * {
+  background-color: #444142;
+  font-family: signpainter !important;
+}
+.navbar-btn {
+  border: 2px solid #FDFCFB;
+  border-radius: 8px;
+  color: #FDFCFB;
+  font-size: 24px;
+  line-height: 24px;
+}
+.btn-teal {
+  background-color: #00EADB;
+}
+.teal {
+  color: #00EAD8 !important;
+}
+.btn-pink {
+  background-color: #E8B6B4;
+}
+.pink {
+  color: #E8B6B4 !important;
+}
+.navbar-brand {
+  padding-top: 7px;
+  padding-bottom: 0;
+}
+.navbar-logo {
+  height: 50px;
+}
+.jumbotron {
+  background: url(../images/sf-lt-gray.png) #444142;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.jumbotron h1, .jumbotron p {
+  color: #FF3E3F;
+  font-family: signpainter
+}
+.jumbotron h1 {
+  font-size: 144px;
+}
+.jumbotron p {
+  font-size: 48px;
+}
+.jumbotron .megaphone {
+  background: url(../images/megaphone.png) no-repeat;
+  background-position: center, center;
+  background-size: contain;
+  height: 374px;
+}
+.login {
+  color: #00EADB !important;
+  font-family: signpainter !important;
+}
+.jumbotron .login {
+  font-size: 36px;
 }
 .event-list-item, .observation-list-item {
   border: 1px solid #C0C0C0;
