@@ -38,12 +38,16 @@ This project uses Facebook authentication, and as such, you must create an app I
 In the development environment, you must create a `thirdPartyServices.js` file within the `server/config/environment` directory. 
 This is required in configuration files, and it should export the settings for your Facebook app.
 
-Here is an example of how the `thirdPartyServices.js` file should be set up. It must export a `facebook` object with 
-keys for `id`, `secret`, and `callback`.
+In addition, for session tokens, you will also need to add a secret in `thirdPartyServices.js`.
+
+Here is an example of how the `thirdPartyServices.js` file should be set up.
 
 ```
 // server/config/environment/thirdPartyServices.js
 module.exports = {
+  secrets: {
+    session: 'secret-key'
+  },
   facebook: {
     id: 12345,
     secret: 'abc123',
@@ -52,8 +56,8 @@ module.exports = {
 };
 ```
 
-In the test and production environments, you will define these Facebook settings using environment variables 
-`process.env.FACEBOOK_ID`, `process.env.FACEBOOK_SECRET`, and `process.env.FACEBOOK_CALLBACK`.
+In the test and production environments, you will define those settings using environment variables 
+`process.env.SESSION_SECRET`, `process.env.FACEBOOK_ID`, `process.env.FACEBOOK_SECRET`, and `process.env.FACEBOOK_CALLBACK`.
 
 ### Tasks ###
 If you want to build React files from the command line, you will first need to install watchify globally 

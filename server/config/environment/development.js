@@ -2,6 +2,9 @@
 var localServices = require('./thirdPartyServices.js');
 
 module.exports = {
+  secrets: {
+    session: localServices.secrets.session
+  },
   postgres: {
     database: 'joseki',
     user: null,
@@ -14,6 +17,6 @@ module.exports = {
   facebook: {
    id: localServices.facebook.id,
    secret: localServices.facebook.secret,
-   callback: 'http://localhost:3000/auth/facebook/callback'
+   callback: localServices.facebook.callback
  }
 };
