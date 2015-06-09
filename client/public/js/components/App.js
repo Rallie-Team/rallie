@@ -171,7 +171,7 @@ var App = React.createClass({
                       This is the toggler for shepherd/sheep.
                       It will be disabled when viewing the event-create and event-detail components
                     */}
-                    <li><a className="login" href="/Server/auth/facebook">Login</a></li>
+                    <li><a className="login" href="/auth/facebook">Login</a></li>
                   </ul>
                 </div>
               </div>
@@ -184,7 +184,7 @@ var App = React.createClass({
               <div className="col-md-6">
                 <h1>Rallie</h1>
                 <p>Real-time event collaboration</p>
-                <a className="login" href="/Server/auth/facebook">Log In / Sign Up with Facebook</a>
+                <a className="login" href="/auth/facebook">Log In / Sign Up with Facebook</a>
               </div>
             </div>
           </div>

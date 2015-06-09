@@ -1,6 +1,9 @@
 // local test configuration file
 
 module.exports = {
+  secrets: {
+    session: process.env.SESSION_SECRET
+  },
   postgres: {
     database: 'joseki',
     user: process.env.DATABASE_USER || null,
