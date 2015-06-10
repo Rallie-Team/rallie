@@ -70,9 +70,6 @@ var EventList = React.createClass({
   },
 
   render: function() {
-    if(cookie.load("username") === undefined){
-      this.transitionTo('/');
-    } else {
     // Sends each event to EventListItem where each event will be rendered
 
     if (this.state.mode === 'shepherd') {
@@ -96,8 +93,6 @@ var EventList = React.createClass({
         {events}
       </div>
     );
-
-    }
   },
 
   _onShepherdEvents: function(){
