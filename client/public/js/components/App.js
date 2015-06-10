@@ -147,45 +147,69 @@ var App = React.createClass({
     } else {
       this.transitionTo('/');
       return (
-        <div className="col-lg-12">
-          <header>
-            <nav className="navbar navbar-default">
-              <div className="container-fluid">
-                {/* Brand and toggle get grouped for better mobile display */}
-                <div className="navbar-header">
-                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                  </button>
-                  <a className="navbar-brand" href="#"><img className="navbar-logo" alt="Rallie" src="/assets/images/megaphone.png"/></a>
-                </div>
+        <div>
+            <header>
+              <nav className="navbar navbar-default">
+                <div className="container-fluid">
+                  {/* Brand and toggle get grouped for better mobile display */}
+                  <div className="navbar-header">
+                    <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                      <span className="sr-only">Toggle navigation</span>
+                      <span className="icon-bar"></span>
+                      <span className="icon-bar"></span>
+                      <span className="icon-bar"></span>
+                    </button>
+                    <a className="navbar-brand" href="#"><img className="navbar-logo" alt="Rallie" src="/assets/images/megaphone.png"/></a>
+                  </div>
 
-                {/* Collect the nav links for toggling */}
-                <div className="collapse navbar-collapse" id="navbar-collapse-1">
-                <ul className="nav navbar-nav">
-                  <li><a id="brand" href="#">Rallie</a></li>
-                </ul>
-                  <ul className="nav navbar-nav navbar-right">
-                    {/*
-                      This is the toggler for shepherd/sheep.
-                      It will be disabled when viewing the event-create and event-detail components
-                    */}
-                    <li><a className="login" href="/auth/facebook">Login</a></li>
+                  {/* Collect the nav links for toggling */}
+                  <div className="collapse navbar-collapse" id="navbar-collapse-1">
+                  <ul className="nav navbar-nav">
+                    <li><a id="brand" href="#">Rallie</a></li>
                   </ul>
+                    <ul className="nav navbar-nav navbar-right">
+                      {/*
+                        This is the toggler for shepherd/sheep.
+                        It will be disabled when viewing the event-create and event-detail components
+                      */}
+                      <li><a className="login" href="/auth/facebook">Login</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </header>
+          <div className="jumbotron">
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-md-6 megaphone"></div>
+                <div className="col-md-6">
+                  <h1>Rallie</h1>
+                  <p>Real-time event collaboration</p>
+                  <a className="login" href="/auth/facebook">Log In / Sign Up with Facebook</a>
                 </div>
               </div>
-            </nav>
-          </header>
+            </div>
+          </div>
 
-          <div className="jumbotron">
+          <div className="container">
             <div className="row">
-              <div className="col-md-6 megaphone"></div>
-              <div className="col-md-6">
-                <h1>Rallie</h1>
-                <p>Real-time event collaboration</p>
-                <a className="login" href="/auth/facebook">Log In / Sign Up with Facebook</a>
+              <div className="col-md-10 col-md-offset-1">
+                <div className="row">
+                  <div className="col-md-4">
+                    Rallie is a platform that makes creating and hosting events easier. 
+                    It closes the communication gap between hosts and participants so they can collaborate on those events in real-time. 
+                    Typically, this is hard; it is difficult to manage uncertainty.
+                  </div>
+                  <div className="col-md-4">
+                    Event hosts put a great deal of effort into ensuring an event runs smoothly. 
+                    Participants are not willing to get involved without a clear understanding of what’s going on. 
+                    Once something unexpected happens, all hell could break loose.
+                  </div>
+                  <div className="col-md-4">
+                    When participants and hosts can seamlessly share information, hosts can act and direct participants to respond accordingly. 
+                    Rallie provides this communication channel so people can effectively rally together.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
