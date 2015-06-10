@@ -51,7 +51,7 @@ var AttendeesList = React.createClass({
     var sheeps = this.state.sheeps.map(function(sheep) {
       return (
         <tr>
-          <SheepListItem key={sheep.id} sheep={sheep}/>
+          <td><SheepListItem key={sheep.id} sheep={sheep}/></td>
         </tr>
       );
     });
