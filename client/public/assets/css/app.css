@@ -215,4 +215,11 @@ footer * {
 .landing-page-footer-tech-stack img {
   margin: 0 25px;
 }
+.attend-button {
+  background-color: #00EAD8 !important;
+}
 
+.attend-button span{
+  font-family: signpainter !important;
+  font-size: 1.5em;
+}

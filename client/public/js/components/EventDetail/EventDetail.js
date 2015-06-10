@@ -45,6 +45,7 @@ var EventDetail = React.createClass({
   },
 
   render: function() {
+
     return (
       <div className="event-detail">
         <div className="event-detail-attendee">
@@ -57,7 +58,7 @@ var EventDetail = React.createClass({
           </td>
           <td>
             { (this.state.mode === 'sheep') ?
-              <button className="btn btn-default edit-buttons" onClick={this._attend}>
+              <button className="btn btn-default btn-sm attend-button" onClick={this._attend}>
                 {this.state.isAttendee ? 'Leave' : 'Attend'} Event
               </button> : null }
           </td>
