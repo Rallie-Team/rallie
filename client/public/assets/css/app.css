@@ -100,6 +100,8 @@ body {
   background-color: #00EADB
 }
 .event-list-item-name, .observation-list-item-user {
+  font-family: signpainter;
+  font-size: 150%;
   font-weight: bold;
 }
 .event-list-item:not(:last-child), .observation-list-item:not(:last-child) {
@@ -145,7 +147,8 @@ body {
 }
 
 #uploaded-picture {
-
+  width: 60px;
+  height: 60px;
 }
 
 .event-detail-name *{
@@ -157,25 +160,13 @@ body {
   font-family: signpainter !important;
 }
 
+.observation-box-style {
+  vertical-align: middle;
+}
+
+
 .event-info-table {
   width: 100%;
-}
-
-.event-detail-description *{
-  
-}
-
-.event-detail-time *{
-  
-}
-
-
-.event-detail-location *{
-  
-}
-
-.event-detail-action *{
-  
 }
 
 .attendees-table-header {
@@ -187,6 +178,10 @@ body {
   font-family: signpainter !important;
   background-color: #00EAD8 !important;
   font-size: 100%;
+}
+
+.no-padding {
+  padding: 0;
 }
 
 footer .navbar {
@@ -219,4 +214,12 @@ footer * {
 }
 .landing-page-footer-tech-stack img {
   margin: 0 25px;
+}
+.attend-button {
+  background-color: #00EAD8 !important;
+}
+
+.attend-button span{
+  font-family: signpainter !important;
+  font-size: 1.5em;
 }
