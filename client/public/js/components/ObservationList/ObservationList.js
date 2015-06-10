@@ -54,7 +54,7 @@ var ObservationList = React.createClass({
 
     return (
       <div className="event-list">
-        <h2>Observations</h2>
+        <h2 className="observations-header">Observations</h2>
         {observations}
       </div>
     );

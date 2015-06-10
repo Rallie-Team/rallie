@@ -2,6 +2,7 @@
   font-family: signpainter;
   src: url(../fonts/signpainter.ttf);
 }
+
 * {
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -134,3 +135,46 @@ body {
 #uploaded-picture {
 
 }
+
+.event-detail-name *{
+  font-family: signpainter !important;
+  font-size: 300%;
+}
+
+.observations-header {
+  font-family: signpainter !important;
+}
+
+.event-info-table {
+  width: 100%;
+}
+
+.event-detail-description *{
+  
+}
+
+.event-detail-time *{
+  
+}
+
+
+.event-detail-location *{
+  
+}
+
+.event-detail-action *{
+  
+}
+
+.attendees-table-header {
+  font-family: signpainter !important;
+  font-size: 200%;
+}
+
+.edit-buttons {
+  font-family: signpainter !important;
+  background-color: #00EAD8 !important;
+  font-size: 100%;
+}
+
+

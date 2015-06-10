@@ -6,7 +6,7 @@ var ShepherdListItem = React.createClass({
   render: function(){
     return (
       <div className="shepherd-list-item">
-        <div className="shepherd-list-item-name">{this.props.shepherd.username}</div>
+        <div className="shepherd-list-item-name"><h6>{this.props.shepherd.username}</h6></div>
       </div>
     );
   }
