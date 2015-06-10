@@ -1,3 +1,7 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
 @font-face {
   font-family: signpainter;
   src: url(../fonts/signpainter.ttf);
@@ -9,6 +13,7 @@
 body {
   font-size: 18px;
   line-height: 1.6;
+  margin-bottom: 90px;
 }
 .navbar a, .navbar-text {
   font-size: 36px;
@@ -54,6 +59,7 @@ body {
   background: url(../images/sf-lt-gray.png) #444142;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-top: -23px;
 }
 .jumbotron h1, .jumbotron p {
   color: #FF3E3F;
@@ -77,6 +83,12 @@ body {
 }
 .jumbotron .login {
   font-size: 36px;
+}
+.landing-page-description {
+  margin-bottom: 30px;
+}
+.how-it-works {
+  width: 100%;
 }
 .event-list-item, .observation-list-item {
   border: 1px solid #C0C0C0;
@@ -177,4 +189,34 @@ body {
   font-size: 100%;
 }
 
-
+footer .navbar {
+  bottom: 0;
+  height: 66px;
+  margin-bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+.landing-page-footer {
+  margin-top: -24px;
+}
+footer * {
+  background-color: #444142;
+  color: #B8C7D0;
+  font-family: signpainter;
+  font-size: 24px;
+  vertical-align: middle;
+}
+.footer-logo {
+  height: 48px;
+  margin-top: 9px;
+}
+.footer-rallie {
+  color: #FF3E3F;
+  font-size: 42px;
+}
+.footer-nav li {
+  font-size: 36px;
+}
+.landing-page-footer-tech-stack img {
+  margin: 0 25px;
+}

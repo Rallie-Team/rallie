@@ -90,15 +90,14 @@ var App = React.createClass({
   //the application will determine which parts of the render function
   //to be displayed
   render: function() {
-    if(cookie.load("username") !== undefined){
+    if (cookie.load("username") !== undefined) {
       var currentUserLi;
       if (this.state.currentUser && this.state.currentUser.username) {
         currentUserLi = <p className="navbar-text">Hi, {this.state.currentUser.username}</p>
       }
       return (
-        <div className="col-lg-12">
+        <div>
           <header>
-
             <nav className="navbar navbar-default">
               <div className="container-fluid">
                 {/* Brand and toggle get grouped for better mobile display */}
@@ -109,7 +108,7 @@ var App = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href={this.makeHref('events')}><img className="navbar-logo" alt="Rallie" src="/assets/images/megaphone.png"/></a>
+                  <a className="navbar-brand" href={this.makeHref('events')}><img className="navbar-logo" alt="Rallie Logo" src="/assets/images/megaphone.png"/></a>
                 </div>
 
                 {/* Collect the nav links for toggling */}
@@ -136,18 +135,34 @@ var App = React.createClass({
             </nav>
           </header>
 
-          <div className="row">
-            <div className="col-lg-10 col-lg-offset-1">
-              {/* The RouteHandler component renders the active child route's handler */}
-              <RouteHandler/>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-10 col-lg-offset-1">
+                {/* The RouteHandler component renders the active child route's handler */}
+                <RouteHandler/>
+              </div>
             </div>
           </div>
+
+          <footer>
+            <div className="navbar navbar-default">
+              <div className="container-fluid">
+                <img className="navbar-left footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
+                <p className="navbar-text footer-rallie">Rallie</p>
+                <ul className="nav navbar-nav footer-nav">
+                  <li><a href="#">Team</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+                <p className="navbar-text navbar-right">Made at Hack Reactor</p>
+              </div>
+            </div>
+          </footer>
         </div>
       );
     } else {
       this.transitionTo('/');
       return (
-        <div className="col-lg-12">
+        <div>
           <header>
             <nav className="navbar navbar-default">
               <div className="container-fluid">
@@ -159,14 +174,14 @@ var App = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#"><img className="navbar-logo" alt="Rallie" src="/assets/images/megaphone.png"/></a>
+                  <a className="navbar-brand" href="#"><img className="navbar-logo" alt="Rallie Logo" src="/assets/images/megaphone.png"/></a>
                 </div>
 
                 {/* Collect the nav links for toggling */}
                 <div className="collapse navbar-collapse" id="navbar-collapse-1">
-                <ul className="nav navbar-nav">
-                  <li><a id="brand" href="#">Rallie</a></li>
-                </ul>
+                  <ul className="nav navbar-nav">
+                    <li><a id="brand" href="#">Rallie</a></li>
+                  </ul>
                   <ul className="nav navbar-nav navbar-right">
                     {/*
                       This is the toggler for shepherd/sheep.
@@ -178,17 +193,76 @@ var App = React.createClass({
               </div>
             </nav>
           </header>
-
           <div className="jumbotron">
-            <div className="row">
-              <div className="col-md-6 megaphone"></div>
-              <div className="col-md-6">
-                <h1>Rallie</h1>
-                <p>Real-time event collaboration</p>
-                <a className="login" href="/auth/facebook">Log In / Sign Up with Facebook</a>
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-md-6 megaphone"></div>
+                <div className="col-md-6">
+                  <h1>Rallie</h1>
+                  <p>Real-time event collaboration</p>
+                  <a className="login" href="/auth/facebook">Log In / Sign Up with Facebook</a>
+                </div>
               </div>
             </div>
           </div>
+
+          <div className="container-fluid">
+            <div className="row landing-page-description">
+              <div className="col-md-10 col-md-offset-1">
+                <div className="row">
+                  <div className="col-md-4">
+                    Rallie is a platform that makes creating and hosting events easier. 
+                    It closes the communication gap between hosts and participants so they can collaborate on those events in real-time. 
+                    Typically, this is hard; it is difficult to manage uncertainty.
+                  </div>
+                  <div className="col-md-4">
+                    Event hosts put a great deal of effort into ensuring an event runs smoothly. 
+                    Participants are not willing to get involved without a clear understanding of what’s going on. 
+                    Once something unexpected happens, all hell could break loose.
+                  </div>
+                  <div className="col-md-4">
+                    When participants and hosts can seamlessly share information, hosts can act and direct participants to respond accordingly. 
+                    Rallie provides this communication channel so people can effectively rally together.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <img className="how-it-works" src="/assets/images/how-it-works.png" alt="How it works"/>
+          </div>
+
+          <footer className="landing-page-footer">
+            <div className="navbar navbar-default">
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-sm-12 col-md-2">
+                    <div>
+                      <img className="navbar-left footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
+                      <p className="navbar-text footer-rallie">Rallie</p>
+                    </div>
+                    <div>
+                      <ul className="list-unstyled footer-nav">
+                        <li>Team</li>
+                        <li>Contact</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="col-sm-12 col-md-9 col-md-offset-1">
+                    <div>Made at Hack Reactor and powered by</div>
+                    <div className="landing-page-footer-tech-stack center-block">
+                      <img src="/assets/images/react-logo.png" alt="React"/>
+                      <img src="/assets/images/flux-logo.png" alt="Flux"/>
+                      <img src="/assets/images/node-logo.png" alt="Node.js"/>
+                      <img src="/assets/images/postgresql-logo.png" alt="PostgreSQL"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
         </div>
       );
     }

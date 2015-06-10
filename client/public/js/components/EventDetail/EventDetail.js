@@ -45,9 +45,8 @@ var EventDetail = React.createClass({
   },
 
   render: function() {
-
     return (
-      <div className="event-detail container-fluid">
+      <div className="event-detail">
         <div className="event-detail-attendee">
           <table>
           <tr>
