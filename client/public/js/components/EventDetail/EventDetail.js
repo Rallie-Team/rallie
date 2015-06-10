@@ -45,41 +45,93 @@ var EventDetail = React.createClass({
   },
 
   render: function() {
+
     return (
-      <div className="event-detail">
+      <div className="event-detail container-fluid">
         <div className="event-detail-attendee">
+          <table>
+          <tr>
+          <td>
           <h3>
             Currently {this.state.isAttendee ? 'Attending' : 'Observing'} Event
-              { (this.state.mode === 'sheep') ?
-              <button className="btn btn-default" onClick={this._attend}>
+          </h3>
+          </td>
+          <td>
+            { (this.state.mode === 'sheep') ?
+              <button className="btn btn-default edit-buttons" onClick={this._attend}>
                 {this.state.isAttendee ? 'Leave' : 'Attend'} Event
               </button> : null }
-          </h3>
+          </td>
+          </tr>
+          </table>
         </div>
 
-        <div className="event-detail-name">
-          <h2>{this.state.event.name}
-            {this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editName}>Edit Name</button> : null}
-          </h2>
-        </div>
-        <div className="event-detail-description">Description: {this.state.event.description}
-          {this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editDescription}>Edit Description</button> : null}
-        </div>
-        {/* Use Moment.js to format start and end times to the following format: Mon, Jun 1, 2015 4:30 PM */}
-        <div className="event-detail-start">Start: {moment(this.state.event.start).format('llll')}</div>
-        <div className="event-detail-end">
-          End: {moment(this.state.event.end).format('llll')}
-          { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._endEvent}>End Event</button> : null }
-        </div>
-        <div className="event-detail-location">Location: {this.state.event.location}
-          { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editLocation}>Edit Location</button> : null }
-        </div>
-        <div className="event-detail-action">Action: {this.state.event.action}
-          { this.state.mode === 'shepherd' ? <button className="btn btn-default" onClick={this._editAction}>Edit Action</button> : null }
+        <hr></hr>
+
+        <div className="row">
+
+        <div className="col-md-7">
+        <table className="event-info-table">
+          <tr>
+            <td>
+              <div className="event-detail-name">
+                <h2>{this.state.event.name}</h2>
+              </div>
+            </td>
+            <td>
+              {this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._editName}>Edit Name</button> : null}
+            </td>      
+          </tr>
+          <tr>
+            <td>
+              <div className="event-detail-description">
+                {this.state.event.description}
+              </div>
+            </td>
+            <td>
+              {this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._editDescription}>Edit Description</button> : null}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div className="event-detail-location">
+                {this.state.event.location}
+              </div>
+            </td>    
+            <td>
+              { this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._editLocation}>Edit Location</button> : null }
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {/* Use Moment.js to format start and end times to the following format: Mon, Jun 1, 2015 4:30 PM */}
+              <div className="event-detail-time">{moment(this.state.event.start).format('lll')} -  
+                {moment(this.state.event.end).format('lll')}
+              </div>
+            </td> 
+            <td>
+              { this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._endEvent}>End Event</button> : null }
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div className="event-detail-action">
+                Action: {this.state.event.action}
+              </div>
+            </td> 
+            <td>
+              { this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._editAction}>Edit Action</button> : null }
+            </td>
+          </tr>
+        </table>
         </div>
 
-        <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
+        <div className="col-md-5">
+          <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
+        </div>
 
+        </div>
+        <hr></hr>
         { /* Add the observation create if and only if sheep is attending event */ }
         { (this.state.mode === 'sheep' && this.state.isAttendee) ? <ObservationCreate eventId={this.state.event.id}/> : null }
         <ObservationList eventId={this.state.event.id || this.props.params.eventId}/>

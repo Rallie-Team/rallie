@@ -137,7 +137,7 @@ var App = React.createClass({
           </header>
 
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-10 col-lg-offset-1">
               {/* The RouteHandler component renders the active child route's handler */}
               <RouteHandler/>
             </div>

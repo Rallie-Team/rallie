@@ -49,16 +49,33 @@ var AttendeesList = React.createClass({
 
     // Render each sheep using the SheepListItem component
     var sheeps = this.state.sheeps.map(function(sheep) {
-      return <SheepListItem key={sheep.id} sheep={sheep}/>
+      return (
+        <tr>
+          <SheepListItem key={sheep.id} sheep={sheep}/>
+        </tr>
+      );
     });
 
     return (
       <div className="event-list">
-        <h2>Attendees</h2>
-        <h3>Host</h3>
-        {shepherds}
-        <h3>Participants</h3>
-        {sheeps}
+        <div className="row">
+        <div className="col-xs-6">
+          <table>
+            <tr>
+              <h4 className="attendees-table-header">Host</h4>
+            </tr>
+            {shepherds}
+          </table>
+          </div>
+        <div className="col-xs-6">
+          <table>
+            <tr>
+              <h4 className="attendees-table-header">Participants</h4>
+            </tr>
+            {sheeps}
+          </table>
+        </div>
+        </div>
       </div>
     )
   },
