@@ -48,7 +48,7 @@ var EventList = React.createClass({
 
     if (this.isMounted()) {
       EventActions.getAllEventsByShepherd(cookie.load('id'));
-      
+
       // Start polling every 2 seconds for new events
       intervalId = setInterval(function(){
         EventActions.getAllEventsByShepherd(cookie.load('id'));
@@ -70,8 +70,6 @@ var EventList = React.createClass({
   },
 
   render: function() {
-    // console.log(this.state.notShepherdEvents, 'notShepherdEvents');
-    // console.log(this.state.shepherdEvents, 'shepherdEvents');
     // Sends each event to EventListItem where each event will be rendered
 
     if (this.state.mode === 'shepherd') {
