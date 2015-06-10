@@ -53,7 +53,7 @@ var EventDetail = React.createClass({
           <tr>
           <td>
           <h3>
-            Currently {this.state.isAttendee ? 'Attending' : 'Observing'} Event
+            Currently {this.state.isAttendee ? 'Attending' : 'Observing'}
           </h3>
           </td>
           <td>
@@ -66,7 +66,7 @@ var EventDetail = React.createClass({
           </table>
         </div>
 
-        <hr></hr>
+        <hr/>
 
         <div className="row">
 
@@ -131,10 +131,8 @@ var EventDetail = React.createClass({
         </div>
 
         </div>
-        <hr></hr>
-        { /* Add the observation create if and only if sheep is attending event */ }
-        { (this.state.mode === 'sheep' && this.state.isAttendee) ? <ObservationCreate eventId={this.state.event.id}/> : null }
-        <ObservationList eventId={this.state.event.id || this.props.params.eventId}/>
+        <hr/>
+        <ObservationList eventId={this.state.event.id || this.props.params.eventId} mode={this.state.mode} isAttendee={this.state.isAttendee}/>
       </div>
     );
   },
@@ -203,7 +201,6 @@ var EventDetail = React.createClass({
   },
 
   _onAttend: function() {
-    // console.log(EventDetailStore.isAttendee());
     this.setState({isAttendee: EventDetailStore.isAttendee()});
   },
 

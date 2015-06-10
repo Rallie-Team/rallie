@@ -28,50 +28,32 @@ var ObservationCreate = React.createClass({
   // asks for users inputs if they want to create an observation
   render: function() {
     return (
-      <div className="event-create">
+      <div className="observation-create">
         <form className="observationCreateForm" onSubmit={this._save}>
           <div className="row">
-          <div className="col-md-7 observation-box-style">
-          <textarea className="inputBox form-control observation-input" type="text" name="content" placeholder="Type something" value={this.state.content} onChange={this._onChange} />
-          </div>
+            <div className="col-md-7 observation-box-style">
+              <div className="form-group">
+                <textarea className="inputBox form-control observation-input" type="text" name="content" placeholder="Type something" value={this.state.content} onChange={this._onChange} />
+              </div>
+            </div>
 
-          <div className="col-md-5">
-          <div className="row">
+            <div className="col-md-5">
+              <div className="row">
+                <div className="col-xs-3 no-padding">
+                  <img id="uploaded-picture" src={this.state.image}/>
+                </div>
 
-          <div className="col-xs-3 no-padding">
-          <table>
-            <tr>
-              <td>
-                <img id="uploaded-picture"src={this.state.image}/>
-              </td>
-            </tr>
-          </table>
-          </div>
-
-          <div className="col-xs-3 no-padding">
-            <table>
-              <tr>
-                <td>
+                <div className="col-xs-3 no-padding">
                   <div id="upload-file-container">
                     <button><input type="file" id="take-picture" accept="image/*" ref="camera" onChange={this.handleFiles}/></button>
                   </div>
-                </td>
-              </tr>
-            </table>
-          </div>
+                </div>
 
-          <div className="col-xs-6 no-padding">
-            <table>
-              <tr>
-                <td>
+                <div className="col-xs-6 no-padding">
                   <input className="inputBox edit-buttons" type="submit" value="Submit" />
-                </td>
-              </tr>
-            </table>
-          </div>
-
-          </div>
-          </div>
+                </div>
+              </div>
+            </div>
 
           </div>
         </form>

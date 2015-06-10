@@ -1,5 +1,7 @@
 var React = require('react'),
     Navigation = require('react-router').Navigation,
+    EventDetailStore = require('../../stores/EventDetailStore'),
+    ObservationCreate = require('./ObservationCreate'),
     ObservationListItem = require('./ObservationListItem'),
     ObservationStore = require('../../stores/ObservationStore'),
     ObservationActions = require('../../actions/ObservationActions');
@@ -17,7 +19,8 @@ var ObservationList = React.createClass({
   getInitialState: function() {
     return {
       // Initialize empty set of observations on initial render
-      observations: []
+      observations: [],
+      isAttendee: EventDetailStore.isAttendee()
     };
   },
 
@@ -26,6 +29,8 @@ var ObservationList = React.createClass({
     ObservationStore.addEventListener('get', this._onGet);
     // Add event listener on observation creation
     ObservationStore.addEventListener('create', this._onCreate);
+
+    EventDetailStore.addEventListener('attend', this._onAttend);
 
     // Fetch all observations after component is mounted
     // Fetching via AJAX needs to happen after mounting due to async
@@ -41,6 +46,7 @@ var ObservationList = React.createClass({
     // Remove event listeners when the DOM element is removed
     ObservationStore.removeEventListener('get', this._onGet);
     ObservationStore.removeEventListener('create', this._onCreate);
+    EventDetailStore.removeEventListener('attend', this._onAttend);
     clearInterval(intervalId);
   },
 
@@ -53,8 +59,10 @@ var ObservationList = React.createClass({
     });
 
     return (
-      <div className="event-list">
+      <div className="observation-list">
         <h2 className="observations-header">Observations</h2>
+        { /* Add the observation create if and only if sheep is attending event */ }
+        { (this.props.mode === 'sheep' && this.props.isAttendee) ? <ObservationCreate eventId={this.props.eventId}/> : null }
         {observations}
       </div>
     );
@@ -70,7 +78,11 @@ var ObservationList = React.createClass({
     this.setState({
       observations: ObservationStore.getAll()
     });
-  }
+  },
+
+  _onAttend: function() {
+    this.setState({isAttendee: EventDetailStore.isAttendee()});
+  },
 });
 
 module.exports = ObservationList;
