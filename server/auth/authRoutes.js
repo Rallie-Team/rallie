@@ -9,8 +9,10 @@ module.exports = function(app){
       if (err) {
         return next(err);
       } else {
-        res.cookie('username', user.username);
-        res.cookie('id', user.id);
+        if (user) {
+          res.cookie('username', user.username);
+          res.cookie('id', user.id);
+        }
         res.redirect('/');
       }
     })(req,res,next);
