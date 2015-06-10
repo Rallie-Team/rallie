@@ -11,7 +11,7 @@ module.exports = function(app){
       } else {
         res.cookie('username', user.username);
         res.cookie('id', user.id);
-        res.redirect('/events');
+        res.redirect('/');
       }
     })(req,res,next);
   });

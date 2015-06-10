@@ -90,7 +90,7 @@ var App = React.createClass({
   //the application will determine which parts of the render function
   //to be displayed
   render: function() {
-    if(cookie.load("username")){
+    if(cookie.load("username") !== undefined){
       var currentUserLi;
       if (this.state.currentUser && this.state.currentUser.username) {
         currentUserLi = <p className="navbar-text">Hi, {this.state.currentUser.username}</p>
@@ -145,6 +145,7 @@ var App = React.createClass({
         </div>
       );
     } else {
+      this.transitionTo('/');
       return (
         <div className="col-lg-12">
           <header>
@@ -188,9 +189,6 @@ var App = React.createClass({
               </div>
             </div>
           </div>
-
-          {/* The RouteHandler component renders the active child route's handler */}
-          <RouteHandler/>
         </div>
       );
     }
