@@ -96,9 +96,8 @@ var App = React.createClass({
         currentUserLi = <p className="navbar-text">Hi, {this.state.currentUser.username}</p>
       }
       return (
-        <div className="col-lg-12">
+        <div>
           <header>
-
             <nav className="navbar navbar-default">
               <div className="container-fluid">
                 {/* Brand and toggle get grouped for better mobile display */}
@@ -109,7 +108,7 @@ var App = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href={this.makeHref('events')}><img className="navbar-logo" alt="Rallie" src="/assets/images/megaphone.png"/></a>
+                  <a className="navbar-brand" href={this.makeHref('events')}><img className="navbar-logo" alt="Rallie Logo" src="/assets/images/megaphone.png"/></a>
                 </div>
 
                 {/* Collect the nav links for toggling */}
@@ -136,10 +135,12 @@ var App = React.createClass({
             </nav>
           </header>
 
-          <div className="row">
-            <div className="col-lg-10 col-lg-offset-1">
-              {/* The RouteHandler component renders the active child route's handler */}
-              <RouteHandler/>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-10 col-lg-offset-1">
+                {/* The RouteHandler component renders the active child route's handler */}
+                <RouteHandler/>
+              </div>
             </div>
           </div>
         </div>
@@ -148,36 +149,36 @@ var App = React.createClass({
       this.transitionTo('/');
       return (
         <div>
-            <header>
-              <nav className="navbar navbar-default">
-                <div className="container-fluid">
-                  {/* Brand and toggle get grouped for better mobile display */}
-                  <div className="navbar-header">
-                    <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-                      <span className="sr-only">Toggle navigation</span>
-                      <span className="icon-bar"></span>
-                      <span className="icon-bar"></span>
-                      <span className="icon-bar"></span>
-                    </button>
-                    <a className="navbar-brand" href="#"><img className="navbar-logo" alt="Rallie" src="/assets/images/megaphone.png"/></a>
-                  </div>
-
-                  {/* Collect the nav links for toggling */}
-                  <div className="collapse navbar-collapse" id="navbar-collapse-1">
-                  <ul className="nav navbar-nav">
-                    <li><a id="brand" href="#">Rallie</a></li>
-                  </ul>
-                    <ul className="nav navbar-nav navbar-right">
-                      {/*
-                        This is the toggler for shepherd/sheep.
-                        It will be disabled when viewing the event-create and event-detail components
-                      */}
-                      <li><a className="login" href="/auth/facebook">Login</a></li>
-                    </ul>
-                  </div>
+          <header>
+            <nav className="navbar navbar-default">
+              <div className="container-fluid">
+                {/* Brand and toggle get grouped for better mobile display */}
+                <div className="navbar-header">
+                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                  <a className="navbar-brand" href="#"><img className="navbar-logo" alt="Rallie Logo" src="/assets/images/megaphone.png"/></a>
                 </div>
-              </nav>
-            </header>
+
+                {/* Collect the nav links for toggling */}
+                <div className="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul className="nav navbar-nav">
+                  <li><a id="brand" href="#">Rallie</a></li>
+                </ul>
+                  <ul className="nav navbar-nav navbar-right">
+                    {/*
+                      This is the toggler for shepherd/sheep.
+                      It will be disabled when viewing the event-create and event-detail components
+                    */}
+                    <li><a className="login" href="/auth/facebook">Login</a></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </header>
           <div className="jumbotron">
             <div className="container-fluid">
               <div className="row">
@@ -191,8 +192,8 @@ var App = React.createClass({
             </div>
           </div>
 
-          <div className="container">
-            <div className="row">
+          <div className="container-fluid">
+            <div className="row landing-page-description">
               <div className="col-md-10 col-md-offset-1">
                 <div className="row">
                   <div className="col-md-4">
@@ -212,6 +213,36 @@ var App = React.createClass({
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
+=======
+
+            <div className="row">
+              <div className="col-xs-12"><img className="how-it-works" src="/assets/images/how-it-works.png" alt="How it works"/></div>
+            </div>
+
+            <div className="row">
+              <footer className="col-xs-12 landing-page-footer">
+                <div className="row">
+                  <div className="col-sm-12 col-md-2">
+                    <div>
+                      <img className="footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
+                      <span className="footer-rallie">Rallie</span>
+                    </div>
+                    <div>
+                      <ul className="list-unstyled footer-nav">
+                        <li>Team</li>
+                        <li>Contact</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="col-sm-12 col-md-10">
+                    <div className="">Made at Hack Reactor and powered by</div>
+                  </div>
+                </div>
+              </footer>
+            </div>
+>>>>>>> Added footer to landing page
           </div>
         </div>
       );

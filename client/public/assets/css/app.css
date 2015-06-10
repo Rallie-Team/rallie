@@ -78,6 +78,12 @@ body {
 .jumbotron .login {
   font-size: 36px;
 }
+.landing-page-description {
+  margin-bottom: 30px;
+}
+.how-it-works {
+  width: 100%;
+}
 .event-list-item, .observation-list-item {
   border: 1px solid #C0C0C0;
   border-radius: 10px;
@@ -177,4 +183,13 @@ body {
   font-size: 100%;
 }
 
-
+.landing-page-footer * {
+  font-family: signpainter;
+}
+.footer-rallie {
+  color: #FF3E3F;
+  font-size: 48px;
+}
+.footer-nav li {
+  font-size: 36px;
+}
