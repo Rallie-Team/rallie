@@ -90,7 +90,7 @@ var App = React.createClass({
   //the application will determine which parts of the render function
   //to be displayed
   render: function() {
-    if(cookie.load("username") !== undefined){
+    if (cookie.load("username") !== undefined) {
       var currentUserLi;
       if (this.state.currentUser && this.state.currentUser.username) {
         currentUserLi = <p className="navbar-text">Hi, {this.state.currentUser.username}</p>
@@ -143,6 +143,20 @@ var App = React.createClass({
               </div>
             </div>
           </div>
+
+          <footer>
+            <div className="navbar navbar-default">
+              <div className="container-fluid">
+                <img className="navbar-left footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
+                <p className="navbar-text footer-rallie">Rallie</p>
+                <ul className="nav navbar-nav footer-nav">
+                  <li><a href="#">Team</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+                <p className="navbar-text navbar-right">Made at Hack Reactor</p>
+              </div>
+            </div>
+          </footer>
         </div>
       );
     } else {
@@ -165,9 +179,9 @@ var App = React.createClass({
 
                 {/* Collect the nav links for toggling */}
                 <div className="collapse navbar-collapse" id="navbar-collapse-1">
-                <ul className="nav navbar-nav">
-                  <li><a id="brand" href="#">Rallie</a></li>
-                </ul>
+                  <ul className="nav navbar-nav">
+                    <li><a id="brand" href="#">Rallie</a></li>
+                  </ul>
                   <ul className="nav navbar-nav navbar-right">
                     {/*
                       This is the toggler for shepherd/sheep.
@@ -213,20 +227,20 @@ var App = React.createClass({
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
-=======
+          </div>
 
-            <div className="row">
-              <div className="col-xs-12"><img className="how-it-works" src="/assets/images/how-it-works.png" alt="How it works"/></div>
-            </div>
+          <div>
+            <img className="how-it-works" src="/assets/images/how-it-works.png" alt="How it works"/>
+          </div>
 
-            <div className="row">
-              <footer className="col-xs-12 landing-page-footer">
+          <footer className="landing-page-footer">
+            <div className="navbar navbar-default">
+              <div className="container-fluid">
                 <div className="row">
                   <div className="col-sm-12 col-md-2">
                     <div>
-                      <img className="footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
-                      <span className="footer-rallie">Rallie</span>
+                      <img className="navbar-left footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
+                      <p className="navbar-text footer-rallie">Rallie</p>
                     </div>
                     <div>
                       <ul className="list-unstyled footer-nav">
@@ -236,14 +250,19 @@ var App = React.createClass({
                     </div>
                   </div>
 
-                  <div className="col-sm-12 col-md-10">
-                    <div className="">Made at Hack Reactor and powered by</div>
+                  <div className="col-sm-12 col-md-9 col-md-offset-1">
+                    <div>Made at Hack Reactor and powered by</div>
+                    <div className="landing-page-footer-tech-stack center-block">
+                      <img src="/assets/images/react-logo.png" alt="React"/>
+                      <img src="/assets/images/flux-logo.png" alt="Flux"/>
+                      <img src="/assets/images/node-logo.png" alt="Node.js"/>
+                      <img src="/assets/images/postgresql-logo.png" alt="PostgreSQL"/>
+                    </div>
                   </div>
                 </div>
-              </footer>
+              </div>
             </div>
->>>>>>> Added footer to landing page
-          </div>
+          </footer>
         </div>
       );
     }
