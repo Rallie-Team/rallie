@@ -105,8 +105,8 @@ var EventDetail = React.createClass({
           <tr>
             <td>
               {/* Use Moment.js to format start and end times to the following format: Mon, Jun 1, 2015 4:30 PM */}
-              <div className="event-detail-time">{moment(this.state.event.start).format('lll')} -  
-                {moment(this.state.event.end).format('lll')}
+              <div className="event-detail-time">
+                {moment(this.state.event.start).format('lll')}&ndash;{moment(this.state.event.end).format('lll')}
               </div>
             </td> 
             <td>
@@ -115,7 +115,7 @@ var EventDetail = React.createClass({
           </tr>
           <tr>
             <td>
-              <div className="event-detail-action">
+              <div className="well">
                 Action: {this.state.event.action}
               </div>
             </td> 

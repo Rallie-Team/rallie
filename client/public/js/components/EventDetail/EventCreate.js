@@ -67,7 +67,7 @@ var EventCreate = React.createClass({
             <label htmlFor="time">End Time</label>
             <input className="form-control inputBox" required={true} type="time" name="endTime" id="endTime" placeholder="Event endTime" value={this.state.endTime} onChange={this._onChange} />
           </div>
-          <button type="submit" className="btn btn-default">Submit</button>
+          <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <div className="event-create-result">{this.state.result}</div>
       </div>
@@ -85,7 +85,7 @@ var EventCreate = React.createClass({
       description: this.state.description,
       startTime: this.state.startTime,
       endTime: this.state.endTime,
-      action: 'the event has not yet started',
+      action: 'The event has not yet started',
       startDate: this.state.startDate,
       endDate: this.state.endDate
     };
