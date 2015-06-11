@@ -19,7 +19,7 @@ var routes = (
     <Route name="events" handler={EventList} path="events"/>
     <Route name="event-create" handler={EventCreate} path="events/create"/>
     <Route name="event-detail" handler={EventDetail} path="events/detail/:eventId"/>
-    <Route name="contacts" handler={Contact} path="contact"/>
+    <Route name="contact" handler={Contact} path="contact"/>
     <Route name="team" handler={Team} path="team"/>
     <Redirect from="_=_" to="events"/>
   </Route>
