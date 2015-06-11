@@ -8,7 +8,7 @@ html {
 }
 
 * {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 body {
   font-size: 18px;
@@ -85,6 +85,7 @@ body {
   font-size: 36px;
 }
 .landing-page-description {
+  font-size: 20px;
   margin-bottom: 30px;
 }
 .how-it-works {
@@ -156,14 +157,13 @@ body {
   font-size: 300%;
 }
 
-.observations-header {
+.h2-list-header {
   font-family: signpainter !important;
 }
 
 .observation-box-style {
   vertical-align: middle;
 }
-
 
 .event-info-table {
   width: 100%;

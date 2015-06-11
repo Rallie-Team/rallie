@@ -6,7 +6,7 @@ var SheepListItem = React.createClass({
   render: function(){
     return (
       <div className="sheep-list-item">
-        <div className="sheep-list-item-name"><h6>{this.props.sheep.username}</h6></div>
+        <div className="sheep-list-item-name">{this.props.sheep.username}</div>
       </div>
     );
   }

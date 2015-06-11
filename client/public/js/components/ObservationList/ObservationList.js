@@ -60,7 +60,7 @@ var ObservationList = React.createClass({
 
     return (
       <div className="observation-list">
-        <h2 className="observations-header">Observations</h2>
+        <h2 className="h2-list-header">Observations</h2>
         { /* Add the observation create if and only if sheep is attending event */ }
         { (this.props.mode === 'sheep' && this.props.isAttendee) ? <ObservationCreate eventId={this.props.eventId}/> : null }
         {observations}

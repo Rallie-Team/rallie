@@ -84,7 +84,7 @@ var EventList = React.createClass({
 
     return (
       <div className="event-list">
-        <h2>Events</h2>
+        <h2 className="h2-list-header">Events</h2>
         { this.state.mode === 'shepherd' ?
         <div className="event-create-button">
           <a href={this.makeHref('event-create')}>Create Event</a>
