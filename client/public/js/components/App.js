@@ -23,11 +23,6 @@ var App = React.createClass({
   */
   mixins: [Navigation, State],
 
-  getParameterByName: function(name){
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-  },
-
   // The default mode for a new user is a sheep
   // Users are able to change to shepherd by clicking a toggle button
   getInitialState: function() {
@@ -150,8 +145,8 @@ var App = React.createClass({
                 <img className="navbar-left footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
                 <p className="navbar-text footer-rallie">Rallie</p>
                 <ul className="nav navbar-nav footer-nav">
-                  <li><a href="#">Team</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href={this.makeHref('team')}>Team</a></li>
+                  <li><a href={this.makeHref('contact')}>Contact</a></li>
                 </ul>
                 <p className="navbar-text navbar-right">Made at Hack Reactor</p>
               </div>
@@ -211,17 +206,17 @@ var App = React.createClass({
               <div className="col-md-10 col-md-offset-1">
                 <div className="row">
                   <div className="col-md-4">
-                    Rallie is a platform that makes creating and hosting events easier. 
-                    It closes the communication gap between hosts and participants so they can collaborate on those events in real-time. 
+                    Rallie is a platform that makes creating and hosting events easier.
+                    It closes the communication gap between hosts and participants so they can collaborate on those events in real-time.
                     Typically, this is hard; it is difficult to manage uncertainty.
                   </div>
                   <div className="col-md-4">
-                    Event hosts put a great deal of effort into ensuring an event runs smoothly. 
-                    Participants are not willing to get involved without a clear understanding of what’s going on. 
+                    Event hosts put a great deal of effort into ensuring an event runs smoothly.
+                    Participants are not willing to get involved without a clear understanding of what’s going on.
                     Once something unexpected happens, all hell could break loose.
                   </div>
                   <div className="col-md-4">
-                    When participants and hosts can seamlessly share information, hosts can act and direct participants to respond accordingly. 
+                    When participants and hosts can seamlessly share information, hosts can act and direct participants to respond accordingly.
                     Rallie provides this communication channel so people can effectively rally together.
                   </div>
                 </div>
