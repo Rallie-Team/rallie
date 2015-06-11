@@ -27,10 +27,10 @@ module.exports = function(app) {
   app.use(compression());
 
   // Takes the data from the url and puts it into the body
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
   // Ensures that all responses be stored in the body and only parses JSON data
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({limit: '5mb'}));
 
   app.use(methodOverride());
 
