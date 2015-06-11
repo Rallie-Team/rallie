@@ -5,7 +5,9 @@ var React = require('react'),
     App = require('./components/App'),
     EventList = require('./components/EventList/EventList'),
     EventCreate = require('./components/EventDetail/EventCreate'),
-    EventDetail = require('./components/EventDetail/EventDetail');
+    EventDetail = require('./components/EventDetail/EventDetail'),
+    Contact = require('./components/Contact/Contact'),
+    Team = require('./components/Team/Team');
 
 //routes show that App is the parent of EventList and EventCreate
 //App will always be rendered and will determine which/if EventList
@@ -17,6 +19,8 @@ var routes = (
     <Route name="events" handler={EventList} path="events"/>
     <Route name="event-create" handler={EventCreate} path="events/create"/>
     <Route name="event-detail" handler={EventDetail} path="events/detail/:eventId"/>
+    <Route name="contacts" handler={Contact} path="contact"/>
+    <Route name="team" handler={Team} path="team"/>
     <Redirect from="_=_" to="events"/>
   </Route>
 );
