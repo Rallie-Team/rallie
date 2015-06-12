@@ -13,7 +13,6 @@ html {
 body {
   font-size: 18px;
   line-height: 1.6;
-  margin-bottom: 90px;
 }
 .navbar a, .navbar-text {
   font-size: 36px;
@@ -91,6 +90,11 @@ body {
 .how-it-works {
   width: 100%;
 }
+
+.event-list, .event-detail, .event-create{
+  padding-bottom: 15px;
+}
+
 .event-list-item, .observation-list-item {
   border: 1px solid #C0C0C0;
   border-radius: 10px;
@@ -184,15 +188,9 @@ body {
   padding: 0;
 }
 
-footer .navbar {
-  bottom: 0;
-  height: 66px;
-  margin-bottom: 0;
-  position: absolute;
-  width: 100%;
-}
 .landing-page-footer {
-  margin-top: -24px;
+  padding-bottom: 20px;
+  background-color:  #444142;
 }
 footer * {
   background-color: #444142;
@@ -201,20 +199,12 @@ footer * {
   font-size: 24px;
   vertical-align: middle;
 }
-.footer-logo {
-  height: 48px;
-  margin-top: 9px;
+.footer-powered-by {
+ color: #FF3E3F ;
+ font-size: 42px;
+ padding-top: 20px;
 }
-.footer-rallie {
-  color: #FF3E3F;
-  font-size: 42px;
-}
-.footer-nav li {
-  font-size: 36px;
-}
-.landing-page-footer-tech-stack img {
-  margin: 0 25px;
-}
+
 .attend-button {
   background-color: #00EAD8 !important;
 }
@@ -229,4 +219,38 @@ footer * {
 }
 .modal img {
   max-width: 100%;
+}
+
+.portraits {
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.portraits-text {
+  text-align: center;
+  font-size: 200%;
+
+}
+
+.portraits-name {
+  text-align: center;
+  font-size: 150%;
+  color: white;
+}
+
+.team-row {
+  background-color: #444142;
+  color: #fff;
+  padding-bottom: 30px;
+}
+
+.team-row a:hover {
+  text-decoration: none;
+}
+
+.added-padding: {
+  padding-bottom: 30px;
 }
