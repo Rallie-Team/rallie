@@ -1,4 +1,4 @@
-# Rallie ![Travis CI build status](https://travis-ci.org/Rallie-Team/rallie.svg?branch=master)
+# Rallie ![Travis CI build status](https://travis-ci.org/Rallie-Team/rallie.svg?branch=master) #
 Find, engage, and run local events in your community with ease.
 
 ## Table of Contents ##
@@ -11,6 +11,8 @@ Find, engage, and run local events in your community with ease.
   5. [Contributing](#contributing)
 
 ## Usage ##
+
+See [LICENSE.md](LICENSE.md) for usage guidelines (in short, we use The MIT License).
 
 ## Requirements ##
 
@@ -76,3 +78,7 @@ If you want to use Gulp to automate the watching and building of the React files
 ## Contributing ##
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## License ##
+
+The MIT License (MIT) Copyright (c) 2015 Derek Sakamoto, Steven Shyun, Kevin Huang, Eddie Kong
