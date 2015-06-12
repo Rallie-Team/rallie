@@ -202,10 +202,13 @@ footer * {
   vertical-align: middle;
 }
 .footer-logo {
+  padding-top: 20px;
   height: 48px;
   margin-top: 9px;
 }
 .footer-rallie {
+  padding-top: 20px;
+  padding-left: 50px;
   color: #FF3E3F;
   font-size: 42px;
 }
@@ -229,4 +232,13 @@ footer * {
 }
 .modal img {
   max-width: 100%;
+}
+
+#circle {
+  width: 100px;
+  height: 100px;
+  background: red;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
 }

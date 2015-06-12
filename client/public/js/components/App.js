@@ -23,11 +23,6 @@ var App = React.createClass({
   */
   mixins: [Navigation, State],
 
-  getParameterByName: function(name){
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-  },
-
   // The default mode for a new user is a sheep
   // Users are able to change to shepherd by clicking a toggle button
   getInitialState: function() {
@@ -143,20 +138,6 @@ var App = React.createClass({
               </div>
             </div>
           </div>
-
-          <footer>
-            <div className="navbar navbar-default">
-              <div className="container-fluid">
-                <img className="navbar-left footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
-                <p className="navbar-text footer-rallie">Rallie</p>
-                <ul className="nav navbar-nav footer-nav">
-                  <li><a href="#">Team</a></li>
-                  <li><a href="#">Contact</a></li>
-                </ul>
-                <p className="navbar-text navbar-right">Made at Hack Reactor</p>
-              </div>
-            </div>
-          </footer>
         </div>
       );
     } else {
@@ -211,18 +192,39 @@ var App = React.createClass({
               <div className="col-md-10 col-md-offset-1">
                 <div className="row">
                   <div className="col-md-4">
-                    Rallie is a platform that makes creating and hosting events easier. 
-                    It closes the communication gap between hosts and participants so they can collaborate on those events in real-time. 
+                    Rallie is a platform that makes creating and hosting events easier.
+                    It closes the communication gap between hosts and participants so they can collaborate on those events in real-time.
                     Typically, this is hard; it is difficult to manage uncertainty.
                   </div>
                   <div className="col-md-4">
-                    Event hosts put a great deal of effort into ensuring an event runs smoothly. 
-                    Participants are not willing to get involved without a clear understanding of what’s going on. 
+                    Event hosts put a great deal of effort into ensuring an event runs smoothly.
+                    Participants are not willing to get involved without a clear understanding of what’s going on.
                     Once something unexpected happens, all hell could break loose.
                   </div>
                   <div className="col-md-4">
-                    When participants and hosts can seamlessly share information, hosts can act and direct participants to respond accordingly. 
+                    When participants and hosts can seamlessly share information, hosts can act and direct participants to respond accordingly.
                     Rallie provides this communication channel so people can effectively rally together.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="container-fluid">
+            <div className="row team-images">
+              <div className="col-md-10 col-md-offset-1">
+                <div className="row">
+                  <div className="col-md-3" id="circle">
+
+                  </div>
+                  <div className="col-md-3">
+
+                  </div>
+                  <div className="col-md-3">
+
+                  </div>
+                  <div className="col-md-3">
+
                   </div>
                 </div>
               </div>
@@ -237,21 +239,12 @@ var App = React.createClass({
             <div className="navbar navbar-default">
               <div className="container-fluid">
                 <div className="row">
-                  <div className="col-sm-12 col-md-2">
+                  <div className="col-sm-12 col-md-5">
                     <div>
-                      <img className="navbar-left footer-logo" alt="Rallie Logo" src="/assets/images/megaphone-48x48.png"/>
-                      <p className="navbar-text footer-rallie">Rallie</p>
-                    </div>
-                    <div>
-                      <ul className="list-unstyled footer-nav">
-                        <li>Team</li>
-                        <li>Contact</li>
-                      </ul>
+                      <p className="navbar-text footer-rallie">Rallie is Powered By:</p>
                     </div>
                   </div>
-
-                  <div className="col-sm-12 col-md-9 col-md-offset-1">
-                    <div>Made at Hack Reactor and powered by</div>
+                  <div className="col-sm-12 col-md-7 col-md-offset-0">
                     <div className="landing-page-footer-tech-stack center-block">
                       <img src="/assets/images/react-logo.png" alt="React"/>
                       <img src="/assets/images/flux-logo.png" alt="Flux"/>
