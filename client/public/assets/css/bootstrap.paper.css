@@ -6335,7 +6335,7 @@ button.close {
   clear: both;
 }
 .center-block {
-  display: block;
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
 }
