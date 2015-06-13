@@ -223,6 +223,12 @@ var App = React.createClass({
                 </a>
                 </div>
                 <div className="col-md-3">
+                <a href="https://www.linkedin.com/in/ekong2">
+                  <img className="portraits center-block" src="/assets/images/eddie.png"/>
+                  <div className="portraits-name">EDDIE KONG</div>
+                </a>
+                </div>
+                <div className="col-md-3">
                 <a href="https://www.linkedin.com/in/kevhuang">
                   <img className="portraits center-block" src="/assets/images/kevin.png"/>
                   <div className="portraits-name" >KEVIN HUANG</div>
@@ -234,35 +240,25 @@ var App = React.createClass({
                     <div className="portraits-name" >STEVEN SHYUN</div>
                   </a>
                 </div>
-                <div className="col-md-3">
-                <a href="https://www.linkedin.com/in/ekong2">
-                  <img className="portraits center-block" src="/assets/images/eddie.png"/>
-                  <div className="portraits-name">EDDIE KONG</div>
-                </a>
-                </div>
               </div>
             </div>
           </div>
           <footer className="landing-page-footer">
             <div className="container-fluid">
-              <div className="row">
-                <div className="col-md-8 col-md-offset-2">
-                  <div className="row">
-                    <p className="footer-powered-by text-center">Rallie is Powered By:</p>
+              <div className="footer-powered-by text-center">Rallie is Powered By:</div>
+              <div className="col-md-8 col-md-offset-2">
+                <div className="row">
+                  <div className="col-md-3">
+                    <img className="center-block" src="/assets/images/react-logo.png" alt="React"/>
                   </div>
-                  <div className="row">
-                    <div className="col-md-3">
-                      <img className="center-block" src="/assets/images/react-logo.png" alt="React"/>
-                    </div>
-                    <div className="col-md-3">
-                      <img className="center-block" src="/assets/images/flux-logo.png" alt="Flux"/>
-                    </div>
-                    <div className="col-md-3">
-                      <img className="center-block" src="/assets/images/node-logo.png" alt="Node.js"/>
-                    </div>
-                    <div className="col-md-3">
-                      <img className="center-block" src="/assets/images/postgresql-logo.png" alt="PostgreSQL"/>
-                    </div>
+                  <div className="col-md-3 flux-logo" >
+                    <img className="center-block" src="/assets/images/flux-logo.png" alt="Flux"/>
+                  </div>
+                  <div className="col-md-3">
+                    <img className="center-block" src="/assets/images/node-logo.png" alt="Node.js"/>
+                  </div>
+                  <div className="col-md-3">
+                    <img className="center-block" src="/assets/images/postgresql-logo.png" alt="PostgreSQL"/>
                   </div>
                 </div>
               </div>

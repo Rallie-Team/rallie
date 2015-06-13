@@ -202,7 +202,6 @@ footer * {
 .footer-powered-by {
  color: #FF3E3F ;
  font-size: 42px;
- padding-top: 20px;
 }
 
 .attend-button {
@@ -244,7 +243,7 @@ footer * {
 .team-row {
   background-color: #444142;
   color: #fff;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .team-row a:hover {
@@ -253,4 +252,7 @@ footer * {
 
 .added-padding: {
   padding-bottom: 30px;
+}
+.flux-logo {
+  margin-top:20px;
 }
