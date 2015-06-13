@@ -223,6 +223,12 @@ var App = React.createClass({
                 </a>
                 </div>
                 <div className="col-md-3">
+                <a href="https://www.linkedin.com/in/ekong2">
+                  <img className="portraits center-block" src="/assets/images/eddie.png"/>
+                  <div className="portraits-name">EDDIE KONG</div>
+                </a>
+                </div>
+                <div className="col-md-3">
                 <a href="https://www.linkedin.com/in/kevhuang">
                   <img className="portraits center-block" src="/assets/images/kevin.png"/>
                   <div className="portraits-name" >KEVIN HUANG</div>
@@ -233,12 +239,6 @@ var App = React.createClass({
                     <img className="portraits center-block" src="/assets/images/steven.png"/>
                     <div className="portraits-name" >STEVEN SHYUN</div>
                   </a>
-                </div>
-                <div className="col-md-3">
-                <a href="https://www.linkedin.com/in/ekong2">
-                  <img className="portraits center-block" src="/assets/images/eddie.png"/>
-                  <div className="portraits-name">EDDIE KONG</div>
-                </a>
                 </div>
               </div>
             </div>
