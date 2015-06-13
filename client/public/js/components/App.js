@@ -246,12 +246,12 @@ var App = React.createClass({
           <footer className="landing-page-footer">
             <div className="container-fluid">
               <div className="footer-powered-by text-center">Rallie is Powered By:</div>
-              <div className="col-md-8 col-md-offset-2 vertically-align">
+              <div className="col-md-8 col-md-offset-2">
                 <div className="row">
                   <div className="col-md-3">
                     <img className="center-block" src="/assets/images/react-logo.png" alt="React"/>
                   </div>
-                  <div className="col-md-3 vertically-align" >
+                  <div className="col-md-3 flux-logo" >
                     <img className="center-block" src="/assets/images/flux-logo.png" alt="Flux"/>
                   </div>
                   <div className="col-md-3">
