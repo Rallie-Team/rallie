@@ -9,7 +9,7 @@ var eventInstance, eventId, shepherdInstance, shepherdId, sheepInstance, sheepId
 
 // Create test shepherd, sheep, and event in db before tests
 before(function(done) {
-  db.init().then(function() {  
+  db.init().then(function() {
     // Create shepherd  
     db.User.create({
       username: 'Sheepish Shepherd'
@@ -41,6 +41,8 @@ before(function(done) {
       sheepId = sheep.id;
       done();
     });
+  }, function() {
+    done();
   });
 });
 
