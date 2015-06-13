@@ -1,6 +1,5 @@
 var Sequelize = require('sequelize');
 var request = require('supertest');
-var express = require('express');
 var app = require('../server.js');
 var db = require('../db');
 var expect = require('chai').expect;
@@ -9,38 +8,36 @@ var eventInstance, eventId, shepherdInstance, shepherdId, sheepInstance, sheepId
 
 // Create test shepherd, sheep, and event in db before tests
 before(function(done) {
-  db.init().then(function() {  
-    // Create shepherd  
-    db.User.create({
-      username: 'Sheepish Shepherd'
-    }).then(function (shepherd) {
-      // Create event
-      shepherdInstance = shepherd;
-      shepherdId = shepherd.id;
-      var currentDate = new Date();
-      return db.Event.create({
-        name: 'Herding cats',
-        start: currentDate,
-        end: new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
-        location: 'San Francisco',
-        minParticipants: 1,
-        maxParticipants: 10
-      });
-    }).then(function (event) {
-      // Add shepherd to event
-      eventInstance = event;
-      eventId = event.id;
-      return shepherdInstance.addShepherdEvent(event);
-    }).then(function() {
-      // Create sheep
-      return db.User.create({
-        username: 'Lonely Sheep'
-      });
-    }).then(function(sheep) {
-      sheepInstance = sheep;
-      sheepId = sheep.id;
-      done();
+  // Create shepherd  
+  db.User.create({
+    username: 'Sheepish Shepherd'
+  }).then(function (shepherd) {
+    // Create event
+    shepherdInstance = shepherd;
+    shepherdId = shepherd.id;
+    var currentDate = new Date();
+    return db.Event.create({
+      name: 'Herding cats',
+      start: currentDate,
+      end: new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
+      location: 'San Francisco',
+      minParticipants: 1,
+      maxParticipants: 10
     });
+  }).then(function (event) {
+    // Add shepherd to event
+    eventInstance = event;
+    eventId = event.id;
+    return shepherdInstance.addShepherdEvent(event);
+  }).then(function() {
+    // Create sheep
+    return db.User.create({
+      username: 'Lonely Sheep'
+    });
+  }).then(function(sheep) {
+    sheepInstance = sheep;
+    sheepId = sheep.id;
+    done();
   });
 });
 

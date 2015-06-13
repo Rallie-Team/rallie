@@ -7,3 +7,5 @@ before_script:
   - npm install -g bower
   - bower install
   - psql -c 'create database joseki;' -U postgres
+  - node server/server.js
+  - npm test
