@@ -37,38 +37,54 @@ var EventCreate = React.createClass({
   //asks for users inputs if they want to create an event
   render: function() {
     return (
-      <div className="event-create">
-        <form className="eventCreateForm" onSubmit={this._save}>
-          <div className="form-group">
-            <label htmlFor="name">Event name</label>
-            <input className="form-control inputBox" required={true} type="text" name="name" id="name" placeholder="Event name" value={this.state.name} onChange={this._onChange} />
+      <div className="event-create container-fluid">
+        <div className="row">
+          <div className="col-md-6">
+            <form className="eventCreateForm" onSubmit={this._save}>
+              <div className="form-group">
+                <label htmlFor="name">Event name</label>
+                <input className="form-control inputBox" required={true} type="text" name="name" id="name" placeholder="Event name" value={this.state.name} onChange={this._onChange} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="location">Event location</label>
+                <input className="form-control inputBox" required={true} type="text" name="location" id="location" placeholder="Event location" value={this.state.location} onChange={this._onChange} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="description">Description</label>
+                <textarea className="form-control inputBox" required={true} rows="3" name="description" id="description" placeholder="Description" value={this.state.description} onChange={this._onChange}/>
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label htmlFor="date">Start Date</label>
+                    <input className="form-control inputBox" required={true} type="date" name="startDate" id="startDate" value={this.state.startDate} onChange={this._onChange} />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label htmlFor="time">Start Time</label>
+                    <input className="form-control inputBox" required={true} type="time" name="startTime" id="startTime" placeholder="Event startTime" value={this.state.startTime} onChange={this._onChange} />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label htmlFor="date">End Date</label>
+                    <input className="form-control inputBox" required={true} type="date" name="endDate" id="endDate" value={this.state.endDate} onChange={this._onChange} />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label htmlFor="time">End Time</label>
+                    <input className="form-control inputBox" required={true} type="time" name="endTime" id="endTime" placeholder="Event endTime" value={this.state.endTime} onChange={this._onChange} />
+                  </div>
+                </div>
+              </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
           </div>
-          <div className="form-group">
-            <label htmlFor="location">Event location</label>
-            <input className="form-control inputBox" required={true} type="text" name="location" id="location" placeholder="Event location" value={this.state.location} onChange={this._onChange} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <input className="form-control inputBox" required={true} type="text" name="description" id="description" placeholder="Description" value={this.state.description} onChange={this._onChange}/>
-          </div>
-          <div className="form-group">
-            <label htmlFor="date">Start Date</label>
-            <input className="form-control inputBox" required={true} type="date" name="startDate" id="startDate" value={this.state.startDate} onChange={this._onChange} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="date">End Date</label>
-            <input className="form-control inputBox" required={true} type="date" name="endDate" id="endDate" value={this.state.endDate} onChange={this._onChange} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="time">Start Time</label>
-            <input className="form-control inputBox" required={true} type="time" name="startTime" id="startTime" placeholder="Event startTime" value={this.state.startTime} onChange={this._onChange} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="time">End Time</label>
-            <input className="form-control inputBox" required={true} type="time" name="endTime" id="endTime" placeholder="Event endTime" value={this.state.endTime} onChange={this._onChange} />
-          </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        </div>
         <div className="event-create-result">{this.state.result}</div>
       </div>
     );

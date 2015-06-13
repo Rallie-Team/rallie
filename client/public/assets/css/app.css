@@ -14,6 +14,9 @@ body {
   font-size: 18px;
   line-height: 1.6;
 }
+hr {
+  border-top-color: #777;
+}
 .navbar a, .navbar-text {
   font-size: 36px;
 }
@@ -105,15 +108,15 @@ body {
   background-color: #00EADB
 }
 .event-list-item-name, .observation-list-item-user {
-  font-family: signpainter;
+  font-family: Roboto;
   font-size: 150%;
+  font-style: italic;
   font-weight: bold;
 }
 .event-list-item:not(:last-child), .observation-list-item:not(:last-child) {
   margin-bottom: 10px;
 }
 .event-list-item-location, .observation-list-item-datetime {
-  font-size: 0.8em;
   font-style: italic;
 }
 .observation-list-item-text {
@@ -125,6 +128,11 @@ body {
   padding-top: 0.8em;
   width: 300px;
 }
+@media (min-width: 992px) {
+  .event-info-container {
+    border-right: 1px solid #777;
+  }
+}  
 .img-border {
   border: 5px solid #C0C0C0;
 }
@@ -156,13 +164,13 @@ body {
   height: 60px;
 }
 
-.event-detail-name *{
-  font-family: signpainter !important;
-  font-size: 300%;
+.event-detail-name * {
+  font-family: Roboto;
 }
 
-.h2-list-header {
-  font-family: signpainter !important;
+.h2-list-header, .h3-list-header {
+  font-family: Roboto;
+  font-style: italic;
 }
 
 .observation-box-style {
@@ -174,14 +182,15 @@ body {
 }
 
 .attendees-table-header {
-  font-family: signpainter !important;
-  font-size: 200%;
+  font-family: Roboto;
+  font-style: italic;
 }
 
 .edit-buttons {
-  font-family: signpainter !important;
-  background-color: #00EAD8 !important;
-  font-size: 100%;
+  background-color: #00EAD8;
+  font-family: Roboto;
+  font-size: 16px;
+  margin: 0 10px;
 }
 
 .no-padding {
@@ -200,17 +209,18 @@ footer * {
   vertical-align: middle;
 }
 .footer-powered-by {
- color: #FF3E3F ;
- font-size: 42px;
+  color: #FF3E3F;
+  font-size: 42px;
 }
 
 .attend-button {
-  background-color: #00EAD8 !important;
+  background-color: #00EAD8;
+  margin: 0 10px;
 }
 
-.attend-button span{
-  font-family: signpainter !important;
-  font-size: 1.5em;
+.attend-button span {
+  font-family: Roboto;
+  font-size: 16px;
 }
 
 .modal-dialog {
@@ -221,17 +231,16 @@ footer * {
 }
 
 .portraits {
-    background-repeat: no-repeat;
-    background-position: 50%;
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
 }
 
 .portraits-text {
   text-align: center;
   font-size: 200%;
-
 }
 
 .portraits-name {
@@ -250,9 +259,6 @@ footer * {
   text-decoration: none;
 }
 
-.added-padding: {
-  padding-bottom: 30px;
-}
 .flux-logo {
-  margin-top:20px;
+  margin-top: 20px;
 }
