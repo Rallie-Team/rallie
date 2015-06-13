@@ -11,10 +11,21 @@ var EventListItem = React.createClass({
   render: function() {
     return (
       <div className={'event-list-item' + (this.props.isParticipating ? ' event-list-item-participating' : '')}>
-        <a href={this.makeHref('event-detail', {eventId: this.props.event.id})} onClick={this._setCurrentEvent}>
-        <div className="event-list-item-name">{this.props.event.name}</div></a>
-        <div className="event-list-item-location">{this.props.event.location}</div>
-        <div className="event-list-item-attendee">{this.props.event.isAttendee}</div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-7">
+              <div className="event-list-item-name">
+                <a href={this.makeHref('event-detail', {eventId: this.props.event.id})} onClick={this._setCurrentEvent}>{this.props.event.name}</a>
+              </div>
+            </div>
+            <div className="col-md-5">
+              <div className="event-list-item-location text-right">{this.props.event.location}</div>
+              <div className="event-list-item-datetime text-right">
+                {moment(this.props.event.start).format('lll')}&ndash;{moment(this.props.event.end).format('lll')}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   },

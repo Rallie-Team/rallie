@@ -29,7 +29,8 @@ router.get('/shepherd/:userId', function(req, res) {
               // Filters events where end date is greater than the current timestamp
               $gt: new Date()
             }
-          }
+          },
+          order: 'start'
         }).then(function(results) {
           // Return all events where the user is a shepherd
           res.json(results);
@@ -68,7 +69,8 @@ router.get('/sheep/:userId', function(req, res) {
             end: {
               $gt: new Date()
             }
-          }
+          },
+          order: 'start'
         }).then(function(results) {
           res.json(results);
         }, function() {
@@ -97,7 +99,8 @@ router.get('/sheep', function(req, res) {
         // Filters events where end date is greater than the current timestamp
         $gt: new Date()
       }
-    }
+    },
+    order: 'start'
   }).then(function(results){
      res.json(results);
   }, function() {

@@ -28,33 +28,36 @@ var ObservationCreate = React.createClass({
   // asks for users inputs if they want to create an observation
   render: function() {
     return (
-      <div className="observation-create">
+      <div className="observation-create container-fluid">
         <form className="observationCreateForm" onSubmit={this._save}>
           <div className="row">
-            <div className="col-md-7 observation-box-style">
-              <div className="form-group">
-                <textarea className="inputBox form-control observation-input" type="text" name="content" placeholder="Type something" value={this.state.content} onChange={this._onChange} />
-              </div>
-            </div>
-
-            <div className="col-md-5">
+            <div className="col-md-8 well">
               <div className="row">
-                <div className="col-xs-3 no-padding">
-                  <img id="uploaded-picture" src={this.state.image}/>
-                </div>
-
-                <div className="col-xs-3 no-padding">
-                  <div id="upload-file-container">
-                    <button><input type="file" id="take-picture" accept="image/*" ref="camera" onChange={this.handleFiles}/></button>
+                <div className="col-md-7 observation-box-style">
+                  <div className="form-group">
+                    <textarea className="inputBox form-control observation-input" type="text" name="content" placeholder="Type something" value={this.state.content} onChange={this._onChange} />
                   </div>
                 </div>
 
-                <div className="col-xs-6 no-padding">
-                  <input className="inputBox edit-buttons" type="submit" value="Submit" />
+                <div className="col-md-5">
+                  <div className="row">
+                    <div className="col-xs-3 no-padding">
+                      <img id="uploaded-picture" src={this.state.image}/>
+                    </div>
+
+                    <div className="col-xs-3 no-padding">
+                      <div id="upload-file-container">
+                        <button><input type="file" id="take-picture" accept="image/*" ref="camera" onChange={this.handleFiles}/></button>
+                      </div>
+                    </div>
+
+                    <div className="col-xs-6 no-padding">
+                      <button className="btn btn-default inputBox edit-buttons" type="submit">Submit</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
         </form>
       </div>

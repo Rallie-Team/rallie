@@ -50,88 +50,78 @@ var EventDetail = React.createClass({
       <div className="event-detail">
         <div className="event-detail-attendee">
           <table>
-          <tr>
-          <td>
-          <h3>
-            Currently {this.state.isAttendee ? 'Attending' : 'Observing'}
-          </h3>
-          </td>
-          <td>
-            { (this.state.mode === 'sheep') ?
-              <button className="btn btn-default btn-sm attend-button" onClick={this._attend}>
-                {this.state.isAttendee ? 'Leave' : 'Attend'} Event
-              </button> : null }
-          </td>
-          </tr>
+            <tr>
+              <td>
+                <h3>Currently {this.state.isAttendee ? 'Attending' : 'Observing'}</h3>
+              </td>
+              <td>
+                { (this.state.mode === 'sheep') ?
+                  <button className="btn btn-default btn-sm attend-button" onClick={this._attend}>
+                    {this.state.isAttendee ? 'Leave' : 'Attend'} Event
+                  </button> : null }
+              </td>
+            </tr>
           </table>
         </div>
 
         <hr/>
 
         <div className="row">
+          <div className="col-md-7 event-info-container">
+            <table className="event-info-table">
+              <tr>
+                <td>
+                  <div className="event-detail-name"><h3>{this.state.event.name}</h3></div>
+                </td>
+                <td>
+                  {this.state.mode === 'shepherd' ? <button className="btn btn-default btn-sm edit-buttons" onClick={this._editName}>Edit Name</button> : null}
+                </td>      
+              </tr>
+              <tr>
+                <td>
+                  <div className="event-detail-description">{this.state.event.description}</div>
+                </td>
+                <td>
+                  {this.state.mode === 'shepherd' ? <button className="btn btn-default btn-sm edit-buttons" onClick={this._editDescription}>Edit Description</button> : null}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div className="event-detail-location">{this.state.event.location}</div>
+                </td>    
+                <td>
+                  { this.state.mode === 'shepherd' ? <button className="btn btn-default btn-sm edit-buttons" onClick={this._editLocation}>Edit Location</button> : null }
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {/* Use Moment.js to format start and end times to the following format: Mon, Jun 1, 2015 4:30 PM */}
+                  <div className="event-detail-time">
+                    {moment(this.state.event.start).format('lll')}&ndash;{moment(this.state.event.end).format('lll')}
+                  </div>
+                </td> 
+                <td>
+                  { this.state.mode === 'shepherd' ? <button className="btn btn-default btn-sm edit-buttons" onClick={this._endEvent}>End Event</button> : null }
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div className="well">Action: {this.state.event.action}</div>
+                </td> 
+                <td>
+                  { this.state.mode === 'shepherd' ? <button className="btn btn-default btn-sm edit-buttons" onClick={this._editAction}>Edit Action</button> : null }
+                </td>
+              </tr>
+            </table>
+          </div>
 
-        <div className="col-md-7">
-        <table className="event-info-table">
-          <tr>
-            <td>
-              <div className="event-detail-name">
-                <h2>{this.state.event.name}</h2>
-              </div>
-            </td>
-            <td>
-              {this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._editName}>Edit Name</button> : null}
-            </td>      
-          </tr>
-          <tr>
-            <td>
-              <div className="event-detail-description">
-                {this.state.event.description}
-              </div>
-            </td>
-            <td>
-              {this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._editDescription}>Edit Description</button> : null}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className="event-detail-location">
-                {this.state.event.location}
-              </div>
-            </td>    
-            <td>
-              { this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._editLocation}>Edit Location</button> : null }
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {/* Use Moment.js to format start and end times to the following format: Mon, Jun 1, 2015 4:30 PM */}
-              <div className="event-detail-time">
-                {moment(this.state.event.start).format('lll')}&ndash;{moment(this.state.event.end).format('lll')}
-              </div>
-            </td> 
-            <td>
-              { this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._endEvent}>End Event</button> : null }
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className="well">
-                Action: {this.state.event.action}
-              </div>
-            </td> 
-            <td>
-              { this.state.mode === 'shepherd' ? <button className="btn btn-default edit-buttons" onClick={this._editAction}>Edit Action</button> : null }
-            </td>
-          </tr>
-        </table>
+          <div className="col-md-5">
+            <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
+          </div>
         </div>
 
-        <div className="col-md-5">
-          <AttendeesList eventId={this.state.event.id || this.props.params.eventId}/>
-        </div>
-
-        </div>
         <hr/>
+
         <ObservationList eventId={this.state.event.id || this.props.params.eventId} mode={this.state.mode} isAttendee={this.state.isAttendee}/>
       </div>
     );
@@ -228,7 +218,6 @@ var EventDetail = React.createClass({
     }
     this.setState({isAttendee: currentUserAttendee});
   },
-
 
   isResponseValid: function(input){
     return input.trim() !== '';
