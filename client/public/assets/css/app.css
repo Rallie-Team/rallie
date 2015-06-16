@@ -1,7 +1,3 @@
-html {
-  min-height: 100%;
-  position: relative;
-}
 @font-face {
   font-family: signpainter;
   src: url(../fonts/signpainter.ttf);
@@ -223,7 +219,7 @@ footer * {
   font-size: 16px;
 }
 
-.modal-dialog {
+.observation-modal .modal-dialog {
   width: 80%;
 }
 .modal img {
