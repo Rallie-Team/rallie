@@ -12,7 +12,7 @@ var ObservationListItem = React.createClass({
         { this.props.observation.rawImage ? 
         <div className="observation-list-item-image center-block">
           <img className="img-circle img-border center-block img-thumbnail" src={this.props.observation.rawImage} onClick={this.showModalImage.bind(this, this.props.observation.id)}/>
-          <div className="modal fade" id={'img' + this.props.observation.id} tabIndex="-1" role="dialog" aria-labelledby="observationImage" aria-hidden="true">
+          <div className="modal fade observation-modal" id={'img' + this.props.observation.id} tabIndex="-1" role="dialog" aria-labelledby="observationImage" aria-hidden="true">
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">

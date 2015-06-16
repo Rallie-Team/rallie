@@ -122,6 +122,20 @@ var EventDetail = React.createClass({
 
         <hr/>
 
+        <div className="modal fade" id="eventActionModal" tabIndex="-1" role="dialog" aria-labelledby="eventActionModal" aria-hidden="true">
+          <div className="modal-dialog modal-sm">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 className="modal-title">New Action</h4>
+              </div>
+              <div className="modal-body">
+                <p>{this.state.event.action}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <ObservationList eventId={this.state.event.id || this.props.params.eventId} mode={this.state.mode} isAttendee={this.state.isAttendee}/>
       </div>
     );
@@ -132,7 +146,7 @@ var EventDetail = React.createClass({
     if (prevEvent.action !== storeCurrentEvent.action){
       prevEvent = storeCurrentEvent;
       if (this.state.mode === 'sheep'){
-        alert(storeCurrentEvent.action);
+        $('#eventActionModal').modal('show');
       }
     } 
     this.setState({event: storeCurrentEvent});
