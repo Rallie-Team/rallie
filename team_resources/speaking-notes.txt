@@ -1,0 +1,56 @@
+Speaking Notes - 06/04/15
+-----
+
+Introduce Joseki - Derek
+  - Joseki is a platform for creating, and partipating in events on the fly,
+    and it allows for dynamic management of the event
+  - So the problem that we faced is that it is hard to organize an event
+    - There is a lot to coordinate and there is a lot of uncertainty
+    - For instance, organizing any get together with friends - potluck, bar crawl,
+      flash mob - takes an inhibitive amount of coordination
+    - Also the uncertainty is a huge factor and fear of missing out is a big problem
+  - So our solution is a to show anyone who wants to participate in an event,
+    all the events in the area, then anyone can also create an event on the fly,
+    where each event is powered by real-time communications between the user and
+    the participant
+  - Our current product is a responsive web app built with React + Flux
+    We chose React + Flux for its data sharing architecture
+    and its portability to mobile with React Native.These were all built on Node and Postgres
+
+Introduce Sheep Experience - Steven
+  - As Derek mentioned, our front-end utilizes React + Flux, which as a new technology
+    put pressure on us to learn. However, we felt that the reactive architecture was
+    best for coordinating dynamic events
+  - In our application a user can log in, starting as a potential participant,
+    and see all events listed. They can choose to participate in any event.
+    While they are in each event, they can record their observations of the event:
+      "This is awesome!" OR "Call help!"
+  - These observations are immediately shared with everyone, including the organizer,
+    giving the organizer an ability to respond and record in real-time, providing
+    real-time command and control
+
+Introduce Shepherd Experience - Eddie
+  - If the user wants to create an event instead of participate in the event, 
+    they can change their role to an organizer
+  - Here the organizer can only see their events
+  - We can create a new event 
+  - Then when we create an event, we can edit the parameters of the event in real-time,
+    and it will be shared with everyone
+  - We can see the real-time recordings of the event
+  - We can also set actions to respond to the event
+  - To simulate real-time feature, we do quick constant polling, which is really
+    responsive due to React's diffing algorithm
+
+Introduce Backend Architecture and Database Schema - Kevin
+  - All of this functionality sets on a Node/Express and PostgreSQL
+  - The key decision here was to choose PostgreSQL as our database
+  - We wanted to use a relational database because we wanted to be as close to common
+    production as possible and to challenge ourselves, as we have primarily worked with
+    non-relational databases
+  - We choose PostgreSQL because we already had experience with MySQL, and it was easier
+    to deploy on Heroku
+  - < Stuff on the database schema >
+  - We also used Sequelize, and we struggled with setting up relations, but we able to
+    set them up with promises. In hindsight, we realized that this was not the most 
+    performant decision
+
