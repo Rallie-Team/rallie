@@ -1,6 +1,5 @@
 var Sequelize = require('sequelize');
 var request = require('supertest');
-var express = require('express');
 var app = require('../server.js');
 var db = require('../db');
 var expect = require('chai').expect;
@@ -9,56 +8,54 @@ var eventInstance, eventId, shepherdInstance, shepherdId, sheepInstance, sheepId
 
 // Create test user and event in db before tests
 before(function(done) {
-  db.init().then(function() {  
-    // Create shepherd  
-    db.User.create({
-      username: 'Sheepish Shepherd'
-    }).then(function (shepherd) {
-      // Create event
-      shepherdInstance = shepherd;
-      shepherdId = shepherd.id;
-      var currentDate = new Date();
-      return db.Event.create({
-        name: 'Herding cats',
-        start: currentDate,
-        end: new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
-        location: 'San Francisco',
-        minParticipants: 1,
-        maxParticipants: 10
-      });
-    }).then(function (event) {
-      // Add shepherd to event
-      eventInstance = event;
-      eventId = event.id;
-      return shepherdInstance.addShepherdEvent(event);
+  // Create shepherd  
+  db.User.create({
+    username: 'Sheepish Shepherd'
+  }).then(function (shepherd) {
+    // Create event
+    shepherdInstance = shepherd;
+    shepherdId = shepherd.id;
+    var currentDate = new Date();
+    return db.Event.create({
+      name: 'Herding cats',
+      start: currentDate,
+      end: new Date(currentDate.getTime() + 60 * 60 * 24 * 1000),
+      location: 'San Francisco',
+      minParticipants: 1,
+      maxParticipants: 10
+    });
+  }).then(function (event) {
+    // Add shepherd to event
+    eventInstance = event;
+    eventId = event.id;
+    return shepherdInstance.addShepherdEvent(event);
+  }).then(function() {
+    // Create sheep
+    return db.User.create({
+      username: 'Lonely Sheep'
+    });
+  }).then(function(sheep) {
+    // Add sheep to event
+    sheepInstance = sheep;
+    sheepId = sheep.id;
+    return sheep.addSheepEvent(eventInstance);
+  }).then(function() {
+    // Create observation
+    db.Observation.create({
+      content: 'These cats are crazy',
+      completed: false,
+      UserId: sheepId,
+      EventId: eventId
+    }).then(function(observation) {
+      // Associate the observation with the event
+      observationInstance = observation;
+      observationId = observation.id;
+      return eventInstance.addObservation(observation);
     }).then(function() {
-      // Create sheep
-      return db.User.create({
-        username: 'Lonely Sheep'
-      });
-    }).then(function(sheep) {
-      // Add sheep to event
-      sheepInstance = sheep;
-      sheepId = sheep.id;
-      return sheep.addSheepEvent(eventInstance);
+      // Associate the observation with the sheep
+      return sheepInstance.addObservation(observationInstance);
     }).then(function() {
-      // Create observation
-      db.Observation.create({
-        content: 'These cats are crazy',
-        completed: false,
-        UserId: sheepId,
-        EventId: eventId
-      }).then(function(observation) {
-        // Associate the observation with the event
-        observationInstance = observation;
-        observationId = observation.id;
-        return eventInstance.addObservation(observation);
-      }).then(function() {
-        // Associate the observation with the sheep
-        return sheepInstance.addObservation(observationInstance);
-      }).then(function() {
-        done();
-      });
+      done();
     });
   });
 });
